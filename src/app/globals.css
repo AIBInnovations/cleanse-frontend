@@ -18,6 +18,11 @@
   user-select: none;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 body {
   background-color: var(--base-100);
   color: var(--base-700);

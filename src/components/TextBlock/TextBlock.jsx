@@ -1,7 +1,6 @@
 import "./TextBlock.css";
 
 import Copy from "../Copy/Copy";
-import BrandIcon from "../BrandIcon/BrandIcon";
 
 const TextBlock = () => {
   return (
@@ -11,9 +10,7 @@ const TextBlock = () => {
           <Copy>
             <h3>Pure nature, timeless beauty.</h3>
           </Copy>
-          <div className="text-block-logo">
-            <BrandIcon />
-          </div>
+          <div className="text-block-logo"></div>
         </div>
         <div className="text-block-col">
           <div className="text-block-copy">

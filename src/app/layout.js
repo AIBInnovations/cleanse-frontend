@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Koulen, DM_Mono, Host_Grotesk, Lexend } from "next/font/google";
+import { Koulen, DM_Mono, Host_Grotesk, Lexend, Inter, Lexend_Exa } from "next/font/google";
 
 import ClientLayout from "@/client-layout";
 
@@ -28,9 +28,21 @@ const dmMono = DM_Mono({
 });
 
 const lexend = Lexend({
-  weight: ["400"],
+  weight: ["400", "700"],
   subsets: ["latin"],
   variable: "--font-lexend",
+});
+
+const inter = Inter({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+const lexendExa = Lexend_Exa({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-lexend-exa",
 });
 
 export const metadata = {
@@ -42,7 +54,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${koulen.variable} ${hostGrotesk.variable} ${dmMono.variable} ${lexend.variable}`}
+        className={`${koulen.variable} ${hostGrotesk.variable} ${dmMono.variable} ${lexend.variable} ${inter.variable} ${lexendExa.variable}`}
       >
         <TransitionProvider>
           <ClientLayout footer={<Footer />}>

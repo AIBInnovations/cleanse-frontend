@@ -1,6 +1,6 @@
 .menu {
   position: fixed;
-  top: 0;
+  top: 44px;
   left: 0;
   right: 0;
   width: 100%;
@@ -8,21 +8,93 @@
   flex-direction: column;
   transition: transform 0.4s ease;
   will-change: transform;
-  z-index: 10;
+  z-index: 1000;
+}
+
+.menu.scrolled {
+  top: 0;
 }
 
 .menu.hidden {
-  transform: translateY(-100%);
+  transform: translateY(-150%);
 }
 
 .menu .menu-header {
   position: relative;
-  padding: 1rem 2rem;
+  padding: 1.5rem 2rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   background: transparent;
   z-index: 2;
+}
+
+/* Scrolled state - green background with cream text */
+.menu.scrolled .menu-header {
+  background-color: #023020;
+  border-radius: 0;
+  justify-content: center;
+}
+
+/* Menu open state - match overlay background */
+.menu.menu-open .menu-header {
+  background-color: rgba(28, 25, 23, 0.95);
+}
+
+.menu.menu-open .menu-logo,
+.menu.menu-open .menu-nav-link {
+  color: #f8f6f3;
+}
+
+.menu.menu-open .menu-trigger-icon .dot {
+  background: #f8f6f3;
+}
+
+/* Full header - shown in hero */
+.menu .menu-header-full {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.menu .menu-header-full.hidden {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+/* Centered header - shown when scrolled */
+.menu .menu-header-centered {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.menu .menu-header-centered.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.menu .menu-centered-logo {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  transition: transform 0.3s ease;
+}
+
+.menu .menu-centered-logo:hover {
+  transform: scale(1.05);
+}
+
+.menu .menu-centered-logo .menu-logo {
+  color: #f8f6f3;
+  font-size: clamp(1.5rem, 2vw, 2rem);
 }
 
 .menu .menu-nav-links {
@@ -39,57 +111,56 @@
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, color 0.3s ease;
 }
 
 .menu .menu-nav-link:hover {
   opacity: 0.7;
 }
 
+.menu.scrolled .menu-nav-link {
+  color: #f8f6f3;
+}
+
 .menu .menu-trigger {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 24px;
-  height: 24px;
   margin-left: 1rem;
 }
 
 .menu .menu-trigger-icon {
   position: relative;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 4px;
 }
 
-.menu .menu-trigger-icon span {
-  position: absolute;
+.menu .menu-trigger-icon .dot {
+  width: 5px;
+  height: 5px;
   background: #023020;
-  border-radius: 2px;
+  border-radius: 50%;
   transition: background 0.3s ease;
 }
 
-.menu .menu-trigger-icon span:first-child {
-  width: 20px;
-  height: 2px;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
+.menu.scrolled .menu-trigger-icon .dot {
+  background: #f8f6f3;
 }
 
-.menu .menu-trigger-icon span:last-child {
-  width: 2px;
-  height: 20px;
-  left: 50%;
-  top: 0;
-  transform: translateX(-50%);
+.menu .menu-trigger:hover .menu-trigger-icon .dot {
+  background: #034d30;
 }
 
-.menu .menu-trigger:hover .menu-trigger-icon span {
-  background: var(--base-300);
+.menu.scrolled .menu-trigger:hover .menu-trigger-icon .dot {
+  background: #d4d0c8;
 }
 
 .menu .menu-logo-link {
@@ -103,6 +174,11 @@
   line-height: 1;
   color: #023020;
   letter-spacing: 0.05em;
+  transition: color 0.3s ease;
+}
+
+.menu.scrolled .menu-logo {
+  color: #f8f6f3;
 }
 
 .menu .menu-toggle {
@@ -138,8 +214,16 @@
   border-radius: 1px;
 }
 
+.menu.scrolled .menu-item {
+  background: #f8f6f3;
+}
+
 .menu .menu-hamburger-icon.open .menu-item {
   background: #023020;
+}
+
+.menu.scrolled .menu-hamburger-icon.open .menu-item {
+  background: #f8f6f3;
 }
 
 .menu .menu-hamburger-icon.open .menu-item:first-child {
@@ -238,6 +322,14 @@
 }
 
 @media (max-width: 1000px) {
+  .menu {
+    top: 36px;
+  }
+
+  .menu.scrolled {
+    top: 0;
+  }
+
   .menu .menu-header {
     padding: 1rem 1.5rem;
   }
@@ -246,7 +338,7 @@
     display: none;
   }
 
-  .menu .menu-logo-link {
+  .menu .menu-header-full .menu-logo-link {
     flex: 1;
     text-align: center;
   }
@@ -254,6 +346,7 @@
   .menu .menu-toggle {
     display: flex;
   }
+
 
   .menu .menu-overlay-items {
     flex-direction: column;

@@ -126,18 +126,18 @@ const PeelReveal = () => {
         </div>
         <div className="peel-reveal-img-container">
           <div className="pr-img">
-            <img src="/product.png" alt="Product" />
+            <img src="/category-hair.png" alt="Product" />
           </div>
           <div className="peel-reveal-header">
-            <h1>Nature's wisdom in every drop</h1>
+            <h1>Ancient Secrets,<br />Modern Radiance</h1>
           </div>
         </div>
         <div className="peel-reveal-intro-text-container">
           <div className="peel-reveal-intro-text">
-            <h1>Sacred</h1>
+            <h1>Shop</h1>
           </div>
           <div className="peel-reveal-intro-text">
-            <h1>Beauty</h1>
+            <h1>Now</h1>
           </div>
         </div>
       </section>

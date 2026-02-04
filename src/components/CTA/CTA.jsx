@@ -33,7 +33,7 @@ const CTA = () => {
         onUpdate: (self) => {
           const progress = self.progress;
 
-          const leftTranslateY = 20 - progress * 30;
+          const leftTranslateY = 30 - progress * 30;
           gsap.set(leftImage, {
             y: `${leftTranslateY}rem`,
           });
@@ -72,13 +72,20 @@ const CTA = () => {
           </div>
         </div>
         <div className="cta-col">
-          <div className="cta-header">
-            <Copy>
-              <h3>A ritual for radiant skin</h3>
-            </Copy>
-          </div>
           <div className="cta-main-img">
+            <div className="cta-header">
+              <Copy>
+                <h3>A ritual for<br />radiant skin</h3>
+              </Copy>
+            </div>
             <img src="/product-display.png" alt="" />
+            <div className="cta-main-copy-inner">
+              <div className="btn">
+                <Copy type="flicker">
+                  <Link href="/wardrobe">Explore Collection</Link>
+                </Copy>
+              </div>
+            </div>
           </div>
         </div>
         <div className="cta-col">

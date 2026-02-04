@@ -1,61 +1,151 @@
 "use client";
 import "./wardrobe.css";
 import { useEffect, useRef, useState } from "react";
-
+import Link from "next/link";
 import { products } from "./products";
-import Product from "@/components/Product/Product";
+import { useCartStore } from "@/store/cartStore";
 import Copy from "@/components/Copy/Copy";
-
 import { gsap } from "gsap";
+
+const ProductCard = ({ product, productIndex, innerRef, style }) => {
+  const addToCart = useCartStore((state) => state.addToCart);
+  const imgIndex = ((productIndex - 1) % 4) + 1;
+  const imgPath = `/p${imgIndex}.png`;
+
+  return (
+    <div className="product-card" ref={innerRef} style={style}>
+      <Link href="/unit" className="product-card-image">
+        <img src={imgPath} alt={product.name} />
+      </Link>
+      <div className="product-card-info">
+        <h3 className="product-card-name">{product.name}</h3>
+        <p className="product-card-description">{product.description}</p>
+        <div className="product-card-footer">
+          <span className="product-card-price">₹{product.price}</span>
+          <button
+            className="quick-add-btn"
+            onClick={() => addToCart(product)}
+          >
+            Quick Add
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const FaceCareCard = ({ product, productIndex, innerRef, style }) => {
+  const imgIndex = ((productIndex - 1) % 4) + 1;
+  const imgPath = `/p${imgIndex}.png`;
+
+  return (
+    <div className="face-care-card" ref={innerRef} style={style}>
+      <Link href="/unit" className="face-care-card-image">
+        <img src={imgPath} alt={product.name} />
+      </Link>
+      <div className="face-care-card-info">
+        <h3 className="face-care-card-name">{product.name}</h3>
+        <div className="face-care-card-footer">
+          <span className="face-care-card-price">₹{product.price}</span>
+          <button className="face-care-view-clinicals">VIEW CLINICALS</button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default function Wardrobe() {
   const [activeTag, setActiveTag] = useState("All");
-  const [activeColor, setActiveColor] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [sortBy, setSortBy] = useState("default");
+  const [priceRange, setPriceRange] = useState("all");
   const productRefs = useRef([]);
   const isInitialMount = useRef(true);
 
-  const handleFilterChange = (newTag, newColor) => {
+  const sortProducts = (productsToSort, sortOption) => {
+    const sorted = [...productsToSort];
+    switch (sortOption) {
+      case "price-low":
+        return sorted.sort((a, b) => a.price - b.price);
+      case "price-high":
+        return sorted.sort((a, b) => b.price - a.price);
+      case "name-az":
+        return sorted.sort((a, b) => a.name.localeCompare(b.name));
+      case "name-za":
+        return sorted.sort((a, b) => b.name.localeCompare(a.name));
+      default:
+        return sorted;
+    }
+  };
+
+  const filterByPrice = (productsToFilter, range) => {
+    switch (range) {
+      case "under-500":
+        return productsToFilter.filter((p) => p.price < 500);
+      case "500-1000":
+        return productsToFilter.filter((p) => p.price >= 500 && p.price <= 1000);
+      case "above-1000":
+        return productsToFilter.filter((p) => p.price > 1000);
+      default:
+        return productsToFilter;
+    }
+  };
+
+  const applyFiltersAndSort = (tag, sort, price) => {
+    let result = tag === "All"
+      ? products
+      : products.filter((product) => product.tag === tag);
+    result = filterByPrice(result, price);
+    result = sortProducts(result, sort);
+    return result;
+  };
+
+  const handleFilterChange = (newTag) => {
     if (isAnimating) return;
-    if (newTag === activeTag && newColor === activeColor) return;
+    if (newTag === activeTag) return;
 
     setIsAnimating(true);
     setActiveTag(newTag);
-    setActiveColor(newColor);
 
-    gsap.killTweensOf(productRefs.current);
-
-    gsap.to(productRefs.current, {
+    gsap.to(productRefs.current.filter(Boolean), {
       opacity: 0,
-      scale: 0.5,
+      y: 20,
       duration: 0.25,
-      stagger: 0.05,
+      stagger: 0.03,
       ease: "power3.out",
       onComplete: () => {
-        const filtered = products.filter((product) => {
-          if (newTag !== "All" && product.tag !== newTag) return false;
-          if (newColor && product.color !== newColor) return false;
-          return true;
-        });
-
+        const filtered = applyFiltersAndSort(newTag, sortBy, priceRange);
         setFilteredProducts(filtered);
       },
     });
   };
 
+  const handleSortChange = (e) => {
+    const newSort = e.target.value;
+    setSortBy(newSort);
+    const filtered = applyFiltersAndSort(activeTag, newSort, priceRange);
+    setFilteredProducts(filtered);
+  };
+
+  const handlePriceFilterChange = (e) => {
+    const newPrice = e.target.value;
+    setPriceRange(newPrice);
+    const filtered = applyFiltersAndSort(activeTag, sortBy, newPrice);
+    setFilteredProducts(filtered);
+  };
+
   useEffect(() => {
     productRefs.current = productRefs.current.slice(0, filteredProducts.length);
-    gsap.killTweensOf(productRefs.current);
 
     gsap.fromTo(
-      productRefs.current,
-      { opacity: 0, scale: 0.5 },
+      productRefs.current.filter(Boolean),
+      { opacity: 0, y: 30 },
       {
         opacity: 1,
-        scale: 1,
-        duration: isInitialMount.current ? 0.5 : 0.25,
-        stagger: isInitialMount.current ? 0.05 : 0.05,
+        y: 0,
+        duration: isInitialMount.current ? 0.6 : 0.3,
+        stagger: isInitialMount.current ? 0.05 : 0.03,
         ease: "power3.out",
         onComplete: () => {
           setIsAnimating(false);
@@ -66,62 +156,147 @@ export default function Wardrobe() {
   }, [filteredProducts]);
 
   return (
-    <>
-      <section className="products-header">
-        <div className="container">
-          <Copy animateOnScroll={false} delay={0.65}>
-            <h1>Sacred Beauty Collection</h1>
+    <div className="wardrobe-page">
+      {/* Hero Section */}
+      <section className="wardrobe-hero">
+        <div className="wardrobe-hero-content">
+          <Copy animateOnScroll={false} delay={0.3}>
+            <p className="wardrobe-hero-label">Shop Collection</p>
           </Copy>
-          <div className="products-header-divider"></div>
-          <div className="product-filter-bar">
-            <div className="filter-bar-header">
-              <p className="bodyCopy">Filters</p>
-            </div>
-            <div className="filter-bar-tags">
-              {["All", "Face Care", "Hair Care", "Body Care"].map((tag) => (
-                <p
-                  key={tag}
-                  className={`bodyCopy ${activeTag === tag ? "active" : ""}`}
-                  onClick={() => handleFilterChange(tag, activeColor)}
-                >
-                  {tag}
-                </p>
-              ))}
-            </div>
-            <div className="filter-bar-colors">
-              {["Gold", "Amber", "Rose", "Cream", "Green"].map((color) => (
-                <span
-                  key={color}
-                  className={`color-selector ${color.toLowerCase()} ${
-                    activeColor === color ? "active" : ""
-                  }`}
-                  onClick={() =>
-                    handleFilterChange(
-                      activeTag,
-                      activeColor === color ? null : color
-                    )
-                  }
-                  style={{ cursor: isAnimating ? "not-allowed" : "pointer" }}
-                ></span>
-              ))}
-            </div>
+          <Copy animateOnScroll={false} delay={0.5}>
+            <h1>Sacred Beauty</h1>
+          </Copy>
+          <Copy animateOnScroll={false} delay={0.7}>
+            <p className="wardrobe-hero-subtitle">
+              Discover our curated collection of Ayurvedic skincare rituals
+            </p>
+          </Copy>
+        </div>
+
+        {/* Category Filter */}
+        <div className="category-filter">
+          {["All", "Face Care", "Hair Care", "Body Care"].map((tag) => (
+            <button
+              key={tag}
+              className={`category-btn ${activeTag === tag ? "active" : ""}`}
+              onClick={() => handleFilterChange(tag)}
+              disabled={isAnimating}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+
+        {/* Sort and Filter Options */}
+        <div className="sort-filter-bar">
+          <div className="filter-group">
+            <label htmlFor="price-filter">Filter</label>
+            <select
+              id="price-filter"
+              value={priceRange}
+              onChange={handlePriceFilterChange}
+              className="filter-select"
+            >
+              <option value="all">All Prices</option>
+              <option value="under-500">Under ₹500</option>
+              <option value="500-1000">₹500 - ₹1000</option>
+              <option value="above-1000">Above ₹1000</option>
+            </select>
+          </div>
+          <span className="filter-divider"></span>
+          <div className="filter-group">
+            <label htmlFor="sort-by">Sort</label>
+            <select
+              id="sort-by"
+              value={sortBy}
+              onChange={handleSortChange}
+              className="filter-select"
+            >
+              <option value="default">Featured</option>
+              <option value="price-low">Price: Low → High</option>
+              <option value="price-high">Price: High → Low</option>
+              <option value="name-az">A → Z</option>
+              <option value="name-za">Z → A</option>
+            </select>
           </div>
         </div>
       </section>
-      <section className="product-list">
-        <div className="container">
-          {filteredProducts.map((product, index) => (
-            <Product
+
+      {activeTag === "Face Care" ? (
+        /* Face Care Category Layout - 2 Cards Only */
+        <section className="face-care-section">
+          {filteredProducts.slice(0, 2).map((product, index) => (
+            <FaceCareCard
               key={product.name}
               product={product}
               productIndex={products.indexOf(product) + 1}
-              showAddToCart={true}
               innerRef={(el) => (productRefs.current[index] = el)}
-              style={{ opacity: 0, transform: "scale(0.5)" }}
+              style={{ opacity: 0 }}
             />
           ))}
-        </div>
-      </section>
-    </>
+        </section>
+      ) : (
+        /* Default Layout for All, Hair Care, Body Care */
+        <>
+          {/* Section 1: 2 Products + Spotlight Banner */}
+          <section className="wardrobe-section section-row-1">
+            <div className="products-pair">
+              {filteredProducts.slice(0, 2).map((product, index) => (
+                <ProductCard
+                  key={product.name}
+                  product={product}
+                  productIndex={products.indexOf(product) + 1}
+                  innerRef={(el) => (productRefs.current[index] = el)}
+                  style={{ opacity: 0 }}
+                />
+              ))}
+            </div>
+            <div className="spotlight-banner">
+              <div className="spotlight-content">
+                <span>Featured</span>
+                <h2>Product</h2>
+                <h2>Spotlight</h2>
+              </div>
+            </div>
+          </section>
+
+          {/* Section 2: 4 Products in a Row */}
+          <section className="wardrobe-section section-row-2">
+            {filteredProducts.slice(2, 6).map((product, index) => (
+              <ProductCard
+                key={product.name}
+                product={product}
+                productIndex={products.indexOf(product) + 1}
+                innerRef={(el) => (productRefs.current[index + 2] = el)}
+                style={{ opacity: 0 }}
+              />
+            ))}
+          </section>
+
+          {/* Section 3: Banner (2 products wide) + 2 Products */}
+          <section className="wardrobe-section section-row-4">
+            <div className="side-banner">
+              <div className="banner-content">
+                <span>Ayurvedic</span>
+                <h2>Banner</h2>
+                <p>Pure ingredients for radiant skin</p>
+              </div>
+            </div>
+            <div className="products-beside-banner">
+              {filteredProducts.slice(6, 10).map((product, index) => (
+                <ProductCard
+                  key={product.name}
+                  product={product}
+                  productIndex={products.indexOf(product) + 1}
+                  innerRef={(el) => (productRefs.current[index + 6] = el)}
+                  style={{ opacity: 0 }}
+                />
+              ))}
+            </div>
+          </section>
+        </>
+      )}
+
+    </div>
   );
 }

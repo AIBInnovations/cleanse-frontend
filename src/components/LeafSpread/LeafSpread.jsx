@@ -84,6 +84,10 @@ const LeafSpread = ({ delay = 0, count = 30, triggerOnScroll = false, triggerEle
         const finalY = Math.sin(angle) * distance * 0.8;
         const size = 0.4 + Math.random() * 0.8;
         const rotationEnd = (Math.random() - 0.5) * 720;
+        const floatY = 10 + Math.random() * 15;
+        const floatX = (Math.random() - 0.5) * 10;
+        const floatRotation = (Math.random() - 0.5) * 10;
+        const floatDuration = 3 + Math.random() * 2;
 
         // Main spread animation
         gsap.to(leaf, {
@@ -95,18 +99,18 @@ const LeafSpread = ({ delay = 0, count = 30, triggerOnScroll = false, triggerEle
           duration: 1.8 + Math.random() * 0.8,
           ease: "power2.out",
           delay: i * 0.03,
-        });
-
-        // Continuous gentle floating
-        gsap.to(leaf, {
-          y: `+=${15 + Math.random() * 25}`,
-          x: `+=${(Math.random() - 0.5) * 15}`,
-          rotation: `+=${(Math.random() - 0.5) * 15}`,
-          duration: 2.5 + Math.random() * 2,
-          ease: "sine.inOut",
-          repeat: -1,
-          yoyo: true,
-          delay: 2 + Math.random() * 0.5,
+          onComplete: () => {
+            // Start gentle floating only after spread is complete
+            gsap.to(leaf, {
+              y: finalY + floatY,
+              x: finalX + floatX,
+              rotation: rotationEnd + floatRotation,
+              duration: floatDuration,
+              ease: "sine.inOut",
+              repeat: -1,
+              yoyo: true,
+            });
+          }
         });
       });
     };

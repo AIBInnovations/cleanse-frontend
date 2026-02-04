@@ -1,0 +1,47 @@
+.hover-word-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.hover-word-text {
+  position: relative;
+  z-index: 2;
+  transition: color 0.3s ease, opacity 0.3s ease;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.hover-word-text.hovered {
+  color: #023020;
+  opacity: 0.4;
+}
+
+.hover-word-image-wrapper {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 8px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.hover-word-image {
+  width: 140px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 9999px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile: disable hover effects */
+@media (max-width: 768px) {
+  .hover-word-container {
+    cursor: default;
+  }
+
+  .hover-word-image-wrapper {
+    display: none;
+  }
+}

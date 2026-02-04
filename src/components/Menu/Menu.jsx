@@ -13,6 +13,7 @@ const Menu = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [isMenuVisible, setIsMenuVisible] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const menuRef = useRef(null);
   const menuOverlayRef = useRef(null);
@@ -58,8 +59,13 @@ const Menu = () => {
     }
 
     if (menuTriggerRef.current) {
+      const dots = menuTriggerRef.current.querySelectorAll('.dot');
+      gsap.to(dots[0], { x: 3, y: 3, duration: 0.4, ease: "power3.out" });
+      gsap.to(dots[1], { x: -3, y: 3, duration: 0.4, ease: "power3.out" });
+      gsap.to(dots[2], { x: 3, y: -3, duration: 0.4, ease: "power3.out" });
+      gsap.to(dots[3], { x: -3, y: -3, duration: 0.4, ease: "power3.out" });
       gsap.to(menuTriggerRef.current, {
-        rotation: 135,
+        rotation: 45,
         duration: 0.5,
         ease: "power3.out",
       });
@@ -122,7 +128,6 @@ const Menu = () => {
   };
 
   const closeMenu = () => {
-    setIsOpen(false);
     setIsAnimating(true);
 
     if (hamburgerRef.current) {
@@ -130,6 +135,8 @@ const Menu = () => {
     }
 
     if (menuTriggerRef.current) {
+      const dots = menuTriggerRef.current.querySelectorAll('.dot');
+      gsap.to(dots, { x: 0, y: 0, duration: 0.4, ease: "power3.out" });
       gsap.to(menuTriggerRef.current, {
         rotation: 0,
         duration: 0.5,
@@ -139,6 +146,7 @@ const Menu = () => {
 
     const tl = gsap.timeline({
       onComplete: () => {
+        setIsOpen(false);
         setIsAnimating(false);
       },
     });
@@ -273,67 +281,119 @@ const Menu = () => {
     };
   }, []);
 
+  const upScrollCountRef = useRef(0);
+  const scrollInitializedRef = useRef(false);
+
   useEffect(() => {
-    if (isMobile) {
-      if (menuRef.current && !isMenuVisible) {
-        menuRef.current.classList.remove("hidden");
-        setIsMenuVisible(true);
-      }
-      return;
+    // Only initialize lastScrollY once on mount
+    if (!scrollInitializedRef.current) {
+      lastScrollY.current = window.scrollY;
+      scrollInitializedRef.current = true;
     }
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const scrollDiff = currentScrollY - lastScrollY.current;
+      const isMenuHidden = menuRef.current?.classList.contains("hidden");
+      const heroHeight = window.innerHeight - 100; // Hero section threshold
 
-      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-        if (isOpen) {
-          closeMenu();
+      // Show transparent nav in hero section, green bg below
+      if (currentScrollY < heroHeight && !isMenuHidden) {
+        setIsScrolled(false);
+      } else if (currentScrollY >= heroHeight) {
+        setIsScrolled(true);
+      }
+
+      // Skip hide/show on mobile
+      if (isMobile) {
+        lastScrollY.current = currentScrollY;
+        return;
+      }
+
+      // Scrolling down or not moving - reset up scroll counter and hide if needed
+      if (scrollDiff >= 0) {
+        upScrollCountRef.current = 0; // Reset counter on any non-upward movement
+
+        if (scrollDiff > 2 && currentScrollY > 10) {
+          if (isOpen) {
+            closeMenu();
+          }
+          if (menuRef.current && !menuRef.current.classList.contains("hidden")) {
+            menuRef.current.classList.add("hidden");
+            setIsMenuVisible(false);
+          }
         }
-        if (isMenuVisible) {
-          menuRef.current.classList.add("hidden");
-          setIsMenuVisible(false);
-        }
-      } else if (currentScrollY < lastScrollY.current) {
-        if (!isMenuVisible) {
-          menuRef.current.classList.remove("hidden");
-          setIsMenuVisible(true);
+      }
+      // Scrolling up - accumulate up scroll distance
+      else if (scrollDiff < -2) {
+        // Accumulate upward scroll distance
+        upScrollCountRef.current += Math.abs(scrollDiff);
+
+        // Only show header after scrolling up at least 50px continuously
+        if (upScrollCountRef.current > 50) {
+          if (menuRef.current && menuRef.current.classList.contains("hidden")) {
+            menuRef.current.classList.remove("hidden");
+            setIsMenuVisible(true);
+          }
         }
       }
 
       lastScrollY.current = currentScrollY;
     };
 
+    // Ensure menu is visible on mobile
+    if (isMobile && menuRef.current && menuRef.current.classList.contains("hidden")) {
+      menuRef.current.classList.remove("hidden");
+      setIsMenuVisible(true);
+    }
+
     window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [isOpen, isMenuVisible, isMobile]);
+  }, [isOpen, isMobile]);
 
   return (
-    <nav className="menu" ref={menuRef}>
+    <nav className={`menu ${isScrolled ? 'scrolled' : ''} ${isOpen ? 'menu-open' : ''}`} ref={menuRef}>
       <div className="menu-header">
-        <Link href="/" className="menu-logo-link">
-          <h4 className="menu-logo">Cleanse</h4>
-        </Link>
-        <div className="menu-nav-links">
-          <Link href="/" className="menu-nav-link">Home</Link>
-          <Link href="/wardrobe" className="menu-nav-link">Shop</Link>
-          <Link href="/genesis" className="menu-nav-link">About</Link>
-          <Link href="/touchpoint" className="menu-nav-link">Blog</Link>
-          <button className="menu-trigger" onClick={toggleMenu} aria-label="Toggle menu">
-            <div className="menu-trigger-icon" ref={menuTriggerRef}>
-              <span></span>
-              <span></span>
+        {/* Full header content - shown in hero section */}
+        <div className={`menu-header-full ${isScrolled ? 'hidden' : ''}`}>
+          <Link href="/" className="menu-logo-link">
+            <h4 className="menu-logo">Cleanse</h4>
+          </Link>
+          <div className="menu-nav-links">
+            <Link href="/" className="menu-nav-link">Home</Link>
+            <Link href="/wardrobe" className="menu-nav-link">Shop</Link>
+            <Link href="/genesis" className="menu-nav-link">About</Link>
+            <Link href="/touchpoint" className="menu-nav-link">Blog</Link>
+            <button className="menu-trigger" onClick={toggleMenu} aria-label="Toggle menu">
+              <div className="menu-trigger-icon" ref={menuTriggerRef}>
+                <span className="dot dot-1"></span>
+                <span className="dot dot-2"></span>
+                <span className="dot dot-3"></span>
+                <span className="dot dot-4"></span>
+              </div>
+            </button>
+          </div>
+          <button className="menu-toggle" onClick={toggleMenu} aria-label="Toggle menu">
+            <div className="menu-hamburger-icon" ref={hamburgerRef}>
+              <span className="menu-item"></span>
+              <span className="menu-item"></span>
             </div>
           </button>
         </div>
-        <button className="menu-toggle" onClick={toggleMenu} aria-label="Toggle menu">
-          <div className="menu-hamburger-icon" ref={hamburgerRef}>
-            <span className="menu-item"></span>
-            <span className="menu-item"></span>
-          </div>
-        </button>
+
+        {/* Centered CLEANSE - shown when scrolled */}
+        <div className={`menu-header-centered ${isScrolled ? 'visible' : ''}`}>
+          <button
+            className="menu-centered-logo"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            <h4 className="menu-logo">Cleanse</h4>
+          </button>
+        </div>
       </div>
 
       <div className="menu-overlay" ref={menuOverlayRef}>
