@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRef, useState, useEffect, useLayoutEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
-import { useCartCount } from "@/store/cartStore";
+import { useCart } from "@/context/CartContext";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 
@@ -28,7 +28,7 @@ const Menu = () => {
   const pathname = usePathname();
   const router = useRouter();
   const isHomePage = pathname === "/";
-  const cartCount = useCartCount();
+  const { cartCount } = useCart();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -514,7 +514,7 @@ const Menu = () => {
         {/* Full header content - shown in hero section */}
         <div className={`menu-header-full ${isScrolled ? 'hidden' : ''}`}>
           <Link href="/" className="menu-logo-link">
-            <h4 className="menu-logo">Cleanse</h4>
+            <img src="/logo.png" alt="Cleanse" className="menu-logo-img" />
           </Link>
           <div className="menu-nav-links">
             <Link href="/" className="menu-nav-link">Home</Link>
@@ -563,7 +563,7 @@ const Menu = () => {
             onClick={toggleMenu}
             aria-label="Toggle menu"
           >
-            <h4 className="menu-logo">Cleanse</h4>
+            <img src="/logo.png" alt="Cleanse" className="menu-logo-img" />
           </button>
         </div>
 

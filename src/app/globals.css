@@ -21,14 +21,14 @@
   --font-heading: 'Caelune Beauty', serif;
   --font-body: 'Lexend', sans-serif;
 
-  /* Luxury Terracotta Ritual - Ayurvedic Color Palette */
-  --base-100: #E8D9C8;  /* Muted Cream - primary background */
-  --base-200: #D4B575;  /* Brushed Gold - light accent */
-  --base-300: #BF7050;  /* Soft Terracotta - medium accent */
-  --base-400: #8C3F2D;  /* Burnt Sienna - UI elements */
-  --base-500: #6B3424;  /* Deep Sienna - secondary text */
-  --base-600: #4A2E24;  /* Dark Umber - near dark */
-  --base-700: #3A2319;  /* Deep Umber - primary text, dark bg */
+  /* Earthy Brown Color Palette */
+  --base-100: #E7D0A6;  /* Light Cream - primary background */
+  --base-200: #9E9268;  /* Olive Brown - light accent */
+  --base-300: #84592C;  /* Medium Brown - medium accent */
+  --base-400: #722F14;  /* Dark Reddish Brown - UI elements */
+  --base-500: #5A2510;  /* Deep Brown - secondary text */
+  --base-600: #422D1C;  /* Very Dark Brown - near dark */
+  --base-700: #2E1F14;  /* Darkest Brown - primary text, dark bg */
 }
 
 * {

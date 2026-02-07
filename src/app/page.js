@@ -1,6 +1,6 @@
 "use client";
 import "./home.css";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 
 // import Preloader, { isInitialLoad } from "@/components/Preloader/Preloader";
@@ -19,6 +19,11 @@ import BlogSection from "@/components/BlogSection/BlogSection";
 
 import Copy from "@/components/Copy/Copy";
 
+import SpinWheel from "@/components/SpinWheel/SpinWheel";
+import NewsletterPopup from "@/components/NewsletterPopup/NewsletterPopup";
+import FOMOPopup from "@/components/FOMOPopup/FOMOPopup";
+import ChatSupport from "@/components/ChatSupport/ChatSupport";
+
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -31,6 +36,61 @@ export default function Index() {
   const centerImageRef = useRef(null);
   const leafSpreadRef = useRef(null);
   const leafTriggeredRef = useRef(false);
+
+  // Marketing popups state
+  const [showSpinWheel, setShowSpinWheel] = useState(false);
+  const [showNewsletter, setShowNewsletter] = useState(false);
+  const [showFOMO, setShowFOMO] = useState(false);
+  const [spinWheelResult, setSpinWheelResult] = useState(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Handle client-side mounting
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Show spin wheel after a delay on page load
+  useEffect(() => {
+    if (!isMounted) return;
+
+    // Always show FOMO popups after mount
+    const fomoTimer = setTimeout(() => {
+      setShowFOMO(true);
+    }, 1000);
+
+    // Show spin wheel after 3 seconds
+    sessionStorage.removeItem("cleanse_popups_seen"); // Reset for testing
+    const hasSeenPopups = false; // Always show for now
+
+    let spinTimer;
+    if (!hasSeenPopups) {
+      spinTimer = setTimeout(() => {
+        setShowSpinWheel(true);
+      }, 3000);
+    }
+
+    return () => {
+      clearTimeout(fomoTimer);
+      if (spinTimer) clearTimeout(spinTimer);
+    };
+  }, [isMounted]);
+
+  const handleSpinComplete = (result) => {
+    setSpinWheelResult(result);
+  };
+
+  const handleSpinClose = () => {
+    setShowSpinWheel(false);
+    // Show newsletter after spin wheel closes
+    setTimeout(() => {
+      setShowNewsletter(true);
+    }, 500);
+  };
+
+  const handleNewsletterClose = () => {
+    setShowNewsletter(false);
+    sessionStorage.setItem("cleanse_popups_seen", "true");
+  };
 
   useGSAP(() => {
     if (!heroSectionRef.current) return;
@@ -246,6 +306,23 @@ export default function Index() {
       <Testimonials />
 
       <PeelReveal />
+
+      {/* Marketing Components - Only render after client mount */}
+      {isMounted && (
+        <>
+          <SpinWheel
+            isOpen={showSpinWheel}
+            onClose={handleSpinClose}
+            onComplete={handleSpinComplete}
+          />
+          <NewsletterPopup
+            isOpen={showNewsletter}
+            onClose={handleNewsletterClose}
+          />
+          <FOMOPopup isActive={showFOMO} />
+          <ChatSupport />
+        </>
+      )}
     </>
   );
 }

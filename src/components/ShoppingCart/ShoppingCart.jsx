@@ -1,9 +1,9 @@
 "use client";
 import "./ShoppingCart.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { products } from "@/app/wardrobe/products";
-import { useCartStore, useCartCount, useCartSubtotal } from "@/store/cartStore";
+import { useCart } from "@/context/CartContext";
 
 const discountTiers = [
   { threshold: 500, label: "5% Off", discount: 5 },
@@ -14,18 +14,188 @@ const discountTiers = [
 
 const maxThreshold = discountTiers[discountTiers.length - 1].threshold;
 
+// Loyalty points rate: 1 point per ₹10 spent
+const POINTS_PER_RUPEE = 0.1;
+
+// Cart timer duration in seconds (15 minutes)
+const CART_TIMER_DURATION = 15 * 60;
+
+// Cart Timer Component
+const CartTimer = ({ cartItems }) => {
+  const [timeLeft, setTimeLeft] = useState(CART_TIMER_DURATION);
+  const timerRef = useRef(null);
+  const lastCartUpdateRef = useRef(Date.now());
+
+  // Reset timer when cart items change
+  useEffect(() => {
+    if (cartItems.length > 0) {
+      lastCartUpdateRef.current = Date.now();
+      setTimeLeft(CART_TIMER_DURATION);
+    }
+  }, [cartItems.length]);
+
+  // Countdown logic
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      setTimeLeft(CART_TIMER_DURATION);
+      return;
+    }
+
+    timerRef.current = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timerRef.current);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
+  }, [cartItems.length]);
+
+  if (cartItems.length === 0) return null;
+
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+  const isUrgent = timeLeft <= 120; // Last 2 minutes
+
+  return (
+    <div className={`cart-timer ${isUrgent ? "urgent" : ""}`}>
+      <div className="cart-timer-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="12" cy="12" r="10" />
+          <polyline points="12,6 12,12 16,14" />
+        </svg>
+      </div>
+      <div className="cart-timer-content">
+        <span className="cart-timer-label">Items reserved for</span>
+        <span className="cart-timer-time">
+          {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
+        </span>
+      </div>
+    </div>
+  );
+};
+
+// Loyalty Points Component
+const LoyaltyPoints = ({ subtotal }) => {
+  const pointsEarned = Math.floor(subtotal * POINTS_PER_RUPEE);
+
+  if (pointsEarned === 0) return null;
+
+  return (
+    <div className="loyalty-points">
+      <div className="loyalty-points-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
+        </svg>
+      </div>
+      <div className="loyalty-points-content">
+        <span className="loyalty-points-value">+{pointsEarned}</span>
+        <span className="loyalty-points-label">Loyalty Points</span>
+      </div>
+    </div>
+  );
+};
+
+// Cross-sell Products Component
+const CrossSellProducts = ({ cartItems }) => {
+  const { addToCart } = useCart();
+
+  // Get products not in cart for cross-selling (limit to 2 for compact display)
+  const cartProductNames = cartItems.map((item) => item.name);
+  const crossSellProducts = products
+    .filter((p) => !cartProductNames.includes(p.name))
+    .slice(0, 2);
+
+  if (crossSellProducts.length === 0 || cartItems.length === 0) return null;
+
+  const handleAddProduct = (product) => {
+    const productIndex = products.findIndex((p) => p.name === product.name) + 1;
+    addToCart({
+      name: product.name,
+      price: product.price,
+      image: `/products/product_${productIndex}.png`,
+      quantity: 1,
+    });
+  };
+
+  return (
+    <div className="cross-sell">
+      <h4 className="cross-sell-title">Complete Your Routine</h4>
+      <div className="cross-sell-products">
+        {crossSellProducts.map((product) => {
+          const productIndex = products.findIndex((p) => p.name === product.name) + 1;
+          return (
+            <div key={product.name} className="cross-sell-item">
+              <div className="cross-sell-image">
+                <img
+                  src={`/products/product_${productIndex}.png`}
+                  alt={product.name}
+                />
+              </div>
+              <div className="cross-sell-details">
+                <p className="cross-sell-name">{product.name}</p>
+                <p className="cross-sell-price">&#8377;{product.price}</p>
+              </div>
+              <button
+                className="cross-sell-add"
+                onClick={() => handleAddProduct(product)}
+              >
+                +
+              </button>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
 const DiscountProgress = ({ subtotal }) => {
   const progress = Math.min((subtotal / maxThreshold) * 100, 100);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const prevTierRef = useRef(null);
 
   const currentTier = [...discountTiers].reverse().find((t) => subtotal >= t.threshold);
   const nextTier = discountTiers.find((t) => subtotal < t.threshold);
 
+  // Check if a new tier was unlocked
+  useEffect(() => {
+    if (currentTier && currentTier !== prevTierRef.current) {
+      if (prevTierRef.current !== null || subtotal >= discountTiers[0].threshold) {
+        setShowConfetti(true);
+        setTimeout(() => setShowConfetti(false), 2000);
+      }
+    }
+    prevTierRef.current = currentTier;
+  }, [currentTier, subtotal]);
+
+  // Generate confetti particles
+  const confettiParticles = showConfetti ? Array.from({ length: 30 }, (_, i) => (
+    <div
+      key={i}
+      className="confetti-particle"
+      style={{
+        left: `${Math.random() * 100}%`,
+        animationDelay: `${Math.random() * 0.5}s`,
+        backgroundColor: ['#FFD700', '#FF6B6B', '#4ECDC4', '#A855F7', '#FF9F43', '#54A0FF', '#5FD068', '#FF78C4', '#F9CA24', '#00D2D3'][Math.floor(Math.random() * 10)],
+      }}
+    />
+  )) : null;
+
   return (
-    <div className="discount-progress">
+    <div className={`discount-progress ${showConfetti ? 'celebrating' : ''}`}>
+      {showConfetti && <div className="confetti-container">{confettiParticles}</div>}
       <div className="discount-progress-top">
         {currentTier ? (
           <p className="discount-progress-msg unlocked">
-            {currentTier.label} unlocked
+            🎉 {currentTier.label} unlocked!
           </p>
         ) : nextTier ? (
           <p className="discount-progress-msg">
@@ -59,10 +229,7 @@ const DiscountProgress = ({ subtotal }) => {
 
 const ShoppingCart = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const cartItems = useCartStore((state) => state.cartItems);
-  const removeFromCart = useCartStore((state) => state.removeFromCart);
-  const cartCount = useCartCount();
-  const subtotal = useCartSubtotal();
+  const { cartItems, removeFromCart, cartCount, subtotal } = useCart();
 
   const toggleCart = () => {
     setIsOpen(!isOpen);
@@ -90,9 +257,9 @@ const ShoppingCart = () => {
         className={`cart-sidebar ${isOpen ? "open" : ""}`}
         onWheel={(e) => {
           const target = e.currentTarget;
-          const cartItems = target.querySelector(".cart-items");
-          if (cartItems) {
-            const { scrollTop, scrollHeight, clientHeight } = cartItems;
+          const cartItemsEl = target.querySelector(".cart-items");
+          if (cartItemsEl) {
+            const { scrollTop, scrollHeight, clientHeight } = cartItemsEl;
             const isAtTop = scrollTop === 0;
             const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
 
@@ -109,9 +276,10 @@ const ShoppingCart = () => {
               Close
             </button>
           </div>
+          <CartTimer cartItems={cartItems} />
           {cartItems.length > 0 && <DiscountProgress subtotal={subtotal} />}
           <div
-            className="cart-items"
+            className="cart-items-scroll"
             onWheel={(e) => {
               e.stopPropagation();
             }}
@@ -140,10 +308,10 @@ const ShoppingCart = () => {
                       <div className="cart-item-name-row">
                         <p className="cart-item-name">{item.name}</p>
                         {quantity > 1 && (
-                          <span className="cart-item-quantity">{quantity}</span>
+                          <span className="cart-item-quantity">x{quantity}</span>
                         )}
                       </div>
-                      <p className="cart-item-price">${item.price}</p>
+                      <p className="cart-item-price">&#8377;{item.price}</p>
                       <button
                         className="cart-item-remove"
                         onClick={() => removeFromCart(item.name)}
@@ -157,31 +325,35 @@ const ShoppingCart = () => {
             )}
           </div>
           {cartItems.length > 0 && (
-            <div className="cart-footer">
-              {(() => {
-                const activeTier = [...discountTiers].reverse().find((t) => subtotal >= t.threshold && t.discount > 0);
-                const discountAmount = activeTier ? (subtotal * activeTier.discount) / 100 : 0;
-                const finalTotal = subtotal - discountAmount;
-                return (
-                  <>
-                    <div className="cart-summary-row">
-                      <span>Subtotal</span>
-                      <span>&#8377;{subtotal.toFixed(2)}</span>
-                    </div>
-                    {activeTier && (
-                      <div className="cart-summary-row cart-discount-row">
-                        <span>{activeTier.label}</span>
-                        <span>-&#8377;{discountAmount.toFixed(2)}</span>
+            <div className="cart-bottom-section">
+              <CrossSellProducts cartItems={cartItems} />
+              <div className="cart-footer">
+                {(() => {
+                  const activeTier = [...discountTiers].reverse().find((t) => subtotal >= t.threshold && t.discount > 0);
+                  const discountAmount = activeTier ? (subtotal * activeTier.discount) / 100 : 0;
+                  const finalTotal = subtotal - discountAmount;
+                  return (
+                    <>
+                      <div className="cart-summary-row">
+                        <span>Subtotal</span>
+                        <span>&#8377;{subtotal.toFixed(2)}</span>
                       </div>
-                    )}
-                    <div className="cart-summary-row cart-total-row">
-                      <span>Total</span>
-                      <span>&#8377;{finalTotal.toFixed(2)}</span>
-                    </div>
-                  </>
-                );
-              })()}
-              <button className="cart-checkout">Checkout</button>
+                      {activeTier && (
+                        <div className="cart-summary-row cart-discount-row">
+                          <span>{activeTier.label}</span>
+                          <span>-&#8377;{discountAmount.toFixed(2)}</span>
+                        </div>
+                      )}
+                      <div className="cart-summary-row cart-total-row">
+                        <span>Total</span>
+                        <span>&#8377;{finalTotal.toFixed(2)}</span>
+                      </div>
+                    </>
+                  );
+                })()}
+                <LoyaltyPoints subtotal={subtotal} />
+                <button className="cart-checkout">Checkout</button>
+              </div>
             </div>
           )}
         </div>

@@ -36,7 +36,7 @@
 .text-reveal-btn {
   display: inline-block;
   padding: 1rem 2.5rem;
-  background-color: #023020;
+  background-color: var(--base-700);
   color: #E7D0A6;
   font-family: var(--font-body);
   font-size: 0.9rem;
@@ -51,7 +51,7 @@
 }
 
 .text-reveal-btn:hover {
-  background-color: #034d30;
+  background-color: var(--base-600);
   transform: translateY(-2px);
   box-shadow: 0 10px 30px rgba(2, 48, 32, 0.3);
 }

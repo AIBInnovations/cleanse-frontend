@@ -3,7 +3,7 @@ import "./Product.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { useCartStore } from "@/store/cartStore";
+import { useCart } from "@/context/CartContext";
 
 const Product = ({
   product,
@@ -14,7 +14,7 @@ const Product = ({
   style,
   imageSrc,
 }) => {
-  const addToCart = useCartStore((state) => state.addToCart);
+  const { addToCart } = useCart();
   const pathname = usePathname();
 
   const handleImageClick = () => {

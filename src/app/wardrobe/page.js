@@ -3,12 +3,12 @@ import "./wardrobe.css";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { products } from "./products";
-import { useCartStore } from "@/store/cartStore";
+import { useCart } from "@/context/CartContext";
 import Copy from "@/components/Copy/Copy";
 import { gsap } from "gsap";
 
 const ProductCard = ({ product, productIndex, innerRef, style }) => {
-  const addToCart = useCartStore((state) => state.addToCart);
+  const { addToCart } = useCart();
   const imgIndex = ((productIndex - 1) % 4) + 1;
   const imgPath = `/p${imgIndex}.png`;
 
@@ -35,7 +35,7 @@ const ProductCard = ({ product, productIndex, innerRef, style }) => {
 };
 
 const FaceCareCard = ({ product, productIndex, innerRef, style }) => {
-  const addToCart = useCartStore((state) => state.addToCart);
+  const { addToCart } = useCart();
   const imgIndex = ((productIndex - 1) % 4) + 1;
   const imgPath = `/p${imgIndex}.png`;
 

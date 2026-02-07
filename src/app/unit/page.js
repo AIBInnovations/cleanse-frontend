@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 
 import { products } from "../wardrobe/products";
 import Product from "@/components/Product/Product";
-import { useCartStore } from "@/store/cartStore";
+import { useCart } from "@/context/CartContext";
 
 const productImages = [
   "/product/product_shot_01.jpg",
@@ -351,7 +351,7 @@ export default function Unit() {
   const [bundleSelected, setBundleSelected] = useState([true, true, true]);
   const [openTab, setOpenTab] = useState("ingredients");
   const [reviewIndex, setReviewIndex] = useState(0);
-  const addToCart = useCartStore((state) => state.addToCart);
+  const { addToCart } = useCart();
 
   const bundleProducts = [
     products.find((p) => p.name === "Sandalwood Serum") || products[3],

@@ -1,7 +1,7 @@
 .blog-section {
   width: 100%;
   padding: 7rem 2rem;
-  background-color: #f8f6f3;
+  background-color: #fff;
   overflow: hidden;
 }
 
@@ -32,14 +32,14 @@
   font-weight: 500;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: #5a8f5c;
+  color: var(--base-300);
 }
 
 .blog-section-title {
   font-family: var(--font-heading);
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 400;
-  color: #023020;
+  color: var(--base-700);
   letter-spacing: -0.03em;
   text-transform: none;
   line-height: 1;
@@ -59,10 +59,10 @@
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #023020;
+  color: var(--base-700);
   text-decoration: none;
   padding: 0.4rem 0.85rem;
-  border: 1px solid #023020;
+  border: 1px solid var(--base-700);
   border-radius: 9999px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
@@ -73,7 +73,7 @@
 }
 
 .blog-view-all:hover span {
-  color: #fffdf8;
+  color: var(--base-100);
 }
 
 .blog-view-all svg {
@@ -81,13 +81,13 @@
 }
 
 .blog-view-all:hover {
-  background-color: #023020;
-  color: #fffdf8;
+  background-color: var(--base-700);
+  color: var(--base-100);
 }
 
 .blog-view-all:hover svg {
   transform: translate(3px, -3px);
-  stroke: #fffdf8;
+  stroke: var(--base-100);
 }
 
 /* Grid */
@@ -112,7 +112,7 @@
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  background: #fffdf8;
+  background: var(--base-100);
   border-radius: 1rem;
   overflow: hidden;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
@@ -126,7 +126,7 @@
 
 /* Green Card Variant */
 .blog-card-green {
-  background: #023020;
+  background: #9e9268;
 }
 
 .blog-card-green .blog-card-title {
@@ -134,7 +134,7 @@
 }
 
 .blog-card-green .blog-card-category {
-  color: #8cb88e;
+  color: var(--base-200);
 }
 
 .blog-card-green .blog-card-divider,
@@ -147,7 +147,7 @@
 }
 
 .blog-card-green:hover .blog-card-title {
-  color: #8cb88e;
+  color: var(--base-200);
 }
 
 /* Featured Card (first one) */
@@ -172,11 +172,11 @@
 }
 
 .blog-card-featured .blog-card-category {
-  color: #8cb88e;
+  color: var(--base-200);
 }
 
 .blog-card-featured .blog-card-read-more {
-  color: #fffdf8;
+  color: var(--base-100);
 }
 
 .blog-card-featured .blog-card-divider,
@@ -262,7 +262,7 @@
   font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #5a8f5c;
+  color: var(--base-300);
 }
 
 .blog-card-divider {
@@ -283,7 +283,7 @@
   font-family: var(--font-body);
   font-size: 1.15rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--base-700);
   line-height: 1.35;
   margin-bottom: 0.5rem;
   text-transform: none;
@@ -291,11 +291,11 @@
 }
 
 .blog-card:hover .blog-card-title {
-  color: #023020;
+  color: var(--base-700);
 }
 
 .blog-card-featured:hover .blog-card-title {
-  color: #fffdf8;
+  color: var(--base-100);
 }
 
 .blog-card-excerpt {
@@ -320,7 +320,7 @@
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #023020;
+  color: var(--base-700);
 }
 
 .blog-card-read-more svg {
@@ -430,7 +430,7 @@
   }
 
   .blog-section-title {
-    font-size: 1.5rem;
+    font-size: clamp(2.5rem, 10vw, 3rem);
   }
 
   .blog-section-label {

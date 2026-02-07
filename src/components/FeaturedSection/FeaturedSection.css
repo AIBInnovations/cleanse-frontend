@@ -2,7 +2,11 @@
   width: 100%;
   min-height: 100vh;
   padding: 4rem 2rem;
-  background-color: #f8f6f3;
+  background-color: #fff;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -16,9 +20,9 @@
   max-width: 1124px;
   height: 90px;
   font-family: var(--font-heading);
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 400;
-  color: #023020;
+  color: var(--base-700);
   line-height: 1.2;
   text-align: left;
   margin-bottom: 1.5rem;
@@ -30,8 +34,8 @@
 .featured-cta-btn {
   display: inline-block;
   padding: 1rem 2rem;
-  background-color: #5a8f5c;
-  color: #fff;
+  background-color: var(--base-300);
+  color: var(--base-100);
   font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 500;
@@ -41,9 +45,9 @@
 }
 
 .featured-cta-btn:hover {
-  background-color: #4a7f4c;
+  background-color: var(--base-400);
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(90, 143, 92, 0.3);
+  box-shadow: 0 10px 30px rgba(132, 89, 44, 0.3);
 }
 
 /* Asymmetric Grid */
@@ -58,7 +62,7 @@
 
 .featured-card {
   position: relative;
-  background-color: #e8e4dc;
+  background-color: #D9C9A8;
   border-radius: 1.5rem;
   overflow: hidden;
   cursor: pointer;
@@ -123,8 +127,8 @@
   bottom: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #fff;
-  color: #1a1a1a;
+  background-color: var(--base-100);
+  color: var(--base-700);
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
@@ -155,21 +159,21 @@
 }
 
 .featured-grid-right .featured-card:nth-child(1) {
-  background-color: #e5e8dc;
+  background-color: #D9C9A8;
   grid-column: 1 / 3;
   grid-row: 1;
   border-radius: 20px;
 }
 
 .featured-grid-right .featured-card:nth-child(2) {
-  background-color: #d4dbc8;
+  background-color: #C4B48C;
   grid-column: 1;
   grid-row: 2;
   border-radius: 20px;
 }
 
 .featured-grid-right .featured-card:nth-child(3) {
-  background-color: #f0ebe3;
+  background-color: #E7D0A6;
   grid-column: 2;
   grid-row: 2;
   border-radius: 20px;
@@ -179,14 +183,14 @@
 .products-section {
   width: 100%;
   padding: 5rem 2rem;
-  background-color: #f8f6f3;
+  background-color: #fff;
 }
 
 .products-section-title {
   font-family: var(--font-heading);
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 400;
-  color: #023020;
+  color: var(--base-700);
   text-align: center;
   margin-bottom: 3rem;
   letter-spacing: 0.1em;
@@ -207,7 +211,7 @@
 }
 
 .product-card-image {
-  background-color: #e8e4dc;
+  background-color: #D9C9A8;
   border-radius: 1rem;
   display: flex;
   justify-content: center;
@@ -260,7 +264,7 @@
   font-family: var(--font-body);
   font-size: 1.1rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--base-700);
   margin-bottom: 0.25rem;
 }
 
@@ -275,13 +279,13 @@
   font-family: var(--font-body);
   font-size: 1.1rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--base-700);
 }
 
 .product-card-btn {
   padding: 0.75rem 1.5rem;
-  background-color: #4a3728;
-  color: #fff;
+  background-color: var(--base-400);
+  color: var(--base-100);
   font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 500;
@@ -292,7 +296,7 @@
 }
 
 .product-card-btn:hover {
-  background-color: #3a2a1e;
+  background-color: var(--base-500);
 }
 
 /* Responsive for Products Grid */
@@ -333,7 +337,7 @@
   position: relative;
   width: 446px;
   height: 183px;
-  background-color: #c8d5b9;
+  background-color: #C4B48C;
   border-radius: 20px;
   display: flex;
   justify-content: center;
@@ -433,7 +437,7 @@
 .play-button svg {
   width: 24px;
   height: 24px;
-  color: #1a1a1a;
+  color: var(--base-700);
   margin-left: 3px;
 }
 
@@ -451,7 +455,7 @@
   font-family: var(--font-body);
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--base-700);
   line-height: 1.3;
   margin-bottom: 1.5rem;
   text-transform: none;
@@ -494,7 +498,7 @@
 .benefits-list .bullet {
   width: 6px;
   height: 6px;
-  background-color: #5a8f5c;
+  background-color: var(--base-300);
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -502,8 +506,8 @@
 .learn-more-btn {
   display: inline-block;
   padding: 1rem 2rem;
-  background-color: #5a8f5c;
-  color: #fff;
+  background-color: var(--base-300);
+  color: var(--base-100);
   font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 500;
@@ -513,9 +517,9 @@
 }
 
 .learn-more-btn:hover {
-  background-color: #4a7f4c;
+  background-color: var(--base-400);
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(90, 143, 92, 0.3);
+  box-shadow: 0 10px 30px rgba(132, 89, 44, 0.3);
 }
 
 /* Responsive */
@@ -609,9 +613,11 @@
 
   .featured-section-title {
     height: auto;
-    font-size: clamp(1.25rem, 5vw, 1.75rem);
+    font-size: clamp(2.5rem, 10vw, 3rem);
     margin-bottom: 1rem;
     padding: 0 0.75rem;
+    position: relative;
+    z-index: 0;
   }
 
   /* Hide desktop grid, show card stack */
@@ -625,8 +631,9 @@
     width: 100%;
     height: 420px;
     margin: 0 auto;
-    overflow: hidden;
+    overflow: visible;
     touch-action: pan-y;
+    z-index: 1;
   }
 
   .featured-stack-card {
@@ -638,7 +645,7 @@
     height: 380px;
     border-radius: 1.25rem;
     overflow: hidden;
-    background-color: #e8e4dc;
+    background-color: #D9C9A8;
     transform-origin: center bottom;
     will-change: transform, opacity;
   }
@@ -684,7 +691,7 @@
   }
 
   .featured-stack-dot.active {
-    background-color: #023020;
+    background-color: var(--base-700);
     transform: scale(1.3);
   }
 
@@ -716,7 +723,7 @@
   }
 
   .products-section-title {
-    font-size: clamp(1.25rem, 5.5vw, 1.75rem);
+    font-size: clamp(2.5rem, 10vw, 3rem);
     margin-bottom: 2.5rem;
   }
 

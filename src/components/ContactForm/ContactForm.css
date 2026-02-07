@@ -34,20 +34,21 @@
 
 .contact-form .contact-form-container {
   position: absolute;
-  top: 40svh;
+  top: 35svh;
   right: 8rem;
   width: 30%;
-  height: 65svh;
-  max-height: 750px;
+  height: 75svh;
+  max-height: 850px;
   background-color: var(--base-700);
   color: var(--base-100);
   border-radius: 0.75rem;
   z-index: 2;
-  padding: 2.5rem 2.5rem;
+  padding: 3rem 2.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: 1.5rem;
 }
 
 .contact-form .cf-header {
@@ -56,7 +57,7 @@
 }
 
 .contact-form .cf-copy p {
-  color: var(--base-400);
+  color: rgba(255, 255, 255, 0.8);
   width: 80%;
   margin: 0 auto;
   text-align: center;
@@ -90,7 +91,6 @@
   align-items: center;
   color: var(--base-700);
   font-size: 1.5rem;
-  margin-bottom: 2rem;
 }
 
 .contact-form .cf-submit svg {
@@ -111,7 +111,7 @@
 }
 
 .contact-form .cf-footer .cf-footer-copy p {
-  color: var(--base-500);
+  color: rgba(255, 255, 255, 0.6);
   width: 40%;
   font-size: 0.8rem;
   text-align: center;

@@ -3,7 +3,7 @@ import "./cart.css";
 import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { products } from "@/app/wardrobe/products";
-import { useCartStore, useCartCount, useCartSubtotal } from "@/store/cartStore";
+import { useCart } from "@/context/CartContext";
 import Copy from "@/components/Copy/Copy";
 
 const discountTiers = [
@@ -16,11 +16,7 @@ const discountTiers = [
 const maxThreshold = discountTiers[discountTiers.length - 1].threshold;
 
 export default function CartPage() {
-  const cartItems = useCartStore((state) => state.cartItems);
-  const removeFromCart = useCartStore((state) => state.removeFromCart);
-  const updateQuantity = useCartStore((state) => state.updateQuantity);
-  const cartCount = useCartCount();
-  const subtotal = useCartSubtotal();
+  const { cartItems, removeFromCart, updateQuantity, addToCart, cartCount, subtotal } = useCart();
 
   const activeTier = [...discountTiers].reverse().find((t) => subtotal >= t.threshold && t.discount > 0);
   const nextTier = discountTiers.find((t) => subtotal < t.threshold);
@@ -185,7 +181,6 @@ export default function CartPage() {
             {recommended.map((product) => {
               const productIndex = products.indexOf(product) + 1;
               const imgIndex = ((productIndex - 1) % 4) + 1;
-              const addToCart = useCartStore.getState().addToCart;
               return (
                 <div key={product.name} className="cart-rec-card">
                   <Link href="/unit" className="cart-rec-card-image">

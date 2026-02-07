@@ -2,10 +2,10 @@
 import "./FeaturedSection.css";
 import Link from "next/link";
 import { useState, useRef, useCallback } from "react";
-import { useCartStore } from "@/store/cartStore";
+import { useCart } from "@/context/CartContext";
 
 const FeaturedSection = () => {
-  const addToCart = useCartStore((state) => state.addToCart);
+  const { addToCart } = useCart();
   const [activeCard, setActiveCard] = useState(0);
   const [dragX, setDragX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);

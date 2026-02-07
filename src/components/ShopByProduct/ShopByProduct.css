@@ -3,7 +3,7 @@
   width: 100%;
   height: 100vh;
   min-height: 700px;
-  background-color: #f8f6f3;
+  background-color: #fff;
   overflow: hidden;
 }
 
@@ -19,7 +19,7 @@
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 2rem;
   overflow: hidden;
-  background-color: #d4d0c8;
+  background-color: #D9C9A8;
 }
 
 .sbp-main-image > img {
@@ -37,7 +37,7 @@
   right: 0;
   width: 420px;
   height: 350px;
-  background-color: #f8f6f3;
+  background-color: #fff;
   border-top-left-radius: 2.5rem;
   z-index: 5;
 }
@@ -68,7 +68,7 @@
   font-family: var(--font-heading);
   font-size: clamp(3rem, 6vw, 5rem);
   font-weight: 400;
-  color: #1a1a1a;
+  color: var(--base-700);
   line-height: 1;
   letter-spacing: -0.03em;
   text-transform: uppercase;
@@ -93,7 +93,7 @@
   align-items: center;
   gap: 0.75rem;
   padding: 1rem 2rem;
-  background-color: #1a1a1a;
+  background-color: var(--base-700);
   color: #fff;
   border-radius: 9999px;
   font-family: var(--font-body);
@@ -107,7 +107,7 @@
 }
 
 .sbp-cta:hover {
-  background-color: #333;
+  background-color: var(--base-600);
   transform: translateY(-2px);
 }
 
@@ -191,7 +191,7 @@
   transform: translateX(-50%);
   width: 0;
   height: 3px;
-  background: #1a1a1a;
+  background: var(--base-700);
   border-radius: 2px;
   transition: width 0.4s ease;
 }
@@ -212,7 +212,7 @@
 }
 
 .sbp-nav-btn:hover {
-  color: #1a1a1a;
+  color: var(--base-700);
 }
 
 .sbp-nav-btn:hover .sbp-nav-btn-bar {
@@ -220,7 +220,7 @@
 }
 
 .sbp-nav-btn.active {
-  color: #1a1a1a;
+  color: var(--base-700);
 }
 
 .sbp-nav-btn.active .sbp-nav-btn-bar {
@@ -237,7 +237,7 @@
   position: absolute;
   width: 40px;
   height: 40px;
-  background-color: #1a1a1a;
+  background-color: var(--base-700);
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -250,7 +250,7 @@
 
 .sbp-hotspot:hover {
   transform: scale(1.1);
-  background-color: #333;
+  background-color: var(--base-600);
 }
 
 .sbp-hotspot-icon {
@@ -272,7 +272,7 @@
 /* Product Cards */
 .sbp-product-card {
   position: absolute;
-  background: #fffdf8;
+  background: var(--base-100);
   border-radius: 1rem;
   padding: 1rem;
   z-index: 10;
@@ -291,7 +291,7 @@
 .sbp-product-card-icon {
   width: 40px;
   height: 40px;
-  background: #f0ede8;
+  background: #D9C9A8;
   border-radius: 0.5rem;
   display: flex;
   align-items: center;
@@ -301,14 +301,14 @@
 .sbp-product-card-icon svg {
   width: 24px;
   height: 24px;
-  color: #1a1a1a;
+  color: var(--base-700);
 }
 
 .sbp-product-card-info h4 {
   font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--base-700);
   letter-spacing: 0.05em;
   margin-bottom: 0.25rem;
 }
@@ -331,7 +331,7 @@
   font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--base-700);
   letter-spacing: 0.08em;
   margin-bottom: 0.25rem;
 }
@@ -380,13 +380,13 @@
   font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--base-700);
 }
 
 .sbp-product-card-btn {
   width: 36px;
   height: 36px;
-  background: #1a1a1a;
+  background: var(--base-700);
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
@@ -397,7 +397,7 @@
 }
 
 .sbp-product-card-btn:hover {
-  background: #333;
+  background: var(--base-600);
 }
 
 .sbp-product-card-btn svg {
@@ -425,7 +425,7 @@
 
 .sbp-rating-stars .star {
   font-size: 1rem;
-  color: #1a1a1a;
+  color: var(--base-700);
   line-height: 1;
 }
 
@@ -437,7 +437,7 @@
   font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--base-700);
   margin-top: 0.25rem;
 }
 
@@ -617,7 +617,7 @@
     bottom: -1px;
     right: -1px;
     border-top-left-radius: 1.25rem;
-    background-color: #f8f6f3;
+    background-color: #fff;
   }
 
   /* SHOP BY / CATEGORY text inside image */
@@ -627,7 +627,7 @@
   }
 
   .sbp-side-text span {
-    font-size: clamp(1.5rem, 7vw, 2.5rem);
+    font-size: clamp(2.5rem, 10vw, 3rem);
   }
 
   /* SKIN CARE title inside the cut-out area */

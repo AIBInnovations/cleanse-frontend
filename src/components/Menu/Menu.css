@@ -51,7 +51,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #023020;
+  background-color: var(--base-700);
   transform-origin: top;
   transform: scaleY(0);
   transition: transform 0.35s ease-out;
@@ -68,13 +68,12 @@
   background-color: rgba(28, 25, 23, 0.95);
 }
 
-.menu.menu-open .menu-logo,
 .menu.menu-open .menu-nav-link {
-  color: #f8f6f3;
+  color: var(--base-100);
 }
 
 .menu.menu-open .menu-trigger-icon .dot {
-  background: #f8f6f3;
+  background: var(--base-100);
 }
 
 /* Full header - shown in hero */
@@ -125,13 +124,13 @@
 }
 
 .menu .menu-centered-logo .menu-logo {
-  color: #023020;
+  color: #8B5A2B;
   font-size: clamp(1.5rem, 2vw, 2rem);
   transition: color 0.3s ease;
 }
 
 .menu.nav-green .menu-centered-logo .menu-logo {
-  color: #f8f6f3;
+  color: #8B5A2B;
 }
 
 .menu .menu-back-arrow {
@@ -139,7 +138,7 @@
   left: 2rem;
   top: 50%;
   transform: translateY(-50%);
-  color: #023020;
+  color: #8B5A2B;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -148,7 +147,7 @@
 }
 
 .menu.nav-green .menu-back-arrow {
-  color: #f8f6f3;
+  color: var(--base-100);
 }
 
 .menu .menu-back-arrow:hover {
@@ -164,7 +163,7 @@
 }
 
 .menu .menu-nav-link {
-  color: #023020;
+  color: #8B5A2B;
   font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 400;
@@ -178,7 +177,7 @@
 }
 
 .menu.nav-green .menu-nav-link {
-  color: #f8f6f3;
+  color: var(--base-100);
 }
 
 .menu .menu-trigger {
@@ -205,25 +204,44 @@
 .menu .menu-trigger-icon .dot {
   width: 5px;
   height: 5px;
-  background: #023020;
+  background: #8B5A2B;
   border-radius: 50%;
   transition: background 0.3s ease;
 }
 
 .menu.nav-green .menu-trigger-icon .dot {
-  background: #f8f6f3;
+  background: var(--base-100);
 }
 
 .menu .menu-trigger:hover .menu-trigger-icon .dot {
-  background: #034d30;
+  background: #d4b896;
 }
 
 .menu.nav-green .menu-trigger:hover .menu-trigger-icon .dot {
-  background: #d4d0c8;
+  background: rgba(255, 255, 255, 0.7);
 }
 
 .menu .menu-logo-link {
   flex-shrink: 0;
+}
+
+.menu .menu-logo-img {
+  height: clamp(1.5rem, 2.5vw, 2rem);
+  width: auto;
+  display: block;
+  transition: filter 0.3s ease;
+}
+
+.menu.nav-green .menu-logo-img {
+  filter: none;
+}
+
+.menu.menu-open .menu-logo-img {
+  filter: none;
+}
+
+.menu .menu-centered-logo .menu-logo-img {
+  height: clamp(1.5rem, 2.5vw, 2rem);
 }
 
 .menu .menu-logo {
@@ -231,13 +249,13 @@
   font-family: var(--font-heading);
   font-size: clamp(1.5rem, 2vw, 2rem);
   line-height: 1;
-  color: #023020;
+  color: #8B5A2B;
   letter-spacing: 0.05em;
   transition: color 0.3s ease;
 }
 
 .menu.nav-green .menu-logo {
-  color: #f8f6f3;
+  color: #8B5A2B;
 }
 
 .menu .menu-toggle {
@@ -269,20 +287,20 @@
   width: 20px;
   height: 2px;
   margin: 0 0 4px;
-  background: #023020;
+  background: #8B5A2B;
   border-radius: 1px;
 }
 
 .menu.nav-green .menu-item {
-  background: #f8f6f3;
+  background: var(--base-100);
 }
 
 .menu .menu-hamburger-icon.open .menu-item {
-  background: #023020;
+  background: #E7D0A6;
 }
 
 .menu.nav-green .menu-hamburger-icon.open .menu-item {
-  background: #f8f6f3;
+  background: var(--base-100);
 }
 
 .menu .menu-hamburger-icon.open .menu-item:first-child {
@@ -319,7 +337,7 @@
 }
 
 .menu .menu-items-header p {
-  color: var(--base-500);
+  color: rgba(231, 208, 166, 0.6);
 }
 
 .menu .menu-overlay-col-sm {
@@ -334,7 +352,7 @@
   align-items: center;
   justify-content: space-between;
   width: 70%;
-  color: var(--base-100);
+  color: #fff;
 }
 
 .menu .menu-overlay-col-sm .menu-main-link p {
@@ -362,14 +380,14 @@
 .menu .menu-sub-links a {
   position: relative;
   display: block;
-  color: var(--base-100);
+  color: #E7D0A6;
   padding: 1rem 0;
-  border-bottom: 1px dashed var(--base-500);
+  border-bottom: 1px dashed rgba(231, 208, 166, 0.3);
   will-change: transform, opacity;
 }
 
 .menu .menu-overlay-footer {
-  border-top: 1px dashed var(--base-500);
+  border-top: 1px dashed rgba(231, 208, 166, 0.3);
   padding: 1rem 0 0 0;
   width: 100%;
   display: flex;
@@ -377,7 +395,7 @@
 }
 
 .menu .menu-overlay-footer a {
-  color: var(--base-100);
+  color: #E7D0A6;
 }
 
 /* Header action buttons (profile + cart + trigger) */
@@ -394,7 +412,7 @@
   align-items: center;
   justify-content: center;
   padding: 0.4rem;
-  color: #023020;
+  color: #8B5A2B;
   transition: opacity 0.3s ease, color 0.3s ease;
 }
 
@@ -409,11 +427,11 @@
 }
 
 .menu.nav-green .menu-action-btn {
-  color: #f8f6f3;
+  color: var(--base-100);
 }
 
 .menu.menu-open .menu-action-btn {
-  color: #f8f6f3;
+  color: var(--base-100);
 }
 
 /* Cart badge */
@@ -423,8 +441,8 @@
   right: -3px;
   width: 14px;
   height: 14px;
-  background: #023020;
-  color: #f8f6f3;
+  background: var(--base-700);
+  color: #E7D0A6;
   font-family: var(--font-body);
   font-size: 0.5rem;
   font-weight: 500;
@@ -436,12 +454,12 @@
 }
 
 .menu.nav-green .menu-cart-badge {
-  background: #f8f6f3;
-  color: #023020;
+  background: var(--base-100);
+  color: var(--base-700);
 }
 
 .menu.menu-open .menu-cart-badge {
-  background: #f8f6f3;
+  background: var(--base-100);
   color: rgba(28, 25, 23, 0.95);
 }
 
@@ -550,8 +568,16 @@
     font-size: clamp(1.25rem, 5vw, 1.5rem);
   }
 
+  .menu .menu-logo-img {
+    height: clamp(2rem, 6vw, 2.5rem);
+  }
+
   .menu .menu-centered-logo .menu-logo {
     font-size: clamp(1.25rem, 5vw, 1.5rem);
+  }
+
+  .menu .menu-centered-logo .menu-logo-img {
+    height: clamp(2rem, 6vw, 2.5rem);
   }
 
   .menu .menu-overlay {
@@ -644,38 +670,38 @@
   }
 
   .menu.scrolled .menu-logo {
-    color: #023020;
+    color: #E7D0A6;
   }
 
   .menu.scrolled .menu-trigger-icon .dot {
-    background: #023020;
+    background: #E7D0A6;
   }
 
   .menu.scrolled .menu-action-btn {
-    color: #023020;
+    color: #E7D0A6;
   }
 
   .menu.scrolled .menu-cart-badge {
-    background: #023020;
-    color: #f8f6f3;
+    background: var(--base-700);
+    color: #E7D0A6;
   }
 
   /* nav-green overrides scrolled resets on mobile */
   .menu.nav-green .menu-logo {
-    color: #f8f6f3;
+    color: #8B5A2B;
   }
 
   .menu.nav-green .menu-trigger-icon .dot {
-    background: #f8f6f3;
+    background: var(--base-100);
   }
 
   .menu.nav-green .menu-action-btn {
-    color: #f8f6f3;
+    color: var(--base-100);
   }
 
   .menu.nav-green .menu-cart-badge {
-    background: #f8f6f3;
-    color: #023020;
+    background: var(--base-100);
+    color: var(--base-700);
   }
 
 }

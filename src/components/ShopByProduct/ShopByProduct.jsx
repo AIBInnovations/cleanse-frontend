@@ -2,11 +2,11 @@
 import "./ShopByProduct.css";
 import { useState } from "react";
 import Link from "next/link";
-import { useCartStore } from "@/store/cartStore";
+import { useCart } from "@/context/CartContext";
 
 const ShopByProduct = () => {
   const [activeCategory, setActiveCategory] = useState(0);
-  const addToCart = useCartStore((state) => state.addToCart);
+  const { addToCart } = useCart();
 
   const categories = [
     {

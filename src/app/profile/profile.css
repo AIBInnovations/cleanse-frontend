@@ -5,7 +5,7 @@
 
 /* Hero */
 .profile-hero {
-  background: #023020;
+  background: var(--base-700);
   padding: 10rem 2rem 8rem;
   text-align: center;
   position: relative;
@@ -55,7 +55,7 @@
 .profile-hero-heading {
   font-family: var(--font-heading);
   font-size: clamp(3.5rem, 8vw, 6rem);
-  color: #f8f6f3;
+  color: var(--base-100);
   line-height: 0.9;
 }
 
@@ -103,12 +103,12 @@
 }
 
 .profile-tab:hover {
-  color: #023020;
+  color: var(--base-700);
 }
 
 .profile-tab.active {
-  color: #f8f6f3;
-  background: #023020;
+  color: var(--base-100);
+  background: var(--base-700);
 }
 
 /* Tab Content */
@@ -142,7 +142,7 @@
 .profile-empty-title {
   font-family: var(--font-heading);
   font-size: clamp(2rem, 4vw, 3rem);
-  color: #023020;
+  color: var(--base-700);
   line-height: 1;
 }
 
@@ -156,8 +156,8 @@
 
 .profile-action-btn {
   display: inline-block;
-  background: #023020;
-  color: #f8f6f3;
+  background: var(--base-700);
+  color: var(--base-100);
   font-family: var(--font-body);
   font-size: clamp(0.75rem, 0.85vw, 0.8rem);
   text-transform: uppercase;
@@ -214,7 +214,7 @@
   font-family: var(--font-body);
   font-size: clamp(1rem, 1.1vw, 1.05rem);
   font-weight: 600;
-  color: #023020;
+  color: var(--base-700);
   text-transform: uppercase;
   letter-spacing: 0.03em;
   margin-bottom: 0.75rem;
@@ -257,7 +257,7 @@
 }
 
 .profile-address-edit {
-  color: #023020;
+  color: var(--base-700);
 }
 
 .profile-address-edit:hover {
@@ -298,8 +298,8 @@
 }
 
 .profile-add-address-btn:hover {
-  border-color: #023020;
-  color: #023020;
+  border-color: var(--base-700);
+  color: var(--base-700);
 }
 
 /* Settings */
@@ -323,7 +323,7 @@
   font-family: var(--font-body);
   font-size: clamp(1rem, 1.1vw, 1.05rem);
   font-weight: 600;
-  color: #023020;
+  color: var(--base-700);
   text-transform: uppercase;
   letter-spacing: 0.03em;
   margin-bottom: 1.5rem;
@@ -353,14 +353,14 @@
   border: 1px solid rgba(2, 48, 32, 0.12);
   border-radius: 0.4rem;
   outline: none;
-  color: #023020;
+  color: var(--base-700);
   background: rgba(255, 255, 255, 0.3);
   transition: border-color 0.2s ease;
   text-transform: none;
 }
 
 .profile-form-input:focus {
-  border-color: #023020;
+  border-color: var(--base-700);
 }
 
 .profile-form-input::placeholder {
@@ -369,8 +369,8 @@
 }
 
 .profile-update-btn {
-  background: #023020;
-  color: #f8f6f3;
+  background: var(--base-700);
+  color: var(--base-100);
   border: none;
   padding: 0.9rem 2rem;
   font-family: var(--font-body);
@@ -408,7 +408,7 @@
   font-family: var(--font-body);
   font-size: clamp(0.88rem, 0.98vw, 0.92rem);
   font-weight: 500;
-  color: #023020;
+  color: var(--base-700);
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }
@@ -455,14 +455,14 @@
   width: 18px;
   left: 3px;
   bottom: 3px;
-  background: #f8f6f3;
+  background: var(--base-100);
   border-radius: 50%;
   transition: transform 0.3s ease;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .profile-toggle input:checked + .profile-toggle-slider {
-  background: #023020;
+  background: var(--base-700);
 }
 
 .profile-toggle input:checked + .profile-toggle-slider::before {

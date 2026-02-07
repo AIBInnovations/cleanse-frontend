@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  background-color: #f8f6f3;
+  background-color: #fff;
 }
 
 .marquee-banner .marquees {
@@ -27,7 +27,7 @@
 .marquee-banner .marquees .marquee-header {
   position: relative;
   width: 200%;
-  color: #4A2C2A;
+  color: var(--base-600);
   opacity: 0.15;
   will-change: transform;
 }
@@ -93,25 +93,25 @@
 .marquee-banner .instagram-icon {
   width: 18px;
   height: 18px;
-  color: #023020;
+  color: var(--base-700);
 }
 
 .marquee-banner .instagram-handle span {
   font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 500;
-  color: #023020;
+  color: var(--base-700);
   letter-spacing: 0.02em;
 }
 
 .marquee-banner .reels-tagline {
   max-width: 678px;
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(3rem, 6vw, 5rem);
   font-weight: 400;
-  color: #023020;
+  color: var(--base-700);
   text-align: center;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.02em;
   line-height: 1;
   opacity: 0.9;
 }
@@ -154,7 +154,7 @@
 .marquee-banner .reel-nav-btn svg {
   width: 24px;
   height: 24px;
-  color: #023020;
+  color: var(--base-700);
 }
 
 .marquee-banner .reel-nav-prev {
@@ -189,7 +189,7 @@
   height: 100%;
   border-radius: 1.25rem !important;
   overflow: hidden;
-  background: #023020;
+  background: var(--base-700);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   transition: box-shadow 0.4s ease;
   -webkit-mask-image: -webkit-radial-gradient(white, black);
@@ -414,7 +414,7 @@
 }
 
 .marquee-banner .indicator-dot.active {
-  background: #4A2C2A;
+  background: var(--base-600);
   transform: scale(1.2);
 }
 
@@ -647,9 +647,10 @@
   }
 
   .marquee-banner .reels-tagline {
-    font-size: clamp(2rem, 10vw, 3.5rem);
+    font-size: clamp(3rem, 12vw, 4rem);
     text-align: center;
     margin: 0 auto;
+    letter-spacing: 0.03em;
   }
 }
 

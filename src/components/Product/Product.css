@@ -11,7 +11,7 @@
   width: 100%;
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  background-color: #023020;
+  background-color: var(--base-700);
   padding: 0;
   border-radius: 0.75rem 0.75rem 0 0;
   text-decoration: none;
@@ -30,7 +30,7 @@
 
 .product .product-info {
   padding: 0 1rem 1rem 1rem;
-  background-color: #023020;
+  background-color: var(--base-700);
   border-radius: 0 0 0.75rem 0.75rem;
   min-height: 6rem;
   color: #E7D0A6;
@@ -60,7 +60,7 @@
   width: 100%;
   margin-top: 0.5rem;
   background-color: #E7D0A6;
-  color: #023020;
+  color: var(--base-700);
   padding: 0.75rem;
   font-size: clamp(0.75rem, 0.9vw, 0.8rem);
   border: none;
