@@ -49,7 +49,7 @@
 
 .cta .container .cta-col:nth-child(2) .cta-main-img .cta-header h3 {
   color: #023020;
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
 }
 
 .cta .container .cta-col:nth-child(2) .cta-main-img img {

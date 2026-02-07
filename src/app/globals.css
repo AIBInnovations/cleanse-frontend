@@ -1,4 +1,26 @@
+/* Font Faces */
+@font-face {
+  font-family: 'Caelune Beauty';
+  src: url('/font/Caelune Beauty.otf') format('opentype'),
+       url('/font/Caelune Beauty.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('/font/Lexend/Lexend-VariableFont_wght.ttf') format('truetype-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
+  /* Font Variables */
+  --font-heading: 'Caelune Beauty', serif;
+  --font-body: 'Lexend', sans-serif;
+
   /* Luxury Terracotta Ritual - Ayurvedic Color Palette */
   --base-100: #E8D9C8;  /* Muted Cream - primary background */
   --base-200: #D4B575;  /* Brushed Gold - light accent */
@@ -41,9 +63,9 @@ h3,
 h4,
 h5 {
   text-transform: uppercase;
-  font-family: var(--font-koulen), sans-serif;
+  font-family: var(--font-heading);
   font-weight: 400;
-  line-height: 0.8;
+  line-height: 0.9;
 }
 
 h1 {
@@ -77,9 +99,9 @@ span {
   text-decoration: none;
   text-transform: uppercase;
   color: var(--base-700);
-  font-family: var(--font-dm-mono), monospace;
-  font-weight: 500;
-  line-height: 1;
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.2;
 }
 
 a,
@@ -102,9 +124,9 @@ span.lg {
 
 p.bodyCopy {
   text-transform: none;
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-weight: 400;
-  line-height: 1.1;
+  line-height: 1.5;
   letter-spacing: -0.01rem;
 }
 
@@ -127,7 +149,7 @@ button {
   text-decoration: none;
   text-transform: uppercase;
   color: var(--base-700);
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-weight: 500;
   font-size: clamp(0.85rem, 1vw, 0.85rem);
   line-height: 1;
@@ -159,7 +181,7 @@ button.secondary {
   text-decoration: none;
   text-transform: uppercase;
   color: var(--base-700);
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-weight: 500;
   font-size: clamp(0.85rem, 1vw, 0.85rem);
   line-height: 1;

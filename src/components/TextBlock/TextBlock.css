@@ -15,7 +15,7 @@
 }
 
 .text-block h3 {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
 }
 
 .text-block .container {

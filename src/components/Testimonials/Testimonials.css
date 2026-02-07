@@ -22,14 +22,14 @@
 }
 
 .testimonials-label p {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   color: #B8860B;
   letter-spacing: 0.05em;
 }
 
 .testimonials-title h2 {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 400;
   color: #023020;
@@ -38,7 +38,7 @@
 }
 
 .testimonials-desc {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 1rem;
   color: #666;
   line-height: 1.6;
@@ -156,7 +156,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 500;
   color: #023020;
@@ -176,26 +176,26 @@
 }
 
 .testimonial-number {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.7rem;
   color: #999;
 }
 
 .testimonial-info h4 {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 500;
   color: #023020;
 }
 
 .testimonial-role {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: #888;
 }
 
 .testimonial-headline {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 1.5rem;
   font-weight: 500;
   color: #023020;
@@ -241,7 +241,7 @@
   right: 0;
   padding: 0.25rem;
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.6rem;
   font-weight: 500;
   color: #fff;
@@ -255,7 +255,7 @@
 }
 
 .testimonial-text {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   color: #555;
   line-height: 1.5;
@@ -280,7 +280,7 @@
 }
 
 .testimonials-cta-content h3 {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(2rem, 4vw, 2.5rem);
   font-weight: 400;
   color: #023020;
@@ -289,7 +289,7 @@
 }
 
 .testimonials-cta-content > p {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 1rem;
   color: #666;
   margin-bottom: 1.5rem;
@@ -314,7 +314,7 @@
 }
 
 .testimonials-btn a {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 500;
   color: #023020;
@@ -333,14 +333,14 @@
 }
 
 .testimonials-cta-note span {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 1.25rem;
   font-weight: 300;
   color: #023020;
 }
 
 .testimonials-cta-note p {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9rem;
   color: #666;
   line-height: 1.6;

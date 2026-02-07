@@ -1,6 +1,6 @@
 .menu {
   position: fixed;
-  top: 44px;
+  top: 0;
   left: 0;
   right: 0;
   width: 100%;
@@ -8,17 +8,17 @@
   flex-direction: column;
   will-change: transform;
   z-index: 1000;
-  transform: translateY(0);
+  transform: translateY(44px);
   transition: transform 0.35s ease;
 }
 
 .menu.scrolled {
-  top: 0;
+  transform: translateY(0);
 }
 
 .menu.hidden {
   transform: translateY(calc(-100% - 50px));
-  transition: transform 0.25s ease-in;
+  transition: transform 0.3s ease-in;
 }
 
 .menu.page-transitioning {
@@ -54,12 +54,13 @@
   background-color: #023020;
   transform-origin: top;
   transform: scaleY(0);
-  transition: transform 0.4s ease-out;
+  transition: transform 0.35s ease-out;
   z-index: -1;
 }
 
 .menu.nav-green .menu-header::before {
   transform: scaleY(1);
+  transition: transform 0.4s ease-out;
 }
 
 /* Menu open state - match overlay background */
@@ -82,11 +83,13 @@
   align-items: center;
   width: 100%;
   opacity: 1;
-  transition: opacity 0.3s ease;
+  visibility: visible;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
 }
 
 .menu .menu-header-full.hidden {
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
   position: absolute;
 }
@@ -97,12 +100,15 @@
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  display: none;
 }
 
-.menu .menu-header-centered.visible {
+.menu.scrolled .menu-header-centered {
+  display: block;
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
 }
 
@@ -159,7 +165,7 @@
 
 .menu .menu-nav-link {
   color: #023020;
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 400;
   text-transform: uppercase;
@@ -222,7 +228,7 @@
 
 .menu .menu-logo {
   text-transform: uppercase;
-  font-family: var(--font-koulen), sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(1.5rem, 2vw, 2rem);
   line-height: 1;
   color: #023020;
@@ -419,7 +425,7 @@
   height: 14px;
   background: #023020;
   color: #f8f6f3;
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: 0.5rem;
   font-weight: 500;
   display: flex;
@@ -445,15 +451,15 @@
   right: 2rem;
   top: 50%;
   transform: translateY(-50%);
-  display: flex;
+  display: none;
   align-items: center;
   gap: 0.5rem;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
 }
 
-.menu .menu-scrolled-actions.visible {
+.menu.scrolled .menu-scrolled-actions {
+  display: flex;
   opacity: 1;
   pointer-events: auto;
 }
@@ -466,10 +472,21 @@
 @media (max-width: 1000px) {
   .menu {
     top: 36px;
+    transform: translateY(0);
+    transition: top 0.35s ease, transform 0.35s ease;
   }
 
   .menu.scrolled {
     top: 0;
+    transform: translateY(0);
+  }
+
+  .menu.hidden {
+    transform: translateY(0);
+  }
+
+  .menu.page-transitioning {
+    transform: translateY(calc(-100% - 50px));
   }
 
   .menu .menu-header {
@@ -525,10 +542,6 @@
 }
 
 @media (max-width: 480px) {
-  .menu {
-    transition: top 0.3s ease;
-  }
-
   .menu .menu-header {
     padding: 0.75rem 1rem;
   }
@@ -607,7 +620,7 @@
   }
 
   .menu .menu-back-arrow {
-    left: 1rem;
+    display: none;
   }
 
   /* Scrolled state on mobile - just handles position, no green bg */
@@ -617,6 +630,7 @@
 
   .menu .menu-header-full.hidden {
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
     position: relative;
   }

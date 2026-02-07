@@ -65,9 +65,9 @@
 }
 
 .sbp-title {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(3rem, 6vw, 5rem);
-  font-weight: 800;
+  font-weight: 400;
   color: #1a1a1a;
   line-height: 1;
   letter-spacing: -0.03em;
@@ -75,7 +75,7 @@
 }
 
 .sbp-tagline {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 400;
   color: #666;
@@ -96,7 +96,7 @@
   background-color: #1a1a1a;
   color: #fff;
   border-radius: 9999px;
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -136,9 +136,9 @@
 }
 
 .sbp-side-text span {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(3rem, 6vw, 5rem);
-  font-weight: 800;
+  font-weight: 400;
   color: inherit;
   letter-spacing: -0.03em;
   text-transform: uppercase;
@@ -169,7 +169,7 @@
   background: transparent;
   border: none;
   border-radius: 0;
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 600;
   color: #666;
@@ -305,7 +305,7 @@
 }
 
 .sbp-product-card-info h4 {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 600;
   color: #1a1a1a;
@@ -314,7 +314,7 @@
 }
 
 .sbp-product-card-info p {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: #888;
 }
@@ -328,7 +328,7 @@
 }
 
 .sbp-product-card-header h4 {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 600;
   color: #1a1a1a;
@@ -337,7 +337,7 @@
 }
 
 .sbp-product-card-header p {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.7rem;
   color: #888;
 }
@@ -370,14 +370,14 @@
 }
 
 .sbp-old-price {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: #aaa;
   text-decoration: line-through;
 }
 
 .sbp-new-price {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 600;
   color: #1a1a1a;
@@ -434,7 +434,7 @@
 }
 
 .sbp-rating-value {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 600;
   color: #1a1a1a;

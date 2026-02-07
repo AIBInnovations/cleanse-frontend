@@ -10,7 +10,7 @@
 }
 
 .cart-hero-label {
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: clamp(0.75rem, 0.9vw, 0.85rem);
   text-transform: uppercase;
   letter-spacing: 0.15em;
@@ -19,7 +19,7 @@
 }
 
 .cart-hero-heading {
-  font-family: var(--font-koulen), sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(4rem, 10vw, 8rem);
   color: #023020;
   line-height: 0.9;
@@ -27,7 +27,7 @@
 }
 
 .cart-hero-count {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(0.9rem, 1vw, 1rem);
   color: rgba(2, 48, 32, 0.6);
   text-transform: uppercase;
@@ -52,14 +52,14 @@
 }
 
 .cart-empty-heading {
-  font-family: var(--font-koulen), sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(3rem, 7vw, 5rem);
   color: #023020;
   line-height: 0.95;
 }
 
 .cart-empty-subtitle {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(0.9rem, 1vw, 1.1rem);
   color: rgba(2, 48, 32, 0.5);
   text-transform: uppercase;
@@ -70,7 +70,7 @@
   display: inline-block;
   background: #023020;
   color: #f8f6f3;
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: clamp(0.8rem, 0.9vw, 0.85rem);
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -104,7 +104,7 @@
 }
 
 .cart-discount-msg {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(0.85rem, 1vw, 0.95rem);
   font-weight: 500;
   color: rgba(248, 246, 243, 0.6);
@@ -155,14 +155,14 @@
 }
 
 .cart-tier-price {
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: clamp(0.65rem, 0.8vw, 0.75rem);
   font-weight: 500;
   color: #f8f6f3;
 }
 
 .cart-tier-label {
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: clamp(0.55rem, 0.65vw, 0.62rem);
   color: rgba(248, 246, 243, 0.45);
   text-transform: uppercase;
@@ -232,7 +232,7 @@
 }
 
 .cart-page-item-name {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(1rem, 1.2vw, 1.15rem);
   font-weight: 500;
   color: #023020;
@@ -241,7 +241,7 @@
 }
 
 .cart-page-item-price {
-  font-family: var(--font-lexend), sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(1rem, 1.2vw, 1.15rem);
   font-weight: 600;
   color: #023020;
@@ -250,7 +250,7 @@
 }
 
 .cart-page-item-unit {
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: clamp(0.7rem, 0.8vw, 0.78rem);
   color: rgba(2, 48, 32, 0.4);
   text-transform: uppercase;
@@ -282,7 +282,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 1.1rem;
   transition: background 0.15s ease;
 }
@@ -297,7 +297,7 @@
 }
 
 .cart-qty-value {
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: 0.85rem;
   color: #023020;
   width: 36px;
@@ -314,7 +314,7 @@
   background: transparent;
   border: none;
   color: rgba(2, 48, 32, 0.4);
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: clamp(0.7rem, 0.8vw, 0.78rem);
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -346,7 +346,7 @@
 }
 
 .cart-summary-title {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(1.1rem, 1.3vw, 1.25rem);
   font-weight: 600;
   color: #023020;
@@ -367,7 +367,7 @@
 .cart-summary-line {
   display: flex;
   justify-content: space-between;
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(0.85rem, 0.95vw, 0.9rem);
   color: #023020;
   text-transform: uppercase;
@@ -399,7 +399,7 @@
   color: #f8f6f3;
   border: none;
   padding: 1.15rem;
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: clamp(0.8rem, 0.9vw, 0.85rem);
   font-weight: 500;
   text-transform: uppercase;
@@ -421,7 +421,7 @@
   display: block;
   text-align: center;
   margin-top: 1rem;
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: clamp(0.7rem, 0.8vw, 0.78rem);
   color: rgba(2, 48, 32, 0.5);
   text-transform: uppercase;
@@ -442,7 +442,7 @@
 }
 
 .cart-recommended-label {
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: clamp(0.7rem, 0.8vw, 0.78rem);
   text-transform: uppercase;
   letter-spacing: 0.15em;
@@ -451,7 +451,7 @@
 }
 
 .cart-recommended-heading {
-  font-family: var(--font-koulen), sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(2.5rem, 5vw, 4rem);
   color: #023020;
   line-height: 0.95;
@@ -501,7 +501,7 @@
 }
 
 .cart-rec-card-name {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(0.8rem, 0.9vw, 0.88rem);
   font-weight: 500;
   color: #023020;
@@ -517,7 +517,7 @@
 }
 
 .cart-rec-card-price {
-  font-family: var(--font-lexend), sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(0.85rem, 1vw, 0.95rem);
   font-weight: 600;
   color: #023020;
@@ -528,7 +528,7 @@
   color: #f8f6f3;
   border: none;
   padding: 0.5rem 1.25rem;
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: clamp(0.65rem, 0.75vw, 0.72rem);
   text-transform: uppercase;
   letter-spacing: 0.08em;

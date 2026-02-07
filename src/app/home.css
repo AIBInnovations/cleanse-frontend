@@ -9,7 +9,7 @@
 }
 
 .promo-bar span {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 500;
   color: #f8f6f3;
@@ -72,8 +72,8 @@
 }
 
 .hero .hero-header h1 {
-  font-family: var(--font-host-grotesk), sans-serif;
-  font-weight: 500;
+  font-family: var(--font-heading);
+  font-weight: 400;
   font-size: clamp(4rem, 8vw, 6rem);
 }
 
@@ -94,7 +94,7 @@
   padding: 1rem 2.5rem;
   background-color: #023020;
   color: #fff;
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -193,11 +193,11 @@
 
 .featured-products .featured-products-header p {
   color: var(--base-500);
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
 }
 
 .featured-products .featured-products-header h3 {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-heading);
 }
 
 .featured-products .featured-products-separator {
@@ -243,7 +243,7 @@
 .featured-products .featured-products-labels p,
 .featured-products .featured-products-labels a {
   color: var(--base-700);
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
 }
 
 .featured-products .featured-products-list {
@@ -325,7 +325,7 @@
 }
 
 .formulas-tagline {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(1.25rem, 2vw, 1.75rem);
   font-weight: 400;
   color: #023020;
@@ -401,7 +401,7 @@
 }
 
 .formula-box h4 {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 1.1rem;
   font-weight: 600;
   color: #023020;
@@ -410,7 +410,7 @@
 }
 
 .formula-box p {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 400;
   color: #555;

@@ -14,15 +14,19 @@ const Orb = ({
 }) => {
   const containerRef = useRef(null);
   const sceneRef = useRef(null);
+  const rendererRef = useRef(null);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsReady(true), 0);
+    const timer = setTimeout(() => setIsReady(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
     if (!isReady || !containerRef.current) return;
+
+    // Skip if renderer already exists
+    if (rendererRef.current) return;
 
     let mounted = true;
     let animationId = null;
@@ -42,12 +46,20 @@ const Orb = ({
     );
     camera.position.z = 10;
 
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: true,
-      preserveDrawingBuffer: true,
-      powerPreference: "high-performance",
-    });
+    let renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+        preserveDrawingBuffer: true,
+        powerPreference: "high-performance",
+      });
+    } catch (error) {
+      console.error("WebGL not available:", error);
+      return;
+    }
+
+    rendererRef.current = renderer;
 
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x000000, 0);
@@ -160,6 +172,7 @@ const Orb = ({
         undefined,
         (error) => {
           if (mounted) {
+            console.error("Error loading texture:", error);
           }
         }
       );
@@ -210,12 +223,15 @@ const Orb = ({
 
       if (renderer) {
         if (containerRef.current && renderer.domElement) {
-          containerRef.current.removeChild(renderer.domElement);
+          try {
+            containerRef.current.removeChild(renderer.domElement);
+          } catch (e) {}
         }
         renderer.dispose();
       }
 
       sceneRef.current = null;
+      rendererRef.current = null;
     };
   }, [
     isReady,

@@ -2,7 +2,7 @@
 import "./Menu.css";
 import Link from "next/link";
 import { useRef, useState, useEffect, useLayoutEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { useCartCount } from "@/store/cartStore";
 import gsap from "gsap";
@@ -26,6 +26,7 @@ const CartIcon = () => (
 
 const Menu = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const isHomePage = pathname === "/";
   const cartCount = useCartCount();
 
@@ -234,11 +235,17 @@ const Menu = () => {
     }
   };
 
-  const handleLinkClick = () => {
+  const handleLinkClick = (e, href) => {
     if (isOpen) {
+      e.preventDefault();
+      // Close menu first, then navigate after animation completes
+      closeMenu();
       setTimeout(() => {
-        closeMenu();
-      }, 500);
+        // Hide the entire menu before page transition
+        setIsPageTransitioning(true);
+        setIsMenuVisible(false);
+        router.push(href);
+      }, 600);
     }
   };
 
@@ -382,33 +389,42 @@ const Menu = () => {
 
       // Hero zone logic (home page only)
       if (isHomePage) {
-        if (!isMobile && currentScrollY < heroHeight && !isMenuHidden && isScrolled && !transitioningRef.current) {
-          // Desktop: smooth transition from green nav to transparent nav
+        const formulasSection = document.querySelector('.formulas');
+        const greenThreshold = formulasSection ? formulasSection.offsetTop : window.innerHeight;
+
+        // Desktop: Scrolling back into hero zone from below
+        if (!isMobile && currentScrollY < heroHeight && isScrolled && !transitioningRef.current) {
+          // Smooth transition: slide nav up, change states, slide nav down
           transitioningRef.current = true;
           menuRef.current?.classList.add("hidden");
 
           setTimeout(() => {
+            setIsNavGreen(false);
             setIsScrolled(false);
             setTimeout(() => {
               menuRef.current?.classList.remove("hidden");
               setIsMenuVisible(true);
               transitioningRef.current = false;
-            }, 30);
-          }, 50);
-        } else if (isMobile && currentScrollY < 36 && isScrolled) {
-          // Mobile: move menu back below promo banner when at top
+            }, 50);
+          }, 300);
+        }
+        // Mobile: move menu back below promo banner when at top
+        else if (isMobile && currentScrollY < 36 && isScrolled) {
           setIsScrolled(false);
-        } else if (currentScrollY >= (isMobile ? 36 : heroHeight) && !isScrolled) {
+          setIsNavGreen(false);
+        }
+        // Scrolling down past hero
+        else if (currentScrollY >= (isMobile ? 36 : heroHeight) && !isScrolled) {
           setIsScrolled(true);
         }
 
-        // Green nav reveal at formulas section
-        const formulasSection = document.querySelector('.formulas');
-        const greenThreshold = formulasSection ? formulasSection.offsetTop : window.innerHeight;
-        if (currentScrollY >= greenThreshold && !isNavGreen) {
-          setIsNavGreen(true);
-        } else if (currentScrollY < greenThreshold && isNavGreen) {
-          setIsNavGreen(false);
+        // Green nav reveal at formulas section (only when scrolled)
+        if (isScrolled && !transitioningRef.current) {
+          if (currentScrollY >= greenThreshold && !isNavGreen) {
+            setIsNavGreen(true);
+          } else if (currentScrollY < greenThreshold && isNavGreen) {
+            setIsNavGreen(false);
+          }
         }
       }
 
@@ -480,7 +496,7 @@ const Menu = () => {
     if (transitioningRef.current && menuRef.current) {
       menuRef.current.classList.add('hidden');
     }
-  }, [isScrolled]);
+  }, [isScrolled, isNavGreen]);
 
   return (
     <nav className={`menu ${isScrolled ? 'scrolled' : ''} ${isNavGreen ? 'nav-green' : ''} ${isOpen ? 'menu-open' : ''} ${isPageTransitioning ? 'page-transitioning' : ''}`} ref={menuRef}>
@@ -541,7 +557,7 @@ const Menu = () => {
         </div>
 
         {/* Centered CLEANSE - shown when scrolled */}
-        <div className={`menu-header-centered ${isScrolled ? 'visible' : ''}`}>
+        <div className="menu-header-centered">
           <button
             className="menu-centered-logo"
             onClick={toggleMenu}
@@ -552,7 +568,7 @@ const Menu = () => {
         </div>
 
         {/* Right-side actions - shown when scrolled */}
-        <div className={`menu-scrolled-actions ${isScrolled ? 'visible' : ''}`}>
+        <div className="menu-scrolled-actions">
           <Link href="/profile" className="menu-action-btn" aria-label="Profile">
             <ProfileIcon />
           </Link>
@@ -573,21 +589,21 @@ const Menu = () => {
               <Link
                 href="/"
                 className="menu-main-link"
-                onClick={handleLinkClick}
+                onClick={(e) => handleLinkClick(e, "/")}
               >
                 <h4>Home</h4>
               </Link>
               <Link
                 href="/wardrobe"
                 className="menu-main-link"
-                onClick={handleLinkClick}
+                onClick={(e) => handleLinkClick(e, "/wardrobe")}
               >
                 <h4>Shop</h4>
               </Link>
               <Link
                 href="/genesis"
                 className="menu-main-link"
-                onClick={handleLinkClick}
+                onClick={(e) => handleLinkClick(e, "/genesis")}
               >
                 <h4>Our Story</h4>
               </Link>
@@ -599,13 +615,13 @@ const Menu = () => {
                 <p>Explore</p>
               </div>
               <div className="menu-sub-links">
-                <Link href="/lookbook" onClick={handleLinkClick}>
+                <Link href="/lookbook" onClick={(e) => handleLinkClick(e, "/lookbook")}>
                   Rituals
                 </Link>
-                <Link href="/touchpoint" onClick={handleLinkClick}>
+                <Link href="/touchpoint" onClick={(e) => handleLinkClick(e, "/touchpoint")}>
                   Contact
                 </Link>
-                <Link href="/unit" onClick={handleLinkClick}>
+                <Link href="/unit" onClick={(e) => handleLinkClick(e, "/unit")}>
                   Ingredients
                 </Link>
               </div>
@@ -615,16 +631,16 @@ const Menu = () => {
                 <p>Bestsellers</p>
               </div>
               <div className="menu-sub-links menu-product-links">
-                <Link href="/product" onClick={handleLinkClick}>
+                <Link href="/product" onClick={(e) => handleLinkClick(e, "/product")}>
                   01. Golden Elixir Oil
                 </Link>
-                <Link href="/product" onClick={handleLinkClick}>
+                <Link href="/product" onClick={(e) => handleLinkClick(e, "/product")}>
                   02. Turmeric Glow Mask
                 </Link>
-                <Link href="/product" onClick={handleLinkClick}>
+                <Link href="/product" onClick={(e) => handleLinkClick(e, "/product")}>
                   03. Rose Hydra Mist
                 </Link>
-                <Link href="/product" onClick={handleLinkClick}>
+                <Link href="/product" onClick={(e) => handleLinkClick(e, "/product")}>
                   04. Sandalwood Serum
                 </Link>
               </div>
@@ -637,7 +653,7 @@ const Menu = () => {
               href="https://x.com/cleanseayurveda"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={handleLinkClick}
+              onClick={() => isOpen && closeMenu()}
             >
               Twitter
             </a>
@@ -647,7 +663,7 @@ const Menu = () => {
               href="https://www.instagram.com/cleanseayurveda/"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={handleLinkClick}
+              onClick={() => isOpen && closeMenu()}
             >
               Instagram
             </a>
@@ -657,7 +673,7 @@ const Menu = () => {
               href="https://www.youtube.com/@cleanseayurveda"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={handleLinkClick}
+              onClick={() => isOpen && closeMenu()}
             >
               YouTube
             </a>

@@ -350,6 +350,7 @@ export default function Unit() {
   const [activeImage, setActiveImage] = useState(0);
   const [bundleSelected, setBundleSelected] = useState([true, true, true]);
   const [openTab, setOpenTab] = useState("ingredients");
+  const [reviewIndex, setReviewIndex] = useState(0);
   const addToCart = useCartStore((state) => state.addToCart);
 
   const bundleProducts = [
@@ -390,6 +391,17 @@ export default function Unit() {
   useEffect(() => {
     const shuffled = [...products].sort(() => 0.5 - Math.random());
     setRelatedProducts(shuffled.slice(0, 4));
+  }, []);
+
+  // Review scroll navigation
+  const scrollToReview = useCallback((direction) => {
+    setReviewIndex((prev) => {
+      if (direction === 'up') {
+        return prev > 0 ? prev - 1 : reviews.length - 1;
+      } else {
+        return prev < reviews.length - 1 ? prev + 1 : 0;
+      }
+    });
   }, []);
 
   return (
@@ -638,7 +650,7 @@ export default function Unit() {
             <div className="reviews-left">
               <div className="reviews-left-sticky">
                 <p className="reviews-label">What Our Customers Say</p>
-                <h3 className="reviews-title">Reviews</h3>
+                <h3 className="reviews-title">Customer Reviews</h3>
                 <div className="reviews-score">
                   <span className="reviews-avg">4.9</span>
                   <span className="reviews-out-of">/ 5</span>
@@ -667,36 +679,60 @@ export default function Unit() {
                     </div>
                   ))}
                 </div>
+                <p className="reviews-summary-text">
+                  Our customers love the natural glow and visible results. Join thousands who have transformed their skincare routine.
+                </p>
                 <button className="write-review-btn">Write a Review</button>
               </div>
             </div>
 
             {/* Right - Review Cards */}
             <div className="reviews-right">
-              {reviews.slice(0, 2).map((review, index) => (
-                <div key={index} className="review-card">
-                  <div className="review-card-top">
-                    <div className="review-stars">
-                      {[1, 2, 3, 4, 5].map((s) => (
-                        <svg key={s} width="11" height="11" viewBox="0 0 24 24" fill={s <= review.rating ? "#023020" : "none"} stroke="#023020" strokeWidth="1.5">
-                          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                      ))}
-                    </div>
-                    <span className="review-date">{review.date}</span>
-                  </div>
-                  <p className="review-text">&ldquo;{review.text}&rdquo;</p>
-                  <div className="review-author">
-                    <div className="review-avatar">
-                      {review.name.charAt(0)}
-                    </div>
-                    <div className="review-author-info">
-                      <span className="review-name">{review.name}</span>
-                      <span className="review-location">{review.location} {review.verified && "· Verified Buyer"}</span>
-                    </div>
+              <div className="reviews-barrel-wrapper">
+                <div className="reviews-barrel">
+                  <div
+                    className="reviews-barrel-track"
+                    style={{ transform: `translateY(-${reviewIndex * 140}px)` }}
+                  >
+                    {reviews.map((review, index) => (
+                      <div key={index} className="review-card">
+                        <div className="review-card-top">
+                          <div className="review-stars">
+                            {[1, 2, 3, 4, 5].map((s) => (
+                              <svg key={s} width="11" height="11" viewBox="0 0 24 24" fill={s <= review.rating ? "#023020" : "none"} stroke="#023020" strokeWidth="1.5">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                              </svg>
+                            ))}
+                          </div>
+                          <span className="review-date">{review.date}</span>
+                        </div>
+                        <p className="review-text">&ldquo;{review.text}&rdquo;</p>
+                        <div className="review-author">
+                          <div className="review-avatar">
+                            {review.name.charAt(0)}
+                          </div>
+                          <div className="review-author-info">
+                            <span className="review-name">{review.name}</span>
+                            <span className="review-location">{review.location} {review.verified && "· Verified Buyer"}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              ))}
+                <div className="reviews-nav-buttons">
+                  <button className="reviews-nav-btn reviews-nav-up" aria-label="Previous review" onClick={() => scrollToReview('up')}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M18 15l-6-6-6 6"/>
+                    </svg>
+                  </button>
+                  <button className="reviews-nav-btn reviews-nav-down" aria-label="Next review" onClick={() => scrollToReview('down')}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

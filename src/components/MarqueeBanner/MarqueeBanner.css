@@ -97,7 +97,7 @@
 }
 
 .marquee-banner .instagram-handle span {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 500;
   color: #023020;
@@ -106,7 +106,7 @@
 
 .marquee-banner .reels-tagline {
   max-width: 678px;
-  font-family: var(--font-koulen), sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 400;
   color: #023020;
@@ -285,7 +285,7 @@
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
   border-radius: 2rem;
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.7rem;
   font-weight: 500;
   color: #fff;
@@ -315,7 +315,7 @@
 }
 
 .marquee-banner .reel-subtitle {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
@@ -323,7 +323,7 @@
 }
 
 .marquee-banner .reel-title {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 1.25rem;
   font-weight: 500;
   color: #fff;

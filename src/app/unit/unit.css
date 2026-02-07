@@ -99,7 +99,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: 0.7rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -137,18 +137,20 @@
 }
 
 .rating-stars svg {
-  display: block;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
 }
 
 .rating-count {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   color: var(--base-500);
 }
 
 /* Product Title */
 .product-title {
-  font-family: var(--font-koulen), sans-serif;
+  font-family: var(--font-heading);
   font-weight: 400;
   font-size: clamp(1.75rem, 2.5vw, 2.25rem);
   color: #023020;
@@ -164,14 +166,14 @@
 }
 
 .product-price-current {
-  font-family: var(--font-lexend), sans-serif;
+  font-family: var(--font-body);
   font-weight: 600;
   font-size: 1.5rem;
   color: #023020;
 }
 
 .product-price-original {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-weight: 400;
   font-size: 0.95rem;
   color: var(--base-400);
@@ -179,7 +181,7 @@
 }
 
 .product-price-discount {
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: 0.7rem;
   font-weight: 500;
   color: #2d6a4f;
@@ -192,7 +194,7 @@
 
 /* Description */
 .product-description {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-weight: 400;
   font-size: 0.85rem;
   line-height: 1.6;
@@ -228,7 +230,7 @@
 
 /* Section Label */
 .product-section-label {
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: 0.65rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -249,7 +251,7 @@
 }
 
 .product-size-btn {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 500;
   padding: 0.6rem 1.5rem;
@@ -287,7 +289,7 @@
 }
 
 .qty-btn {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 400;
   width: 2.5rem;
@@ -307,7 +309,7 @@
 }
 
 .qty-value {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 500;
   min-width: 2rem;
@@ -317,7 +319,7 @@
 
 .add-to-cart-btn {
   flex: 1;
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 500;
   padding: 0.75rem 2rem;
@@ -342,7 +344,7 @@
 /* Buy Now */
 .buy-now-btn {
   width: 100%;
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 500;
   padding: 0.85rem;
@@ -387,7 +389,7 @@
 
 .delivery-input {
   flex: 1;
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   padding: 0.7rem 1rem;
   border: none;
@@ -407,7 +409,7 @@
 }
 
 .delivery-check-btn {
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: 0.7rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -427,7 +429,7 @@
 }
 
 .delivery-msg {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: #2d6a4f;
   margin-top: 0.5rem;
@@ -447,7 +449,7 @@
 }
 
 .policy-item span {
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: 0.65rem;
   font-weight: 500;
   color: var(--base-500);
@@ -485,7 +487,7 @@
 }
 
 .bundle-label {
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: 0.65rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -495,7 +497,7 @@
 }
 
 .bundle-title {
-  font-family: var(--font-koulen), sans-serif;
+  font-family: var(--font-heading);
   font-weight: 400;
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   color: #023020;
@@ -503,7 +505,7 @@
 }
 
 .bundle-badge {
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: 0.7rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -528,7 +530,7 @@
 }
 
 .connector-text {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: var(--base-400);
   white-space: nowrap;
@@ -624,7 +626,7 @@
 }
 
 .bundle-product-name {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 600;
   color: #023020;
@@ -633,7 +635,7 @@
 }
 
 .bundle-product-price {
-  font-family: var(--font-lexend), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 600;
   color: #023020;
@@ -643,7 +645,7 @@
   position: absolute;
   bottom: 1rem;
   right: 1.25rem;
-  font-family: var(--font-koulen), sans-serif;
+  font-family: var(--font-heading);
   font-size: 2rem;
   color: var(--base-200);
   line-height: 1;
@@ -677,7 +679,7 @@
 }
 
 .bundle-price-label {
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: 0.65rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -692,21 +694,21 @@
 }
 
 .bundle-price-original {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9rem;
   color: var(--base-400);
   text-decoration: line-through;
 }
 
 .bundle-price-final {
-  font-family: var(--font-lexend), sans-serif;
+  font-family: var(--font-body);
   font-size: 1.5rem;
   font-weight: 700;
   color: #023020;
 }
 
 .bundle-savings {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: #2d6a4f;
 }
@@ -715,7 +717,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.7rem;
   font-weight: 500;
   padding: 0.65rem 1.25rem;
@@ -766,7 +768,7 @@
   background: none;
   border: 1.5px solid transparent;
   cursor: pointer;
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: 0.65rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -815,7 +817,7 @@
 
 .info-tab-text {
   flex: 1;
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.95rem;
   line-height: 1.8;
   color: var(--base-500);
@@ -860,7 +862,7 @@
 }
 
 .info-value-label {
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: 0.6rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -874,7 +876,7 @@
 .reviews-section {
   width: 100%;
   background: #fff;
-  padding: 5rem 0;
+  padding: 6rem 0;
 }
 
 .reviews-container {
@@ -903,7 +905,7 @@
 }
 
 .reviews-label {
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: 0.6rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -913,9 +915,9 @@
 }
 
 .reviews-title {
-  font-family: var(--font-koulen), sans-serif;
+  font-family: var(--font-heading);
   font-weight: 400;
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-size: clamp(2rem, 3vw, 2.5rem);
   color: #023020;
   line-height: 1;
   margin-bottom: 1.5rem;
@@ -929,7 +931,7 @@
 }
 
 .reviews-avg {
-  font-family: var(--font-lexend), sans-serif;
+  font-family: var(--font-body);
   font-size: 2.25rem;
   font-weight: 700;
   color: #023020;
@@ -937,7 +939,7 @@
 }
 
 .reviews-out-of {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.85rem;
   color: var(--base-400);
   font-weight: 400;
@@ -949,8 +951,14 @@
   margin-bottom: 0.4rem;
 }
 
+.reviews-stars-row svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
 .reviews-rating-count {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: var(--base-400);
   margin-bottom: 1.5rem;
@@ -970,7 +978,7 @@
 }
 
 .review-bar-label {
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: 0.6rem;
   font-weight: 500;
   color: var(--base-400);
@@ -993,23 +1001,35 @@
   transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.reviews-summary-text {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--base-500);
+  margin-bottom: 1.5rem;
+}
+
 .write-review-btn {
-  font-family: var(--font-dm-mono), monospace;
-  font-size: 0.6rem;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  padding: 0;
-  background: none;
+  letter-spacing: 0.12em;
+  padding: 0.85rem 1.5rem;
+  background: #023020;
   border: none;
-  color: #023020;
+  color: #f8f6f3;
   cursor: pointer;
-  opacity: 0.5;
-  transition: opacity 0.2s ease;
+  border-radius: 4px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .write-review-btn:hover {
-  opacity: 1;
+  opacity: 0.9;
+}
+
+.write-review-btn:active {
+  transform: scale(0.97);
 }
 
 .reviews-right {
@@ -1017,6 +1037,80 @@
   display: flex;
   flex-direction: column;
   gap: 0;
+}
+
+/* Reviews Scroll Container */
+.reviews-barrel-wrapper {
+  position: relative;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.reviews-barrel {
+  position: relative;
+  height: 420px;
+  overflow: hidden;
+  flex: 1;
+}
+
+.reviews-barrel::before,
+.reviews-barrel::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 80px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.reviews-barrel::before {
+  top: 0;
+  background: linear-gradient(to bottom, #fff 0%, rgba(255,255,255,0.8) 50%, transparent 100%);
+}
+
+.reviews-barrel::after {
+  bottom: 0;
+  background: linear-gradient(to top, #fff 0%, rgba(255,255,255,0.8) 50%, transparent 100%);
+}
+
+.reviews-barrel-track {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Navigation Buttons */
+.reviews-nav-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.reviews-nav-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--base-200);
+  background: #fff;
+  color: #023020;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reviews-nav-btn:hover {
+  background: #023020;
+  color: #fff;
+  border-color: #023020;
+}
+
+.reviews-nav-btn:active {
+  transform: scale(0.95);
 }
 
 .review-card {
@@ -1029,6 +1123,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  flex-shrink: 0;
 }
 
 .review-card:last-child {
@@ -1036,7 +1131,7 @@
 }
 
 .review-card-quote {
-  font-family: var(--font-koulen), sans-serif;
+  font-family: var(--font-heading);
   font-size: 2.5rem;
   color: var(--base-200);
   line-height: 1;
@@ -1051,11 +1146,17 @@
 
 .review-stars {
   display: flex;
-  gap: 1px;
+  gap: 2px;
+}
+
+.review-stars svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
 }
 
 .review-date {
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: 0.6rem;
   color: var(--base-400);
   text-transform: uppercase;
@@ -1063,14 +1164,14 @@
 }
 
 .review-title {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 600;
   color: #023020;
 }
 
 .review-text {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.85rem;
   line-height: 1.7;
   color: var(--base-500);
@@ -1089,7 +1190,7 @@
   border-radius: 50%;
   background: #023020;
   color: #f8f6f3;
-  font-family: var(--font-koulen), sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.75rem;
   display: flex;
   align-items: center;
@@ -1104,14 +1205,14 @@
 }
 
 .review-name {
-  font-family: var(--font-host-grotesk), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 600;
   color: #023020;
 }
 
 .review-location {
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: 0.6rem;
   color: var(--base-300);
 }
@@ -1136,7 +1237,7 @@
 }
 
 .recommended-label {
-  font-family: var(--font-dm-mono), monospace;
+  font-family: var(--font-body);
   font-size: 0.65rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -1146,7 +1247,7 @@
 }
 
 .recommended-title {
-  font-family: var(--font-koulen), sans-serif;
+  font-family: var(--font-heading);
   font-weight: 400;
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   color: #023020;
@@ -1259,6 +1360,30 @@
 
   .reviews-bars {
     max-width: 280px;
+  }
+
+  .reviews-barrel {
+    height: 360px;
+  }
+
+  .reviews-barrel::before,
+  .reviews-barrel::after {
+    height: 60px;
+  }
+
+  .reviews-barrel-wrapper {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .reviews-nav-buttons {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .reviews-nav-btn {
+    width: 32px;
+    height: 32px;
   }
 
   .recommended-grid {
