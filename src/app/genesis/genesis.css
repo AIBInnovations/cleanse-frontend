@@ -1,3 +1,8 @@
+.genesis-page {
+  position: relative;
+  z-index: 4;
+}
+
 .genesis-hero {
   position: relative;
   width: 100%;

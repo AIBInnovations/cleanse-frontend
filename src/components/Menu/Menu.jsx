@@ -354,13 +354,18 @@ const Menu = () => {
     };
   }, []);
 
-  // Sync scrolled state on route change
+  // Sync scrolled + navGreen state on route change
   useEffect(() => {
     if (!isHomePage) {
       setIsScrolled(true);
+      setIsNavGreen(true);
     } else {
       const heroHeight = window.innerHeight - 100;
-      setIsScrolled(window.scrollY >= heroHeight);
+      const scrolled = window.scrollY >= heroHeight;
+      setIsScrolled(scrolled);
+      if (!scrolled) {
+        setIsNavGreen(false);
+      }
     }
   }, [pathname, isHomePage]);
 

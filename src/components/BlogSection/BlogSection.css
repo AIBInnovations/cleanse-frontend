@@ -17,7 +17,7 @@
   align-items: center;
   margin-bottom: 4rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(2, 48, 32, 0.1);
+  border-bottom: 1px solid rgba(79, 44, 34, 0.1);
 }
 
 .blog-header-left {
@@ -122,7 +122,7 @@
 
 .blog-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 25px 50px rgba(2, 48, 32, 0.12);
+  box-shadow: 0 25px 50px rgba(79, 44, 34, 0.12);
 }
 
 /* Green Card Variant */
@@ -236,7 +236,7 @@
   font-weight: 500;
   letter-spacing: 0.1em;
   color: #fff;
-  background: rgba(2, 48, 32, 0.7);
+  background: rgba(79, 44, 34, 0.7);
   padding: 0.4rem 0.75rem;
   border-radius: 9999px;
   backdrop-filter: blur(4px);

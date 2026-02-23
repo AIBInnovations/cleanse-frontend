@@ -71,7 +71,7 @@ export default function Genesis() {
   );
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="genesis-page">
       <section className="project-preview">
         <div className="project-preview-wrapper">
           <div className="preview-col">

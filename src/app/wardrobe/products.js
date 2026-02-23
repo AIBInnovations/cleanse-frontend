@@ -5,8 +5,7 @@ export const products = [
     color: "Gold",
     tag: "Hair Care",
     sizes: ["50ml", "100ml", "200ml"],
-    description:
-      "A luxurious blend of Brahmi, Amla, and Bhringraj infused in cold-pressed coconut oil. This ancient formula strengthens roots, promotes growth, and adds lustrous shine.",
+    description: "Brahmi, Amla & Bhringraj in cold-pressed coconut oil.",
   },
   {
     name: "Turmeric Glow Mask",
@@ -14,8 +13,7 @@ export const products = [
     color: "Amber",
     tag: "Face Care",
     sizes: ["30g", "60g", "100g"],
-    description:
-      "Radiance-boosting face mask with pure turmeric, sandalwood, and raw honey. Brightens complexion, reduces dark spots, and reveals your natural glow.",
+    description: "Pure turmeric, sandalwood & raw honey face mask.",
   },
   {
     name: "Rose Hydra Mist",
@@ -23,8 +21,7 @@ export const products = [
     color: "Rose",
     tag: "Face Care",
     sizes: ["50ml", "100ml", "150ml"],
-    description:
-      "Refreshing facial mist crafted from steam-distilled Himalayan rose petals. Hydrates, tones, and awakens skin with every spritz.",
+    description: "Himalayan rose petal facial mist for hydration.",
   },
   {
     name: "Sandalwood Serum",
@@ -32,8 +29,7 @@ export const products = [
     color: "Cream",
     tag: "Face Care",
     sizes: ["15ml", "30ml"],
-    description:
-      "Anti-aging serum with pure Mysore sandalwood, saffron, and almond oil. Reduces fine lines and imparts a youthful, dewy finish.",
+    description: "Mysore sandalwood & saffron anti-aging serum.",
   },
   {
     name: "Ashwagandha Body Oil",
@@ -41,8 +37,7 @@ export const products = [
     color: "Amber",
     tag: "Body Care",
     sizes: ["100ml", "200ml"],
-    description:
-      "Restorative body oil infused with Ashwagandha and sesame. Nourishes deeply, calms the mind, and promotes restful sleep when used in evening massage.",
+    description: "Restorative body oil with Ashwagandha & sesame.",
   },
   {
     name: "Neem Purifying Cleanser",
@@ -50,8 +45,7 @@ export const products = [
     color: "Green",
     tag: "Face Care",
     sizes: ["100ml", "200ml"],
-    description:
-      "Gentle yet effective cleanser with neem, tulsi, and tea tree. Purifies pores, controls excess oil, and maintains skin's natural balance.",
+    description: "Gentle cleanser with neem, tulsi & tea tree.",
   },
   {
     name: "Kumkumadi Night Elixir",
@@ -59,8 +53,7 @@ export const products = [
     color: "Gold",
     tag: "Face Care",
     sizes: ["15ml", "30ml"],
-    description:
-      "Legendary Ayurvedic formula with saffron and 16 precious herbs. Apply nightly for transformed, luminous skin by morning.",
+    description: "Saffron & 16 precious herbs for luminous skin.",
   },
   {
     name: "Hibiscus Hair Mask",
@@ -68,8 +61,7 @@ export const products = [
     color: "Rose",
     tag: "Hair Care",
     sizes: ["150g", "250g"],
-    description:
-      "Deep conditioning mask with hibiscus flower, henna, and fenugreek. Repairs damage, adds volume, and brings back natural bounce.",
+    description: "Deep conditioning with hibiscus, henna & fenugreek.",
   },
   {
     name: "Vetiver Cooling Gel",
@@ -77,8 +69,7 @@ export const products = [
     color: "Green",
     tag: "Body Care",
     sizes: ["100ml", "200ml"],
-    description:
-      "Soothing gel with vetiver, aloe vera, and cucumber extract. Instantly cools sun-exposed skin and calms irritation naturally.",
+    description: "Soothing gel with vetiver, aloe & cucumber.",
   },
   {
     name: "Saffron Brightening Cream",
@@ -86,8 +77,7 @@ export const products = [
     color: "Gold",
     tag: "Face Care",
     sizes: ["30g", "50g"],
-    description:
-      "Luxurious day cream with Kashmiri saffron and licorice root. Evens skin tone and protects against environmental stressors.",
+    description: "Kashmiri saffron & licorice root day cream.",
   },
   {
     name: "Triphala Detox Mask",
@@ -95,8 +85,7 @@ export const products = [
     color: "Amber",
     tag: "Face Care",
     sizes: ["50g", "100g"],
-    description:
-      "Purifying clay mask with Triphala, multani mitti, and rose water. Draws out impurities and refines pores for clearer skin.",
+    description: "Purifying clay mask with Triphala & rose water.",
   },
   {
     name: "Jasmine Body Butter",
@@ -104,8 +93,7 @@ export const products = [
     color: "Cream",
     tag: "Body Care",
     sizes: ["100g", "200g"],
-    description:
-      "Rich body butter with jasmine absolute, shea, and kokum. Melts into skin for deep, lasting moisture and intoxicating fragrance.",
+    description: "Rich body butter with jasmine, shea & kokum.",
   },
   {
     name: "Bhringraj Hair Tonic",
@@ -113,8 +101,7 @@ export const products = [
     color: "Green",
     tag: "Hair Care",
     sizes: ["100ml", "200ml"],
-    description:
-      "Concentrated scalp treatment with Bhringraj, Brahmi, and peppermint. Stimulates follicles, reduces hair fall, and promotes thickness.",
+    description: "Scalp treatment with Bhringraj & peppermint.",
   },
   {
     name: "Chandan Face Mist",
@@ -122,8 +109,7 @@ export const products = [
     color: "Cream",
     tag: "Face Care",
     sizes: ["50ml", "100ml"],
-    description:
-      "Calming facial toner with sandalwood hydrosol and vetiver. Soothes inflammation, minimizes pores, and prepares skin for serums.",
+    description: "Calming toner with sandalwood & vetiver.",
   },
   {
     name: "Manjistha Glow Serum",
@@ -131,8 +117,7 @@ export const products = [
     color: "Rose",
     tag: "Face Care",
     sizes: ["15ml", "30ml"],
-    description:
-      "Blood-purifying serum with Manjistha and pomegranate. Clears blemishes, fades scars, and promotes even-toned radiance.",
+    description: "Manjistha & pomegranate for even-toned radiance.",
   },
   {
     name: "Amla Hair Serum",
@@ -140,8 +125,7 @@ export const products = [
     color: "Green",
     tag: "Hair Care",
     sizes: ["30ml", "60ml"],
-    description:
-      "Lightweight serum with Amla extract and argan oil. Tames frizz, adds shine, and protects hair from heat and pollution.",
+    description: "Lightweight serum with Amla & argan oil.",
   },
   {
     name: "Lotus Eye Cream",
@@ -149,8 +133,7 @@ export const products = [
     color: "Rose",
     tag: "Face Care",
     sizes: ["15g", "30g"],
-    description:
-      "Delicate eye treatment with lotus extract, cucumber, and vitamin E. Reduces puffiness, dark circles, and fine lines around eyes.",
+    description: "Lotus extract & cucumber for delicate eye area.",
   },
   {
     name: "Kesar Glow Body Oil",
@@ -158,8 +141,7 @@ export const products = [
     color: "Gold",
     tag: "Body Care",
     sizes: ["100ml", "200ml"],
-    description:
-      "Premium body oil with saffron, almond, and jojoba. Gives skin a golden radiance perfect for special occasions and bridal rituals.",
+    description: "Premium saffron, almond & jojoba body oil.",
   },
   {
     name: "Tulsi Clarifying Toner",
@@ -167,8 +149,7 @@ export const products = [
     color: "Green",
     tag: "Face Care",
     sizes: ["100ml", "200ml"],
-    description:
-      "Balancing toner with holy basil, witch hazel, and green tea. Controls breakouts and restores skin's natural pH.",
+    description: "Holy basil & green tea balancing toner.",
   },
   {
     name: "Shikakai Shampoo Bar",
@@ -176,8 +157,7 @@ export const products = [
     color: "Amber",
     tag: "Hair Care",
     sizes: ["75g", "100g"],
-    description:
-      "Zero-waste shampoo bar with Shikakai, Reetha, and Amla. Cleanses gently without stripping natural oils. Travel-friendly and eco-conscious.",
+    description: "Zero-waste bar with Shikakai, Reetha & Amla.",
   },
   {
     name: "Moringa Body Lotion",
@@ -185,8 +165,7 @@ export const products = [
     color: "Green",
     tag: "Body Care",
     sizes: ["200ml", "400ml"],
-    description:
-      "Lightweight daily lotion with Moringa oil and aloe. Fast-absorbing hydration that leaves skin soft without greasiness.",
+    description: "Lightweight daily lotion with Moringa & aloe.",
   },
   {
     name: "Bakuchi Anti-Age Oil",
@@ -194,8 +173,7 @@ export const products = [
     color: "Amber",
     tag: "Face Care",
     sizes: ["15ml", "30ml"],
-    description:
-      "Natural retinol alternative with Bakuchiol from Babchi seeds. Smooths wrinkles, firms skin, and is gentle enough for sensitive types.",
+    description: "Natural retinol alternative from Babchi seeds.",
   },
   {
     name: "Mogra Hand Cream",
@@ -203,8 +181,7 @@ export const products = [
     color: "Cream",
     tag: "Body Care",
     sizes: ["50g", "100g"],
-    description:
-      "Nourishing hand cream with Arabian jasmine and shea butter. Repairs dry, cracked hands and leaves a delicate floral trail.",
+    description: "Arabian jasmine & shea butter hand cream.",
   },
   {
     name: "Haldi Ubtan Scrub",
@@ -212,8 +189,7 @@ export const products = [
     color: "Gold",
     tag: "Body Care",
     sizes: ["150g", "300g"],
-    description:
-      "Traditional bridal scrub with turmeric, gram flour, and cream. Exfoliates, brightens, and softens skin like no other.",
+    description: "Traditional turmeric & gram flour bridal scrub.",
   },
   {
     name: "Reetha Hair Wash",
@@ -221,8 +197,7 @@ export const products = [
     color: "Amber",
     tag: "Hair Care",
     sizes: ["200ml", "400ml"],
-    description:
-      "Gentle liquid cleanser with soapnuts, Shikakai, and hibiscus. Creates natural lather while strengthening and conditioning hair.",
+    description: "Gentle soapnut cleanser with Shikakai & hibiscus.",
   },
   {
     name: "Aloe Vera Gel",
@@ -230,8 +205,7 @@ export const products = [
     color: "Green",
     tag: "Body Care",
     sizes: ["200ml", "400ml"],
-    description:
-      "Pure aloe vera gel with cucumber and vitamin E. Multi-use formula for face, body, and hair. Soothes burns, hydrates, and heals.",
+    description: "Pure aloe vera gel for face, body & hair.",
   },
   {
     name: "Ratrani Night Cream",
@@ -239,8 +213,7 @@ export const products = [
     color: "Cream",
     tag: "Face Care",
     sizes: ["30g", "50g"],
-    description:
-      "Restorative night cream with night-blooming jasmine and almond. Repairs daytime damage while you sleep for morning radiance.",
+    description: "Night jasmine & almond restorative cream.",
   },
   {
     name: "Nagarmotha Body Mist",
@@ -248,8 +221,7 @@ export const products = [
     color: "Amber",
     tag: "Body Care",
     sizes: ["100ml", "200ml"],
-    description:
-      "Earthy aromatic mist with Nagarmotha (Cyprus) and vetiver. A grounding fragrance that connects you to nature's essence.",
+    description: "Earthy aromatic mist with Cyprus & vetiver.",
   },
   {
     name: "Methi Hair Pack",
@@ -257,8 +229,7 @@ export const products = [
     color: "Amber",
     tag: "Hair Care",
     sizes: ["100g", "200g"],
-    description:
-      "Protein-rich treatment with fenugreek, yogurt powder, and egg protein. Strengthens weak hair and prevents breakage naturally.",
+    description: "Protein-rich fenugreek treatment for strong hair.",
   },
   {
     name: "Parijat Lip Balm",
@@ -266,7 +237,6 @@ export const products = [
     color: "Rose",
     tag: "Face Care",
     sizes: ["10g", "15g"],
-    description:
-      "Healing lip balm with night jasmine, beeswax, and ghee. Repairs chapped lips and adds a subtle natural tint.",
+    description: "Night jasmine, beeswax & ghee lip balm.",
   },
 ];

@@ -3,12 +3,12 @@ import "./SpinWheel.css";
 import { useState, useRef } from "react";
 
 const prizes = [
-  { label: "10% OFF", value: "10off", color: "#023020", textColor: "#E7D0A6" },
-  { label: "FREE SHIP", value: "freeship", color: "#E7D0A6", textColor: "#023020" },
-  { label: "5% OFF", value: "5off", color: "#023020", textColor: "#E7D0A6" },
-  { label: "TRY AGAIN", value: "tryagain", color: "#E7D0A6", textColor: "#023020" },
-  { label: "15% OFF", value: "15off", color: "#023020", textColor: "#E7D0A6" },
-  { label: "FREE GIFT", value: "sample", color: "#E7D0A6", textColor: "#023020" },
+  { label: "10% OFF", value: "10off", color: "#4F2C22", textColor: "#F0EDE8" },
+  { label: "FREE SHIP", value: "freeship", color: "#F0EDE8", textColor: "#4F2C22" },
+  { label: "5% OFF", value: "5off", color: "#4F2C22", textColor: "#F0EDE8" },
+  { label: "TRY AGAIN", value: "tryagain", color: "#F0EDE8", textColor: "#4F2C22" },
+  { label: "15% OFF", value: "15off", color: "#4F2C22", textColor: "#F0EDE8" },
+  { label: "FREE GIFT", value: "sample", color: "#F0EDE8", textColor: "#4F2C22" },
 ];
 
 const SpinWheel = ({ isOpen, onClose, onComplete }) => {
@@ -124,7 +124,7 @@ const SpinWheel = ({ isOpen, onClose, onComplete }) => {
           <div className="spin-wheel-right">
             <div className="wheel-container">
               <div className="wheel-pointer">
-                <svg width="24" height="32" viewBox="0 0 24 32" fill="#E7D0A6">
+                <svg width="24" height="32" viewBox="0 0 24 32" fill="#663532">
                   <polygon points="12,32 0,0 24,0" />
                 </svg>
               </div>
@@ -142,7 +142,7 @@ const SpinWheel = ({ isOpen, onClose, onComplete }) => {
                       <path
                         d={createSegmentPath(index)}
                         fill={prize.color}
-                        stroke="#E7D0A6"
+                        stroke="#663532"
                         strokeWidth="1"
                       />
                       <text
@@ -161,7 +161,7 @@ const SpinWheel = ({ isOpen, onClose, onComplete }) => {
                     </g>
                   ))}
                   {/* Center circle */}
-                  <circle cx={centerX} cy={centerY} r="35" fill="#023020" stroke="#E7D0A6" strokeWidth="3" />
+                  <circle cx={centerX} cy={centerY} r="35" fill="#4F2C22" stroke="#663532" strokeWidth="3" />
                 </svg>
                 <div className="wheel-center-logo">
                   <img src="/logo.png" alt="Cleanse" />

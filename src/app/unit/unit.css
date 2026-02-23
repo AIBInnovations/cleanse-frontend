@@ -1,3 +1,9 @@
+.unit-page {
+  position: relative;
+  z-index: 4;
+  background: #F0EDE8;
+}
+
 .product-hero {
   position: relative;
   width: 100%;
@@ -104,8 +110,8 @@
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #8b4513;
-  background: rgba(139, 69, 19, 0.08);
+  color: #663532;
+  background: rgba(102, 53, 50, 0.08);
   padding: 0.5rem 1rem;
   border-radius: 4px;
   width: fit-content;
@@ -114,7 +120,7 @@
 .stock-dot {
   width: 6px;
   height: 6px;
-  background: #8b4513;
+  background: #663532;
   border-radius: 50%;
   animation: stockPulse 2s ease-in-out infinite;
 }
@@ -184,8 +190,8 @@
   font-family: var(--font-body);
   font-size: 0.7rem;
   font-weight: 500;
-  color: #2d6a4f;
-  background: rgba(45, 106, 79, 0.08);
+  color: #663532;
+  background: rgba(102, 53, 50, 0.08);
   padding: 0.25rem 0.5rem;
   border-radius: 3px;
   text-transform: uppercase;
@@ -305,7 +311,7 @@
 }
 
 .qty-btn:hover {
-  background: rgba(2, 48, 32, 0.05);
+  background: rgba(79, 44, 34, 0.05);
 }
 
 .qty-value {
@@ -323,8 +329,8 @@
   font-size: 0.85rem;
   font-weight: 500;
   padding: 0.75rem 2rem;
-  background: var(--base-700);
-  border: 1px solid var(--base-700);
+  background: #663532;
+  border: 1px solid #663532;
   color: var(--base-100);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -333,8 +339,8 @@
 }
 
 .add-to-cart-btn:hover {
-  background: #034d30;
-  border-color: #034d30;
+  background: #4F2C22;
+  border-color: #4F2C22;
 }
 
 .add-to-cart-btn:active {
@@ -370,13 +376,9 @@
 .product-delivery-check {
   display: flex;
   flex-direction: column;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: #F0EDE8;
   border-radius: 12px;
   padding: 1.25rem;
-  box-shadow: 0 4px 24px rgba(2, 48, 32, 0.04);
 }
 
 .delivery-input-row {
@@ -384,7 +386,7 @@
   gap: 0;
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid rgba(2, 48, 32, 0.1);
+  border: 1px solid rgba(79, 44, 34, 0.1);
 }
 
 .delivery-input {
@@ -396,7 +398,7 @@
   border-radius: 0;
   outline: none;
   color: var(--base-700);
-  background: rgba(255, 255, 255, 0.3);
+  background: #fff;
   transition: background 0.2s ease;
 }
 
@@ -405,7 +407,7 @@
 }
 
 .delivery-input:focus {
-  background: rgba(255, 255, 255, 0.5);
+  background: #fff;
 }
 
 .delivery-check-btn {
@@ -415,23 +417,23 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   padding: 0.7rem 1.25rem;
-  background: rgba(2, 48, 32, 0.06);
+  background: rgba(79, 44, 34, 0.06);
   border: none;
-  border-left: 1px solid rgba(2, 48, 32, 0.1);
+  border-left: 1px solid rgba(79, 44, 34, 0.1);
   color: var(--base-700);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .delivery-check-btn:hover {
-  background: var(--base-700);
+  background: #663532;
   color: var(--base-100);
 }
 
 .delivery-msg {
   font-family: var(--font-body);
   font-size: 0.75rem;
-  color: #2d6a4f;
+  color: #663532;
   margin-top: 0.5rem;
 }
 
@@ -465,7 +467,7 @@
 
 .bundle-section {
   width: 100%;
-  background: var(--base-100);
+  background: #F0EDE8;
   padding: 5rem 2rem;
 }
 
@@ -474,7 +476,7 @@
   max-width: 1100px;
   margin: 0 auto;
   padding: 2.5rem 2.5rem;
-  border: 1px solid var(--base-200);
+  border: 1px solid rgba(79, 44, 34, 0.1);
   border-radius: 20px;
   background: #fff;
 }
@@ -511,7 +513,7 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: #fff;
-  background: var(--base-700);
+  background: #663532;
   padding: 0.5rem 1.25rem;
   border-radius: 100px;
 }
@@ -526,7 +528,7 @@
 .connector-line {
   flex: 1;
   height: 1px;
-  background: var(--base-200);
+  background: rgba(79, 44, 34, 0.1);
 }
 
 .connector-text {
@@ -548,7 +550,7 @@
   display: flex;
   flex-direction: column;
   background: #fafaf7;
-  border: 1.5px solid var(--base-200);
+  border: 1.5px solid rgba(79, 44, 34, 0.1);
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
@@ -559,15 +561,15 @@
 }
 
 .bundle-product-card:hover {
-  border-color: var(--base-300);
+  border-color: rgba(79, 44, 34, 0.2);
   transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(2, 48, 32, 0.06);
+  box-shadow: 0 8px 30px rgba(79, 44, 34, 0.06);
 }
 
 .bundle-product-card.selected {
   border-color: var(--base-700);
   background: #fff;
-  box-shadow: 0 4px 20px rgba(2, 48, 32, 0.08);
+  box-shadow: 0 4px 20px rgba(79, 44, 34, 0.08);
 }
 
 .bundle-product-check {
@@ -590,8 +592,8 @@
 }
 
 .bundle-product-card.selected .bundle-check-circle {
-  background: var(--base-700);
-  border-color: var(--base-700);
+  background: #663532;
+  border-color: #663532;
 }
 
 .bundle-product-img {
@@ -647,13 +649,13 @@
   right: 1.25rem;
   font-family: var(--font-heading);
   font-size: 2rem;
-  color: var(--base-200);
+  color: rgba(79, 44, 34, 0.08);
   line-height: 1;
   transition: color 0.3s ease;
 }
 
 .bundle-product-card.selected .bundle-product-number {
-  color: rgba(2, 48, 32, 0.08);
+  color: rgba(79, 44, 34, 0.08);
 }
 
 .bundle-footer {
@@ -662,7 +664,7 @@
   justify-content: space-between;
   padding: 1.75rem 2rem;
   background: #fafaf7;
-  border: 1px solid var(--base-200);
+  border: 1px solid rgba(79, 44, 34, 0.1);
   border-radius: 16px;
 }
 
@@ -710,7 +712,7 @@
 .bundle-savings {
   font-family: var(--font-body);
   font-size: 0.75rem;
-  color: #2d6a4f;
+  color: #663532;
 }
 
 .bundle-add-btn {
@@ -721,7 +723,7 @@
   font-size: 0.7rem;
   font-weight: 500;
   padding: 0.65rem 1.25rem;
-  background: var(--base-700);
+  background: #663532;
   border: none;
   border-radius: 100px;
   color: #fff;
@@ -732,9 +734,9 @@
 }
 
 .bundle-add-btn:hover {
-  background: #034d30;
+  background: #4F2C22;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(2, 48, 32, 0.2);
+  box-shadow: 0 6px 20px rgba(79, 44, 34, 0.2);
 }
 
 .bundle-add-btn:active {
@@ -858,7 +860,7 @@
 
 .info-value-item:hover .info-value-icon {
   border-color: var(--base-700);
-  background: rgba(2, 48, 32, 0.03);
+  background: rgba(79, 44, 34, 0.03);
 }
 
 .info-value-label {
@@ -996,7 +998,7 @@
 
 .review-bar-fill {
   height: 100%;
-  background: var(--base-700);
+  background: #663532;
   border-radius: 2px;
   transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -1016,11 +1018,11 @@
   text-transform: uppercase;
   letter-spacing: 0.12em;
   padding: 0.85rem 1.5rem;
-  background: var(--base-700);
+  background: #663532;
   border: none;
   color: var(--base-100);
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 8px;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
@@ -1104,9 +1106,9 @@
 }
 
 .reviews-nav-btn:hover {
-  background: var(--base-700);
+  background: #663532;
   color: #fff;
-  border-color: var(--base-700);
+  border-color: #663532;
 }
 
 .reviews-nav-btn:active {
@@ -1188,7 +1190,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--base-700);
+  background: #663532;
   color: var(--base-100);
   font-family: var(--font-heading);
   font-size: 0.75rem;
@@ -1221,7 +1223,7 @@
 
 .recommended-section {
   width: 100%;
-  background: #fff;
+  background: #F0EDE8;
   padding: 5rem 0;
 }
 
@@ -1261,23 +1263,21 @@
 }
 
 .recommended-grid .product {
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(2, 48, 32, 0.08);
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 24px rgba(2, 48, 32, 0.06);
+  background: #fff;
+  border: 1px solid rgba(79, 44, 34, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(79, 44, 34, 0.06);
   transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .recommended-grid .product:hover {
-  box-shadow: 0 8px 32px rgba(2, 48, 32, 0.1);
-  border-color: rgba(2, 48, 32, 0.15);
+  box-shadow: 0 8px 32px rgba(79, 44, 34, 0.1);
+  border-color: rgba(79, 44, 34, 0.15);
 }
 
 .recommended-grid .product .product-img {
-  background-color: rgba(2, 48, 32, 0.05);
-  border-radius: 0.75rem 0.75rem 0 0;
+  background-color: rgba(79, 44, 34, 0.05);
+  border-radius: 16px 16px 0 0;
 }
 
 .recommended-grid .product .product-info {
@@ -1290,7 +1290,7 @@
 }
 
 .recommended-grid .product .product-info .add-to-cart-btn {
-  background-color: var(--base-700);
+  background-color: #663532;
   color: #fff;
 }
 

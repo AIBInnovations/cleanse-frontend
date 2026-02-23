@@ -579,7 +579,7 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: rgba(2, 48, 32, 0.2);
+    background-color: rgba(79, 44, 34, 0.2);
     cursor: pointer;
     transition: all 0.3s ease;
   }

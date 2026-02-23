@@ -1,61 +1,14 @@
 "use client";
+import "@/components/FeaturedSection/FeaturedSection.css";
 import "./wardrobe.css";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { products } from "./products";
 import { useCart } from "@/context/CartContext";
-import Copy from "@/components/Copy/Copy";
 import { gsap } from "gsap";
 
-const ProductCard = ({ product, productIndex, innerRef, style }) => {
-  const { addToCart } = useCart();
-  const imgIndex = ((productIndex - 1) % 4) + 1;
-  const imgPath = `/p${imgIndex}.png`;
-
-  return (
-    <div className="product-card" ref={innerRef} style={style}>
-      <Link href="/unit" className="product-card-image">
-        <img src={imgPath} alt={product.name} />
-      </Link>
-      <div className="product-card-info">
-        <h3 className="product-card-name">{product.name}</h3>
-        <p className="product-card-description">{product.description}</p>
-        <div className="product-card-footer">
-          <span className="product-card-price">₹{product.price}</span>
-          <button
-            className="quick-add-btn"
-            onClick={() => addToCart(product)}
-          >
-            Quick Add
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const FaceCareCard = ({ product, productIndex, innerRef, style }) => {
-  const { addToCart } = useCart();
-  const imgIndex = ((productIndex - 1) % 4) + 1;
-  const imgPath = `/p${imgIndex}.png`;
-
-  return (
-    <div className="face-care-card" ref={innerRef} style={style}>
-      <Link href="/unit" className="face-care-card-image">
-        <img src={imgPath} alt={product.name} />
-      </Link>
-      <div className="face-care-card-info">
-        <h3 className="face-care-card-name">{product.name}</h3>
-        <div className="face-care-card-footer">
-          <span className="face-care-card-price">₹{product.price}</span>
-          <button className="face-care-view-clinicals" onClick={() => addToCart(product)}>ADD TO BAG</button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 export default function Wardrobe() {
+  const { addToCart } = useCart();
   const [activeTag, setActiveTag] = useState("All");
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -161,23 +114,20 @@ export default function Wardrobe() {
 
   return (
     <div className="wardrobe-page">
-      {/* Hero Section */}
+      {/* Hero Section - same as home */}
       <section className="wardrobe-hero">
         <div className="wardrobe-hero-content">
-          <Copy animateOnScroll={false} delay={0.3}>
-            <p className="wardrobe-hero-label">Shop Collection</p>
-          </Copy>
-          <Copy animateOnScroll={false} delay={0.5}>
-            <h1>Sacred Beauty</h1>
-          </Copy>
-          <Copy animateOnScroll={false} delay={0.7}>
-            <p className="wardrobe-hero-subtitle">
-              Discover our curated collection of Ayurvedic skincare rituals
-            </p>
-          </Copy>
+          <div className="wardrobe-breadcrumb">
+            <Link href="/">HOME</Link>/ <Link href="/wardrobe">SHOP</Link>/ <span>{activeTag === "All" ? "ALL" : activeTag.toUpperCase()}</span>
+          </div>
+          <h1 className="wardrobe-hero-title">
+            {activeTag === "All" ? "BODY SKIN CARE" : activeTag.toUpperCase()}
+          </h1>
         </div>
+      </section>
 
-        {/* Category Filter */}
+      {/* Category Filter + Sort */}
+      <section className="wardrobe-filters">
         <div className="category-filter">
           {["All", "Face Care", "Hair Care", "Body Care"].map((tag) => (
             <button
@@ -191,7 +141,6 @@ export default function Wardrobe() {
           ))}
         </div>
 
-        {/* Sort and Filter Options */}
         <div className="sort-filter-bar">
           <div className="filter-group">
             <label htmlFor="price-filter">Filter</label>
@@ -226,81 +175,111 @@ export default function Wardrobe() {
         </div>
       </section>
 
-      {activeTag === "Face Care" || activeTag === "Hair Care" || activeTag === "Body Care" ? (
-        /* Category Layout - Card Style */
-        <section className="face-care-section">
-          {filteredProducts.slice(0, 3).map((product, index) => (
-            <FaceCareCard
-              key={product.name}
-              product={product}
-              productIndex={products.indexOf(product) + 1}
-              innerRef={(el) => (productRefs.current[index] = el)}
-              style={{ opacity: 0 }}
-            />
-          ))}
-        </section>
-      ) : (
-        /* Default Layout for All */
-        <>
-          {/* Section 1: 2 Products + Spotlight Banner */}
-          <section className="wardrobe-section section-row-1">
-            <div className="products-pair">
-              {filteredProducts.slice(0, 2).map((product, index) => (
-                <ProductCard
-                  key={product.name}
-                  product={product}
-                  productIndex={products.indexOf(product) + 1}
-                  innerRef={(el) => (productRefs.current[index] = el)}
-                  style={{ opacity: 0 }}
-                />
-              ))}
-            </div>
-            <div className="spotlight-banner">
-              <div className="spotlight-content">
-                <span>Featured</span>
-                <h2>Product</h2>
-                <h2>Spotlight</h2>
+      {/* Section 1: 2 Products + Spotlight Banner */}
+      <section className="wardrobe-section section-row-1">
+        <div className="products-pair">
+          {filteredProducts.slice(0, 2).map((product, index) => {
+            const imgIndex = ((products.indexOf(product)) % 4) + 1;
+            return (
+              <div key={product.name + index} className="product-card" ref={(el) => (productRefs.current[index] = el)} style={{ opacity: 0 }}>
+                <div className="product-card-image">
+                  <img src={`/images/${imgIndex}.png`} alt={product.name} loading="lazy" />
+                </div>
+                <button className="product-card-cart-btn" onClick={() => addToCart(product)}>
+                  <span className="cart-btn-circle">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                      <line x1="3" y1="6" x2="21" y2="6" />
+                      <path d="M16 10a4 4 0 01-8 0" />
+                    </svg>
+                  </span>
+                  <span className="cart-btn-text">Add to Cart</span>
+                </button>
+                <div className="product-card-info">
+                  <h3 className="product-card-name">{product.name}</h3>
+                  <p className="product-card-desc">{product.description}</p>
+                  <div className="product-card-footer">
+                    <span className="product-card-price">₹{product.price}</span>
+                    <Link href="/unit" className="product-card-buy-btn">Buy Now</Link>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <div className="spotlight-banner">
+          <img src="/images/top.png" alt="Featured Collection" className="spotlight-banner-img" />
+        </div>
+      </section>
+
+      {/* Section 2: 4 Products in a Row */}
+      <section className="wardrobe-section section-row-2">
+        {filteredProducts.slice(2, 6).map((product, index) => {
+          const imgIndex = ((products.indexOf(product)) % 4) + 1;
+          return (
+            <div key={product.name + index} className="product-card" ref={(el) => (productRefs.current[index + 2] = el)} style={{ opacity: 0 }}>
+              <div className="product-card-image">
+                <img src={`/images/${imgIndex}.png`} alt={product.name} loading="lazy" />
+              </div>
+              <button className="product-card-cart-btn" onClick={() => addToCart(product)}>
+                <span className="cart-btn-circle">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <path d="M16 10a4 4 0 01-8 0" />
+                  </svg>
+                </span>
+                <span className="cart-btn-text">Add to Cart</span>
+              </button>
+              <div className="product-card-info">
+                <h3 className="product-card-name">{product.name}</h3>
+                <p className="product-card-desc">{product.description}</p>
+                <div className="product-card-footer">
+                  <span className="product-card-price">₹{product.price}</span>
+                  <Link href="/unit" className="product-card-buy-btn">Buy Now</Link>
+                </div>
               </div>
             </div>
-          </section>
+          );
+        })}
+      </section>
 
-          {/* Section 2: 4 Products in a Row */}
-          <section className="wardrobe-section section-row-2">
-            {filteredProducts.slice(2, 6).map((product, index) => (
-              <ProductCard
-                key={product.name}
-                product={product}
-                productIndex={products.indexOf(product) + 1}
-                innerRef={(el) => (productRefs.current[index + 2] = el)}
-                style={{ opacity: 0 }}
-              />
-            ))}
-          </section>
-
-          {/* Section 3: Banner (2 products wide) + 2 Products */}
-          <section className="wardrobe-section section-row-4">
-            <div className="side-banner">
-              <div className="banner-content">
-                <span>Ayurvedic</span>
-                <h2>Banner</h2>
-                <p>Pure ingredients for radiant skin</p>
+      {/* Section 3: Side Banner + 4 Products */}
+      <section className="wardrobe-section section-row-3">
+        <div className="side-banner">
+          <img src="/images/banner.png" alt="Ayurvedic Collection" className="side-banner-img" />
+        </div>
+        <div className="products-beside-banner">
+          {filteredProducts.slice(6, 10).map((product, index) => {
+            const imgIndex = ((products.indexOf(product)) % 4) + 1;
+            return (
+              <div key={product.name + index} className="product-card" ref={(el) => (productRefs.current[index + 6] = el)} style={{ opacity: 0 }}>
+                <div className="product-card-image">
+                  <img src={`/images/${imgIndex}.png`} alt={product.name} loading="lazy" />
+                </div>
+                <button className="product-card-cart-btn" onClick={() => addToCart(product)}>
+                  <span className="cart-btn-circle">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                      <line x1="3" y1="6" x2="21" y2="6" />
+                      <path d="M16 10a4 4 0 01-8 0" />
+                    </svg>
+                  </span>
+                  <span className="cart-btn-text">Add to Cart</span>
+                </button>
+                <div className="product-card-info">
+                  <h3 className="product-card-name">{product.name}</h3>
+                  <p className="product-card-desc">{product.description}</p>
+                  <div className="product-card-footer">
+                    <span className="product-card-price">₹{product.price}</span>
+                    <Link href="/unit" className="product-card-buy-btn">Buy Now</Link>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="products-beside-banner">
-              {filteredProducts.slice(6, 10).map((product, index) => (
-                <ProductCard
-                  key={product.name}
-                  product={product}
-                  productIndex={products.indexOf(product) + 1}
-                  innerRef={(el) => (productRefs.current[index + 6] = el)}
-                  style={{ opacity: 0 }}
-                />
-              ))}
-            </div>
-          </section>
-        </>
-      )}
-
+            );
+          })}
+        </div>
+      </section>
     </div>
   );
 }

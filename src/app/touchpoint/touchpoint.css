@@ -1,154 +1,391 @@
-.contact-hero {
+/* Touchpoint Page */
+.touchpoint-page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #F0EDE8;
+  position: relative;
+  z-index: 4;
+  padding-bottom: 5rem;
+}
+
+/* Hero */
+.touchpoint-hero {
   position: relative;
   width: 100%;
-  height: 100svh;
-  overflow: hidden;
-}
-
-.contact-hero .container {
+  height: 50vh;
+  min-height: 400px;
+  background-image: url('/images/hero.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
-  overflow: hidden;
+  align-items: flex-end;
+  justify-content: flex-start;
 }
 
-.contact-hero .container .contact-hero-col {
-  flex: 1;
-  height: 100%;
-}
-
-.contact-hero .container .contact-hero-img {
-  position: relative;
-  transform: translateY(6rem) scale(1.2);
+.touchpoint-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100%;
-  will-change: transform;
+  height: 55%;
+  background: linear-gradient(180deg, rgba(68, 40, 36, 0.85) 0%, rgba(68, 40, 36, 0) 100%);
+  z-index: 1;
+  pointer-events: none;
 }
 
-.contact-hero .contact-hero-copy {
-  padding: 8rem 0 2rem 0;
+.touchpoint-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 3rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 0.75rem;
 }
 
-.contact-hero .contact-meta {
+.touchpoint-breadcrumb {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.touchpoint-breadcrumb a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.touchpoint-breadcrumb a:hover {
+  color: #fff;
+}
+
+.touchpoint-breadcrumb span {
+  color: #C8AD73;
+}
+
+.touchpoint-hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 400;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.touchpoint-hero-subtitle {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 400px;
+}
+
+/* Contact Cards */
+.touchpoint-cards {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.touchpoint-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
+  gap: 0.75rem;
+}
+
+.touchpoint-card-icon {
+  width: 50px;
+  height: 50px;
+  background: rgba(102, 53, 50, 0.08);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.touchpoint-card-title {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #663532;
+}
+
+.touchpoint-card-desc {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: #777;
+  line-height: 1.5;
+}
+
+.touchpoint-card-link {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #4F2C22;
+  text-decoration: none;
+  margin-top: auto;
+  transition: color 0.3s ease;
+}
+
+a.touchpoint-card-link:hover {
+  color: #663532;
+}
+
+/* Contact Form Section */
+.touchpoint-form-section {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 1rem 2rem 3rem;
+}
+
+.touchpoint-form-wrapper {
+  display: flex;
   gap: 2rem;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #fff;
 }
 
-.contact-hero .contact-meta .contact-meta-block {
+.touchpoint-form-image {
+  width: 45%;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.touchpoint-form-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.touchpoint-form-container {
+  flex: 1;
+  padding: 3rem;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+
+.touchpoint-form-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  color: #4F2C22;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.touchpoint-form-desc {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.touchpoint-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.touchpoint-form-row {
+  display: flex;
   gap: 1rem;
 }
 
-.contact-hero .contact-meta .contact-meta-block p {
-  color: var(--base-500);
+.touchpoint-form-row .touchpoint-input-group {
+  flex: 1;
 }
 
-.contact-callout {
-  background-color: var(--base-700);
-  color: var(--base-100);
-}
-
-.contact-callout p {
-  color: var(--base-500);
-}
-
-.contact-callout .container {
-  padding: 12rem 2rem 3rem 2rem;
-}
-
-.contact-callout .container .contact-callout-header {
-  width: 75%;
-  margin: 0 auto;
-  text-align: center;
+.touchpoint-input-group {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 2rem;
+  gap: 0.4rem;
 }
 
-.contact-callout .container .contact-callout-header p {
-  width: 30%;
-  margin-bottom: 2rem;
+.touchpoint-input-group label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #4F2C22;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
-.contact-callout .contact-callout-img {
-  transform: translateY(0rem);
-  will-change: transform;
-  width: 12rem;
-  height: 16rem;
-  border-radius: 0.75rem;
-  overflow: hidden;
+.touchpoint-input-group input,
+.touchpoint-input-group select,
+.touchpoint-input-group textarea {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(79, 44, 34, 0.15);
+  border-radius: 8px;
+  background: #F0EDE8;
+  color: #4F2C22;
+  outline: none;
+  transition: border-color 0.3s ease;
+  resize: none;
 }
 
-.contact-callout .contact-callout-logo {
-  width: 5rem;
-  height: 5rem;
-  margin-bottom: 2rem;
+.touchpoint-input-group input:focus,
+.touchpoint-input-group select:focus,
+.touchpoint-input-group textarea:focus {
+  border-color: #663532;
 }
 
-@media (min-width: 2400px) {
-  .contact-hero .contact-hero-copy {
-    justify-content: center;
-    gap: 20rem;
-  }
-
-  .contact-callout .container .contact-callout-header {
-    width: 50%;
-  }
+.touchpoint-input-group input::placeholder,
+.touchpoint-input-group textarea::placeholder {
+  color: rgba(79, 44, 34, 0.35);
 }
 
+.touchpoint-submit-btn {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.9rem 2rem;
+  background: #663532;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}
+
+.touchpoint-submit-btn:hover {
+  background: #4F2C22;
+}
+
+/* FAQ Section */
+.touchpoint-faq {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 2rem 2rem 4rem;
+}
+
+.touchpoint-faq-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  color: #4F2C22;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.touchpoint-faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.touchpoint-faq-item {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.touchpoint-faq-item h4 {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #663532;
+  margin-bottom: 0.75rem;
+}
+
+.touchpoint-faq-item p {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: #777;
+  line-height: 1.6;
+}
+
+/* Responsive */
 @media (max-width: 1000px) {
-  .contact-hero .container .contact-hero-col.contact-hero-img-wrapper {
-    display: none;
+  .touchpoint-hero {
+    height: 40vh;
+    min-height: 300px;
   }
 
-  .contact-callout .container .contact-callout-header p {
-    width: 80%;
+  .touchpoint-hero-content {
+    padding: 2rem;
   }
 
-  .contact-callout .container {
-    padding: 8rem 2rem 3rem;
+  .touchpoint-cards {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 2rem 1.5rem;
+  }
+
+  .touchpoint-form-wrapper {
+    flex-direction: column;
+  }
+
+  .touchpoint-form-image {
+    width: 100%;
+    height: 300px;
+  }
+
+  .touchpoint-form-container {
+    padding: 2rem;
+  }
+
+  .touchpoint-faq-grid {
+    grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 480px) {
-  .contact-hero {
-    height: auto;
-    min-height: 100svh;
+@media (max-width: 600px) {
+  .touchpoint-hero {
+    height: 35vh;
+    min-height: 250px;
   }
 
-  .contact-hero .contact-hero-copy {
-    padding: 6rem 0 2rem 0;
+  .touchpoint-hero-content {
+    padding: 1.5rem;
   }
 
-  .contact-hero .contact-meta .contact-meta-block {
-    gap: 0.75rem;
+  .touchpoint-hero-title {
+    font-size: clamp(2rem, 8vw, 3rem);
   }
 
-  .contact-callout .container {
-    padding: 6rem 1.5rem 2.5rem;
+  .touchpoint-cards {
+    grid-template-columns: 1fr;
+    padding: 1.5rem 1rem;
   }
 
-  .contact-callout .container .contact-callout-header {
-    width: 100%;
-    gap: 1.5rem;
+  .touchpoint-form-section {
+    padding: 0.5rem 1rem 2rem;
   }
 
-  .contact-callout .container .contact-callout-header p {
-    width: 95%;
+  .touchpoint-form-image {
+    height: 200px;
   }
 
-  .contact-callout .contact-callout-img {
-    width: 10rem;
-    height: 13rem;
+  .touchpoint-form-container {
+    padding: 1.5rem;
   }
 
-  .contact-callout .contact-callout-logo {
-    width: 4rem;
-    height: 4rem;
-    margin-bottom: 1.5rem;
+  .touchpoint-form-row {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .touchpoint-faq {
+    padding: 1.5rem 1rem 3rem;
   }
 }
