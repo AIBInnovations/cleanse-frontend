@@ -3,15 +3,14 @@ import "./unit.css";
 import { useState, useEffect, useCallback } from "react";
 
 import { products } from "../wardrobe/products";
-import Product from "@/components/Product/Product";
+import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 
 const productImages = [
-  "/product/product_shot_01.jpg",
-  "/product/product_shot_02.jpg",
-  "/product/product_shot_03.jpg",
-  "/product/product_shot_04.jpg",
-  "/product/product_shot_05.jpg",
+  "/images/1.png",
+  "/images/2.png",
+  "/images/3.png",
+  "/images/4.png",
 ];
 
 const reviews = [
@@ -348,7 +347,7 @@ export default function Unit() {
   const [pincode, setPincode] = useState("");
   const [deliveryMsg, setDeliveryMsg] = useState("");
   const [activeImage, setActiveImage] = useState(0);
-  const [bundleSelected, setBundleSelected] = useState([true, true, true]);
+  const [bundleSelected, setBundleSelected] = useState([true, true, true, true, true, true]);
   const [openTab, setOpenTab] = useState("ingredients");
   const [reviewIndex, setReviewIndex] = useState(0);
   const { addToCart } = useCart();
@@ -357,6 +356,9 @@ export default function Unit() {
     products.find((p) => p.name === "Sandalwood Serum") || products[3],
     products.find((p) => p.name === "Rose Hydra Mist") || products[2],
     products.find((p) => p.name === "Turmeric Glow Mask") || products[1],
+    products.find((p) => p.name === "Ashwagandha Body Oil") || products[4],
+    products.find((p) => p.name === "Neem Purifying Cleanser") || products[5],
+    products.find((p) => p.name === "Saffron Brightening Cream") || products[9],
   ];
 
   const toggleBundleItem = (index) => {
@@ -531,33 +533,30 @@ export default function Unit() {
       </section>
 
       <section className="bundle-section">
-        <div className="bundle-container">
-          <div className="bundle-header">
-            <div className="bundle-header-text">
-              <p className="bundle-label">Complete Your Ritual</p>
-              <h3 className="bundle-title">Build Your Bundle</h3>
-            </div>
-            <div className="bundle-badge">15% Off</div>
-          </div>
-
-          <div className="bundle-connector">
-            <span className="connector-line"></span>
-            <span className="connector-text">Select products to bundle</span>
-            <span className="connector-line"></span>
-          </div>
-
-          <div className="bundle-products">
+        <div className="bundle-header">
+          <h3 className="bundle-title">BUILD YOUR BUNDLE</h3>
+          <p className="bundle-subtitle">Select products and save 15% on your bundle</p>
+        </div>
+        <div className="bundle-layout">
+          <div className="bundle-grid">
             {bundleProducts.map((product, index) => {
               const imgIndex = ((products.indexOf(product)) % 4) + 1;
-              const imgPath = `/p${imgIndex}.png`;
+              const imgPath = `/images/${imgIndex}.png`;
               return (
                 <button
                   key={product.name}
-                  className={`bundle-product-card ${bundleSelected[index] ? "selected" : ""}`}
+                  className={`bundle-card ${bundleSelected[index] ? "bundle-card-selected" : ""}`}
                   onClick={() => toggleBundleItem(index)}
                 >
-                  <div className="bundle-product-check">
-                    <div className="bundle-check-circle">
+                  <div className="bundle-card-image">
+                    <img src={imgPath} alt={product.name} />
+                  </div>
+                  <div className="bundle-card-info">
+                    <p className="bundle-card-name">{product.name}</p>
+                    <p className="bundle-card-price">&#8377;{product.price}</p>
+                  </div>
+                  <div className="bundle-card-check">
+                    <div className={`bundle-check-circle ${bundleSelected[index] ? "checked" : ""}`}>
                       {bundleSelected[index] && (
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                           <polyline points="20 6 9 17 4 12" />
@@ -565,36 +564,53 @@ export default function Unit() {
                       )}
                     </div>
                   </div>
-                  <div className="bundle-product-img">
-                    <img src={imgPath} alt={product.name} />
-                  </div>
-                  <div className="bundle-product-info">
-                    <p className="bundle-product-name">{product.name}</p>
-                    <p className="bundle-product-price">&#8377;{product.price}</p>
-                  </div>
-                  <div className="bundle-product-number">0{index + 1}</div>
                 </button>
               );
             })}
           </div>
-
-          <div className="bundle-footer">
-            <div className="bundle-pricing">
-              <div className="bundle-price-detail">
-                <span className="bundle-price-label">Bundle Total</span>
-                <div className="bundle-price-values">
-                  <span className="bundle-price-original">&#8377;{bundleOriginalTotal}</span>
-                  <span className="bundle-price-final">&#8377;{bundleDiscountedTotal}</span>
-                </div>
-              </div>
-              <p className="bundle-savings">You save &#8377;{bundleOriginalTotal - bundleDiscountedTotal} with this bundle</p>
+          <div className="bundle-summary">
+            <h4 className="bundle-summary-title">YOUR BUNDLE</h4>
+            <p className="bundle-summary-desc">Add products and save 15%</p>
+            <div className="bundle-summary-divider" />
+            <div className="bundle-summary-slots">
+              {bundleProducts.map((product, index) => {
+                const imgIndex = ((products.indexOf(product)) % 4) + 1;
+                return (
+                  <div key={product.name} className="bundle-slot">
+                    {bundleSelected[index] ? (
+                      <>
+                        <div className="bundle-slot-img">
+                          <img src={`/images/${imgIndex}.png`} alt={product.name} />
+                        </div>
+                        <div className="bundle-slot-info">
+                          <span className="bundle-slot-name">{product.name}</span>
+                          <span className="bundle-slot-price">&#8377;{product.price}</span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="bundle-slot-img bundle-slot-empty" />
+                        <div className="bundle-slot-info">
+                          <div className="bundle-slot-line bundle-slot-line-long" />
+                          <div className="bundle-slot-line bundle-slot-line-short" />
+                        </div>
+                      </>
+                    )}
+                  </div>
+                );
+              })}
             </div>
+            <div className="bundle-summary-divider" />
+            <div className="bundle-summary-total">
+              <span>Total</span>
+              <div className="bundle-summary-prices">
+                <span className="bundle-total-original">&#8377;{bundleOriginalTotal}</span>
+                <span className="bundle-total-final">&#8377;{bundleDiscountedTotal}</span>
+              </div>
+            </div>
+            <p className="bundle-summary-savings">You save &#8377;{bundleOriginalTotal - bundleDiscountedTotal}</p>
             <button className="bundle-add-btn" onClick={handleAddBundle}>
               Add Bundle to Cart
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
             </button>
           </div>
         </div>
@@ -740,21 +756,27 @@ export default function Unit() {
 
       {/* Recommended For You */}
       <section className="recommended-section">
-        <div className="recommended-container">
-          <div className="recommended-header">
-            <p className="recommended-label">Curated For You</p>
-            <h3 className="recommended-title">Recommended</h3>
-          </div>
-          <div className="recommended-grid">
-            {relatedProducts.map((product) => (
-              <Product
-                key={product.name}
-                product={product}
-                productIndex={products.indexOf(product) + 1}
-                showAddToCart={true}
-              />
-            ))}
-          </div>
+        <h2 className="recommended-title">RECOMMENDED FOR YOU</h2>
+        <div className="recommended-grid">
+          {relatedProducts.map((product) => {
+            const imgIndex = ((products.indexOf(product)) % 4) + 1;
+            return (
+              <div key={product.name} className="rec-card">
+                <div className="rec-card-image">
+                  <Link href="/unit">
+                    <img src={`/images/${imgIndex}.png`} alt={product.name} />
+                  </Link>
+                </div>
+                <div className="rec-card-info">
+                  <h3 className="rec-card-name">{product.name}</h3>
+                  <div className="rec-card-footer">
+                    <span className="rec-card-price">&#8377;{product.price}</span>
+                    <button className="rec-card-btn" onClick={() => addToCart(product)}>Add to Cart</button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </section>
     </div>

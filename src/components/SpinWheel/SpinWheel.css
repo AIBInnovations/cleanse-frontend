@@ -272,6 +272,7 @@
 @media (max-width: 768px) {
   .spin-wheel-modal {
     max-width: 95%;
+    width: 95%;
     margin: 1rem;
   }
 

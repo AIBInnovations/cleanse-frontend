@@ -44,9 +44,16 @@ export default function Index() {
   const [spinWheelResult, setSpinWheelResult] = useState(null);
   const [isMounted, setIsMounted] = useState(false);
 
-  // Handle client-side mounting
+  // Handle client-side mounting + hash scroll
   useEffect(() => {
     setIsMounted(true);
+    if (window.location.hash) {
+      const id = window.location.hash.slice(1);
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 800);
+    }
   }, []);
 
   // Show spin wheel after a delay on page load
@@ -243,15 +250,21 @@ export default function Index() {
         </div>
       </section>
 
-      <FeaturedSection />
+      <div id="featured">
+        <FeaturedSection />
+      </div>
 
       <MarqueeBanner />
 
-      <WhySkinSection />
+      <div id="why-skin">
+        <WhySkinSection />
+      </div>
 
       <ShopByCategory />
 
-      <BuildYourRitual />
+      <div id="rituals">
+        <BuildYourRitual />
+      </div>
 
       <PeelReveal />
 
@@ -261,7 +274,9 @@ export default function Index() {
 
       {/* <CTA /> */}
 
-      <Testimonials />
+      <div id="testimonials">
+        <Testimonials />
+      </div>
 
       <LatestLaunches />
 

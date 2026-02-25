@@ -1,133 +1,158 @@
 "use client";
 import "./touchpoint.css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 
+const faqs = [
+  { q: "What are your shipping times?", a: "We ship within 2-3 business days. Delivery takes 5-7 days across India and 10-14 days internationally." },
+  { q: "Do you offer returns?", a: "Yes, we offer a 7-day return policy on unopened products. Contact our support team to initiate a return." },
+  { q: "Are your products 100% natural?", a: "All Cleanse products are made with pure, ethically sourced Ayurvedic ingredients with no synthetic additives." },
+  { q: "Do you ship internationally?", a: "Yes, we ship worldwide. International shipping charges are calculated at checkout based on your location." },
+];
+
 export default function Touchpoint() {
+  const heroRef = useRef(null);
   const cardsRef = useRef([]);
+  const formRef = useRef(null);
+  const faqRefs = useRef([]);
+  const [openFaq, setOpenFaq] = useState(null);
 
   useGSAP(() => {
     gsap.fromTo(
       cardsRef.current.filter(Boolean),
-      { opacity: 0, y: 40 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "power3.out",
-        delay: 0.3,
-      }
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power3.out", delay: 0.3 }
     );
   });
 
   return (
     <div className="touchpoint-page">
-      {/* Hero */}
-      <section className="touchpoint-hero">
+      {/* Hero - Full screen centered */}
+      <section className="touchpoint-hero" ref={heroRef}>
+        <div className="touchpoint-hero-bg">
+          <img src="/images/b2.png" alt="" />
+        </div>
         <div className="touchpoint-hero-content">
           <div className="touchpoint-breadcrumb">
             <Link href="/">HOME</Link>/ <span>CONTACT</span>
           </div>
-          <h1 className="touchpoint-hero-title">GET IN TOUCH</h1>
+          <h1 className="touchpoint-hero-title">LET&apos;S<br />CONNECT</h1>
           <p className="touchpoint-hero-subtitle">
-            We&apos;re here to guide your wellness journey.
+            We&apos;re here to guide your wellness journey with ancient wisdom and modern care.
           </p>
+          <div className="touchpoint-hero-scroll">
+            <span>Scroll</span>
+            <div className="touchpoint-scroll-line"></div>
+          </div>
         </div>
       </section>
 
-      {/* Contact Cards */}
-      <section className="touchpoint-cards">
+      {/* Contact Info Strip */}
+      <section className="touchpoint-info-strip">
         <div
-          className="touchpoint-card"
+          className="touchpoint-info-item"
           ref={(el) => (cardsRef.current[0] = el)}
           style={{ opacity: 0 }}
         >
-          <div className="touchpoint-card-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#663532" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <div className="touchpoint-info-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
               <polyline points="22,6 12,13 2,6"/>
             </svg>
           </div>
-          <h3 className="touchpoint-card-title">General Inquiries</h3>
-          <p className="touchpoint-card-desc">For partnerships, press, and brand collaborations.</p>
-          <a href="mailto:hello@cleanseayurveda.com" className="touchpoint-card-link">hello@cleanseayurveda.com</a>
+          <div className="touchpoint-info-text">
+            <span className="touchpoint-info-label">Email Us</span>
+            <a href="mailto:hello@cleanseayurveda.com" className="touchpoint-info-value">hello@cleanseayurveda.com</a>
+          </div>
         </div>
 
+        <div className="touchpoint-info-divider"></div>
+
         <div
-          className="touchpoint-card"
+          className="touchpoint-info-item"
           ref={(el) => (cardsRef.current[1] = el)}
           style={{ opacity: 0 }}
         >
-          <div className="touchpoint-card-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#663532" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+          <div className="touchpoint-info-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
             </svg>
           </div>
-          <h3 className="touchpoint-card-title">Customer Support</h3>
-          <p className="touchpoint-card-desc">Questions about orders, shipping, or returns.</p>
-          <a href="mailto:care@cleanseayurveda.com" className="touchpoint-card-link">care@cleanseayurveda.com</a>
+          <div className="touchpoint-info-text">
+            <span className="touchpoint-info-label">Call Us</span>
+            <a href="tel:+919876543210" className="touchpoint-info-value">+91 98765 43210</a>
+          </div>
         </div>
 
+        <div className="touchpoint-info-divider"></div>
+
         <div
-          className="touchpoint-card"
+          className="touchpoint-info-item"
           ref={(el) => (cardsRef.current[2] = el)}
           style={{ opacity: 0 }}
         >
-          <div className="touchpoint-card-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#663532" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <div className="touchpoint-info-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
               <circle cx="12" cy="10" r="3"/>
             </svg>
           </div>
-          <h3 className="touchpoint-card-title">Visit Us</h3>
-          <p className="touchpoint-card-desc">Our wellness studio in Rishikesh, India.</p>
-          <span className="touchpoint-card-link">Rishikesh, Uttarakhand 249201</span>
+          <div className="touchpoint-info-text">
+            <span className="touchpoint-info-label">Visit Us</span>
+            <span className="touchpoint-info-value">Rishikesh, Uttarakhand</span>
+          </div>
         </div>
 
+        <div className="touchpoint-info-divider"></div>
+
         <div
-          className="touchpoint-card"
+          className="touchpoint-info-item"
           ref={(el) => (cardsRef.current[3] = el)}
           style={{ opacity: 0 }}
         >
-          <div className="touchpoint-card-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#663532" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+          <div className="touchpoint-info-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
             </svg>
           </div>
-          <h3 className="touchpoint-card-title">Call Us</h3>
-          <p className="touchpoint-card-desc">Mon - Sat, 10am to 6pm IST.</p>
-          <a href="tel:+919876543210" className="touchpoint-card-link">+91 98765 43210</a>
+          <div className="touchpoint-info-text">
+            <span className="touchpoint-info-label">Hours</span>
+            <span className="touchpoint-info-value">Mon — Sat, 10am–6pm</span>
+          </div>
         </div>
       </section>
 
-      {/* Contact Form Section */}
-      <section className="touchpoint-form-section">
-        <div className="touchpoint-form-wrapper">
-          <div className="touchpoint-form-image">
-            <img src="/images/hero.png" alt="Cleanse Products" />
-          </div>
-          <div className="touchpoint-form-container">
-            <h2 className="touchpoint-form-title">Send Us a Message</h2>
-            <p className="touchpoint-form-desc">
-              We&apos;d love to hear from you. Fill out the form and we&apos;ll get back within 24 hours.
+      {/* Form Section - Split layout */}
+      <section className="touchpoint-form-section" ref={formRef}>
+        <div className="touchpoint-form-split">
+          <div className="touchpoint-form-left">
+            <span className="touchpoint-form-eyebrow">Get in Touch</span>
+            <h2 className="touchpoint-form-heading">Send Us<br />A Message</h2>
+            <p className="touchpoint-form-copy">
+              Whether it&apos;s a question about our products, a partnership inquiry, or just to say hello — we&apos;d love to hear from you.
             </p>
+            <div className="touchpoint-form-image">
+              <img src="/images/why1.png" alt="Cleanse Ayurveda" />
+            </div>
+          </div>
+          <div className="touchpoint-form-right">
             <form className="touchpoint-form" onSubmit={(e) => e.preventDefault()}>
               <div className="touchpoint-form-row">
                 <div className="touchpoint-input-group">
                   <label>First Name</label>
-                  <input type="text" placeholder="Enter your first name" />
+                  <input type="text" placeholder="First name" />
                 </div>
                 <div className="touchpoint-input-group">
                   <label>Last Name</label>
-                  <input type="text" placeholder="Enter your last name" />
+                  <input type="text" placeholder="Last name" />
                 </div>
               </div>
               <div className="touchpoint-input-group">
                 <label>Email</label>
-                <input type="email" placeholder="Enter your email" />
+                <input type="email" placeholder="your@email.com" />
               </div>
               <div className="touchpoint-input-group">
                 <label>Subject</label>
@@ -142,34 +167,48 @@ export default function Touchpoint() {
               </div>
               <div className="touchpoint-input-group">
                 <label>Message</label>
-                <textarea rows="4" placeholder="Tell us how we can help..."></textarea>
+                <textarea rows="5" placeholder="Tell us how we can help..."></textarea>
               </div>
-              <button type="submit" className="touchpoint-submit-btn">Send Message</button>
+              <button type="submit" className="touchpoint-submit-btn">
+                <span>Send Message</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </button>
             </form>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
+      {/* FAQ Section - Accordion */}
       <section className="touchpoint-faq">
-        <h2 className="touchpoint-faq-title">Frequently Asked Questions</h2>
-        <div className="touchpoint-faq-grid">
-          <div className="touchpoint-faq-item">
-            <h4>What are your shipping times?</h4>
-            <p>We ship within 2-3 business days. Delivery takes 5-7 days across India and 10-14 days internationally.</p>
-          </div>
-          <div className="touchpoint-faq-item">
-            <h4>Do you offer returns?</h4>
-            <p>Yes, we offer a 7-day return policy on unopened products. Contact our support team to initiate a return.</p>
-          </div>
-          <div className="touchpoint-faq-item">
-            <h4>Are your products 100% natural?</h4>
-            <p>All Cleanse products are made with pure, ethically sourced Ayurvedic ingredients with no synthetic additives.</p>
-          </div>
-          <div className="touchpoint-faq-item">
-            <h4>Do you ship internationally?</h4>
-            <p>Yes, we ship worldwide. International shipping charges are calculated at checkout based on your location.</p>
-          </div>
+        <div className="touchpoint-faq-header">
+          <span className="touchpoint-faq-eyebrow">Support</span>
+          <h2 className="touchpoint-faq-title">Frequently Asked<br />Questions</h2>
+        </div>
+        <div className="touchpoint-faq-list">
+          {faqs.map((faq, index) => (
+            <div
+              key={index}
+              className={`touchpoint-faq-item ${openFaq === index ? "active" : ""}`}
+              ref={(el) => (faqRefs.current[index] = el)}
+              onClick={() => setOpenFaq(openFaq === index ? null : index)}
+            >
+              <div className="touchpoint-faq-question">
+                <h4>{faq.q}</h4>
+                <div className="touchpoint-faq-toggle">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19" className="faq-v-line" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                  </svg>
+                </div>
+              </div>
+              <div className="touchpoint-faq-answer">
+                <p>{faq.a}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
     </div>

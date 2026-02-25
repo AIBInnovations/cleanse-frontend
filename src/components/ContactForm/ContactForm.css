@@ -11,7 +11,7 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  z-index: 1;
+  z-index: 5;
 }
 
 .contact-form .contact-parallax-image-wrapper img {
@@ -32,7 +32,7 @@
   color: #fff;
   border-radius: 25px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  z-index: 5;
+  z-index: 11;
   padding: 3rem 2.5rem;
   display: flex;
   flex-direction: column;
@@ -170,13 +170,18 @@
 }
 
 @media (max-width: 480px) {
+  .contact-form {
+    margin-bottom: -40px;
+  }
+
   .contact-form .contact-parallax-image-wrapper {
     height: 300px;
   }
 
   .contact-form .contact-form-container {
-    padding: 3rem 1.5rem;
+    padding: 3rem 1.5rem 8rem;
     gap: 1.5rem;
+    border-radius: 0;
   }
 
   .contact-form .cf-submit {

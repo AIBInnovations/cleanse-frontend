@@ -249,6 +249,21 @@ const Menu = () => {
     }
   };
 
+  const handleSectionClick = (e, sectionId) => {
+    e.preventDefault();
+    closeMenu();
+    setTimeout(() => {
+      if (isHomePage) {
+        const el = document.getElementById(sectionId);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      } else {
+        setIsPageTransitioning(true);
+        setIsMenuVisible(false);
+        router.push(`/#${sectionId}`);
+      }
+    }, 600);
+  };
+
   // Hide header during page transitions
   const transitionTimerRef = useRef(null);
   const pageTransitionActiveRef = useRef(false);
@@ -525,7 +540,7 @@ const Menu = () => {
             <Link href="/" className="menu-nav-link">Home</Link>
             <Link href="/wardrobe" className="menu-nav-link">Shop</Link>
             <Link href="/genesis" className="menu-nav-link">About</Link>
-            <Link href="/touchpoint" className="menu-nav-link">Blog</Link>
+            <Link href="/blog" className="menu-nav-link">Blog</Link>
           </div>
           <div className="menu-header-actions">
             <Link href="/profile" className="menu-action-btn" aria-label="Profile">
@@ -621,7 +636,7 @@ const Menu = () => {
               </div>
               <div className="menu-sub-links">
                 <Link href="/lookbook" onClick={(e) => handleLinkClick(e, "/lookbook")}>
-                  Rituals
+                  Lookbook
                 </Link>
                 <Link href="/touchpoint" onClick={(e) => handleLinkClick(e, "/touchpoint")}>
                   Contact
@@ -633,21 +648,21 @@ const Menu = () => {
             </div>
             <div className="menu-overlay-sub-col">
               <div className="menu-items-header">
-                <p>Bestsellers</p>
+                <p>Discover</p>
               </div>
               <div className="menu-sub-links menu-product-links">
-                <Link href="/product" onClick={(e) => handleLinkClick(e, "/product")}>
-                  01. Golden Elixir Oil
-                </Link>
-                <Link href="/product" onClick={(e) => handleLinkClick(e, "/product")}>
-                  02. Turmeric Glow Mask
-                </Link>
-                <Link href="/product" onClick={(e) => handleLinkClick(e, "/product")}>
-                  03. Rose Hydra Mist
-                </Link>
-                <Link href="/product" onClick={(e) => handleLinkClick(e, "/product")}>
-                  04. Sandalwood Serum
-                </Link>
+                <a href="/#featured" onClick={(e) => handleSectionClick(e, "featured")}>
+                  Featured
+                </a>
+                <a href="/#why-skin" onClick={(e) => handleSectionClick(e, "why-skin")}>
+                  Why Cleanse
+                </a>
+                <a href="/#rituals" onClick={(e) => handleSectionClick(e, "rituals")}>
+                  Rituals
+                </a>
+                <a href="/#testimonials" onClick={(e) => handleSectionClick(e, "testimonials")}>
+                  Testimonials
+                </a>
               </div>
             </div>
           </div>

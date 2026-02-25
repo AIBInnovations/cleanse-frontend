@@ -483,35 +483,39 @@
 /* Formulas Responsive */
 @media (max-width: 1200px) {
   .formulas-content {
-    min-height: 900px;
+    height: auto;
+    min-height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 1.5rem;
+    padding: 2rem;
   }
 
-  .formulas-boxes-left,
-  .formulas-boxes-right {
+  .formula-box-tl,
+  .formula-box-tr,
+  .formula-box-bl,
+  .formula-box-br {
     position: relative;
     top: auto;
     left: auto;
-    right: auto;
-    bottom: auto;
-    justify-content: center;
-    width: 100%;
-    margin-bottom: 2rem;
   }
 
-  .formulas-boxes-right {
-    margin-top: 2rem;
-    margin-bottom: 0;
-  }
+  .formula-box-tl { grid-column: 1; grid-row: 1; justify-self: end; }
+  .formula-box-tr { grid-column: 2; grid-row: 1; justify-self: start; }
+  .formula-box-bl { grid-column: 1; grid-row: 3; justify-self: end; }
+  .formula-box-br { grid-column: 2; grid-row: 3; justify-self: start; }
 
   .formulas-center {
     position: relative;
     top: auto;
     left: auto;
-    transform: none;
-    margin: 0 auto;
+    grid-column: 1 / -1;
+    grid-row: 2;
     width: 100%;
     max-width: 500px;
-    height: 500px;
+    height: 300px;
+    justify-self: center;
   }
 }
 
@@ -521,22 +525,19 @@
   }
 
   .formulas-content {
-    min-height: auto;
-  }
-
-  .formulas-boxes-left,
-  .formulas-boxes-right {
-    flex-direction: column;
-    align-items: center;
+    gap: 1rem;
+    padding: 2rem 1rem;
   }
 
   .formula-box {
     width: 100%;
-    max-width: 320px;
+    height: auto;
+    min-height: 200px;
   }
 
   .formulas-center {
-    height: 350px;
+    height: 250px;
+    max-width: 400px;
   }
 
   .formulas-header {
@@ -546,11 +547,6 @@
   .formulas-tagline {
     font-size: clamp(1rem, 4vw, 1.25rem);
   }
-
-  .formula-box {
-    height: auto;
-    min-height: 200px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -559,8 +555,8 @@
   }
 
   .hero {
-    background-image: url('/mobilehero.jpg');
-    background-position: 75% 60%;
+    background-image: url('/images/mobilehero.png');
+    background-position: center center;
     background-size: cover;
   }
 
@@ -577,8 +573,10 @@
   }
 
   .hero .hero-header {
-    top: 14svh;
+    top: 50%;
+    transform: translateY(-50%);
     right: 1rem;
+    left: auto;
     width: calc(100% - 2rem);
     gap: 1rem;
     z-index: 2;
@@ -646,69 +644,33 @@
     width: calc(100% - 2rem);
   }
 
-  /* Formulas - desktop-like layout scaled for mobile */
+  /* Formulas mobile */
   .formulas {
-    padding: 5rem 0 3rem;
-    min-height: 100svh;
+    padding: 3rem 0 2rem;
+    min-height: auto;
     justify-content: flex-start;
   }
 
   .formulas-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    position: relative;
-  }
-
-  .formulas-boxes-left,
-  .formulas-boxes-right {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-    flex-direction: row !important;
-    width: auto !important;
+    grid-template-columns: 1fr 1fr;
     gap: 0.75rem;
-    margin: 0 !important;
-    justify-content: center;
-    align-items: flex-start;
-  }
-
-  .formulas-center {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    transform: none !important;
-    width: 200px;
-    height: 200px;
-    max-width: none;
-    margin: 0;
-  }
-
-  .formulas-center-image img {
-    transform: scale(2);
+    padding: 1.5rem 0.75rem;
   }
 
   .formula-box {
-    width: 155px !important;
-    height: 230px !important;
-    max-width: none !important;
-    min-height: auto !important;
+    width: 100%;
+    height: auto;
+    min-height: 180px;
     padding: 0.85rem;
-    gap: 0;
-    overflow: hidden;
-    flex-shrink: 0 !important;
   }
 
   .formula-box h4 {
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     margin-bottom: 0.35rem;
   }
 
   .formula-box p {
-    font-size: 0.55rem;
+    font-size: 0.7rem;
     line-height: 1.4;
   }
 
@@ -718,21 +680,22 @@
     margin-bottom: 0.5rem;
   }
 
-  .formulas-boxes-left .formula-box:last-child {
-    margin-top: 1.5rem;
+  .formulas-center {
+    height: 260px;
+    max-width: 85%;
   }
 
-  .formulas-boxes-right .formula-box:last-child {
-    margin-top: 1.5rem;
+  .formulas-center-image img {
+    object-fit: cover;
+    border-radius: 16px;
   }
 
   .formulas-header {
-    padding: 2rem 1rem 0;
-    margin-top: 0;
+    padding: 1.5rem 1rem 0;
   }
 
   .formulas-tagline {
-    font-size: clamp(0.8rem, 3.5vw, 1rem);
+    font-size: clamp(0.9rem, 4vw, 1.1rem);
   }
 }
 
@@ -844,29 +807,32 @@
 
 @media (max-width: 480px) {
   .cta-section {
-    padding: 2rem 0.75rem;
+    padding: 3rem 0.75rem;
   }
 
   .cta-card {
-    height: 250px;
+    height: 200px;
+    border-radius: 12px;
   }
 
   .cta-heading {
-    font-size: 22px;
-    max-width: 220px;
+    font-size: 18px;
+    max-width: 180px;
   }
 
   .cta-desc {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .cta-shop-btn {
-    width: 150px;
-    height: 44px;
-    font-size: 14px;
+    width: 120px;
+    height: 38px;
+    font-size: 12px;
+    border-radius: 8px;
   }
 
   .cta-content {
-    padding: 1rem;
+    padding: 0.75rem;
+    gap: 0.5rem;
   }
 }

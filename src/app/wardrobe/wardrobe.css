@@ -242,8 +242,8 @@
 }
 
 .side-banner {
-  width: 606px;
-  height: 1086px;
+  width: 680px;
+  height: 1000px;
   flex-shrink: 0;
   border-radius: 31px;
   overflow: hidden;
@@ -252,8 +252,10 @@
 
 .side-banner-img {
   width: 100%;
-  height: 100%;
+  height: 150%;
   object-fit: cover;
+  object-position: center center;
+  margin-top: -25%;
 }
 
 .products-beside-banner {
@@ -445,5 +447,196 @@
   .products-beside-banner {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .wardrobe-page {
+    padding-bottom: 3rem;
+  }
+
+  .wardrobe-hero {
+    height: 30vh;
+    min-height: 200px;
+  }
+
+  .wardrobe-hero-content {
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+
+  .wardrobe-hero-title {
+    font-size: clamp(1.5rem, 7vw, 2.5rem);
+  }
+
+  .wardrobe-breadcrumb {
+    font-size: 0.65rem;
+  }
+
+  .wardrobe-filters {
+    padding: 1rem 0.75rem 0.5rem;
+    gap: 1rem;
+  }
+
+  .category-filter {
+    gap: 0.35rem;
+  }
+
+  .category-btn {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.65rem;
+  }
+
+  .sort-filter-bar {
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .filter-select {
+    min-width: 80px;
+    font-size: 0.65rem;
+  }
+
+  .filter-group label {
+    font-size: 0.5rem;
+  }
+
+  .wardrobe-section {
+    padding: 0 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-row-1 {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .section-row-3 {
+    gap: 0.75rem;
+  }
+
+  .products-pair {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .products-pair .product-card {
+    width: 100%;
+    flex: unset;
+  }
+
+  .spotlight-banner {
+    width: 100%;
+    height: 180px;
+    border-radius: 12px;
+  }
+
+  .section-row-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .section-row-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 0.75rem;
+  }
+
+  .side-banner {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    border-radius: 12px;
+    min-height: 550px;
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .side-banner .side-banner-img {
+    width: 100%;
+    height: 160%;
+    object-fit: cover;
+    object-position: center 40%;
+    margin-top: -30%;
+  }
+
+  .products-beside-banner {
+    display: contents;
+  }
+
+  .products-beside-banner .product-card {
+    position: relative;
+    z-index: 3;
+  }
+
+  .products-beside-banner .product-card:nth-child(1) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .products-beside-banner .product-card:nth-child(2) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .products-beside-banner .product-card:nth-child(3) {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .products-beside-banner .product-card:nth-child(4) {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .wardrobe-page .product-card-image {
+    height: 180px;
+    border-radius: 12px;
+  }
+
+  .wardrobe-page .product-card-image img {
+    max-width: 85%;
+    max-height: 85%;
+  }
+
+  .wardrobe-page .product-card-cart-btn {
+    top: 140px;
+    right: 8px;
+    height: 32px;
+    width: 32px;
+  }
+
+  .wardrobe-page .cart-btn-circle {
+    min-width: 32px;
+    height: 32px;
+  }
+
+  .wardrobe-page .product-card-name {
+    font-size: 0.75rem;
+  }
+
+  .wardrobe-page .product-card-desc {
+    font-size: 0.65rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .wardrobe-page .product-card-price {
+    font-size: 0.75rem;
+  }
+
+  .wardrobe-page .product-card-buy-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.65rem;
+  }
+
+  .wardrobe-page .product-card-info {
+    padding: 0.5rem 0;
+  }
+
+  .section-row-3 {
+    margin-bottom: 2rem;
   }
 }

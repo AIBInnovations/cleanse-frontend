@@ -12,18 +12,18 @@ const Footer = () => {
         <div className="footer-container">
           <div className="footer-top">
             <div className="footer-pages">
-              <h3 className="footer-pages-title">PAGES</h3>
+              <h3 className="footer-pages-title">NAVIGATION</h3>
               <div className="footer-pages-links">
+                <Link href="/wardrobe?category=Hair Care">HAIR CARE</Link>
+                <Link href="/wardrobe?category=Body Care">BODY CARE</Link>
+                <Link href="/wardrobe?category=Face Care">FACE CARE</Link>
                 <Link href="/genesis">ABOUT US</Link>
-                <Link href="/wardrobe">PAGE 1</Link>
-                <Link href="/lookbook">PAGE 2</Link>
-                <Link href="/contact">PAGE 3</Link>
               </div>
             </div>
           </div>
 
           <div className="footer-bottom">
-            <img src="logo.png" alt="Cleanse" className="footer-logo" />
+            <img src="/logo.png" alt="Cleanse" className="footer-logo" />
             <div className="footer-socials">
               <a href="https://www.instagram.com/cleanseayurveda/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">TWITTER</a>

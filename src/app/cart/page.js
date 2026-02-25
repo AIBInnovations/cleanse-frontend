@@ -58,15 +58,13 @@ export default function CartPage() {
   return (
     <div className="cart-page">
       <section className="cart-hero">
-        <Copy animateOnScroll={false} delay={0.2}>
-          <p className="cart-hero-label">Your Bag</p>
-        </Copy>
-        <Copy animateOnScroll={false} delay={0.4}>
-          <h1 className="cart-hero-heading">Cart</h1>
-        </Copy>
-        <Copy animateOnScroll={false} delay={0.6}>
-          <p className="cart-hero-count">{cartCount} {cartCount === 1 ? "item" : "items"} in your bag</p>
-        </Copy>
+        <div className="cart-hero-content">
+          <div className="cart-breadcrumb">
+            <Link href="/">HOME</Link>/ <span>CART</span>
+          </div>
+          <h1 className="cart-hero-title">YOUR BAG</h1>
+          <p className="cart-hero-count">{cartCount} {cartCount === 1 ? "item" : "items"}</p>
+        </div>
       </section>
 
       {/* Discount Progress */}
@@ -103,7 +101,7 @@ export default function CartPage() {
             return (
               <div key={`${item.name}-${index}`} className="cart-page-item">
                 <div className="cart-page-item-image">
-                  <img src={`/p${imgIndex}.png`} alt={item.name} />
+                  <img src={`/images/${imgIndex}.png`} alt={item.name} />
                 </div>
                 <div className="cart-page-item-details">
                   <div className="cart-page-item-top">
@@ -184,7 +182,7 @@ export default function CartPage() {
               return (
                 <div key={product.name} className="cart-rec-card">
                   <Link href="/unit" className="cart-rec-card-image">
-                    <img src={`/p${imgIndex}.png`} alt={product.name} />
+                    <img src={`/images/${imgIndex}.png`} alt={product.name} />
                   </Link>
                   <div className="cart-rec-card-info">
                     <h4 className="cart-rec-card-name">{product.name}</h4>

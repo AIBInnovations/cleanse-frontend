@@ -11,7 +11,7 @@ export default function ProfilePage() {
 
   return (
     <div className="profile-page">
-      {/* Hero */}
+      {/* Hero - Genesis style */}
       <section className="profile-hero">
         <div className="profile-hero-content">
           <div className="profile-avatar">
@@ -20,14 +20,14 @@ export default function ProfilePage() {
               <path d="M4 21v-1a8 8 0 0116 0v1" />
             </svg>
           </div>
-          <Copy animateOnScroll={false} delay={0.2}>
+          <Copy animateOnScroll={false} delay={0.3}>
             <p className="profile-hero-label">Welcome Back</p>
           </Copy>
-          <Copy animateOnScroll={false} delay={0.4}>
+          <Copy animateOnScroll={false} delay={0.5} type="flicker">
             <h1 className="profile-hero-heading">Your Profile</h1>
           </Copy>
-          <Copy animateOnScroll={false} delay={0.6}>
-            <p className="profile-hero-subtitle">Guest</p>
+          <Copy animateOnScroll={false} delay={0.7}>
+            <p className="profile-hero-subtitle">Manage your account, orders & preferences</p>
           </Copy>
         </div>
       </section>
@@ -107,17 +107,25 @@ export default function ProfilePage() {
           <div className="profile-settings">
             <div className="profile-settings-card">
               <h3 className="profile-settings-title">Personal Information</h3>
-              <div className="profile-form-group">
-                <label className="profile-form-label">Full Name</label>
-                <input type="text" className="profile-form-input" placeholder="Enter your name" />
+              <div className="profile-form-row">
+                <div className="profile-form-group">
+                  <label className="profile-form-label">Full Name</label>
+                  <input type="text" className="profile-form-input" placeholder="Enter your name" />
+                </div>
+                <div className="profile-form-group">
+                  <label className="profile-form-label">Email</label>
+                  <input type="email" className="profile-form-input" placeholder="Enter your email" />
+                </div>
               </div>
-              <div className="profile-form-group">
-                <label className="profile-form-label">Email</label>
-                <input type="email" className="profile-form-input" placeholder="Enter your email" />
-              </div>
-              <div className="profile-form-group">
-                <label className="profile-form-label">Phone</label>
-                <input type="tel" className="profile-form-input" placeholder="+91" />
+              <div className="profile-form-row">
+                <div className="profile-form-group">
+                  <label className="profile-form-label">Phone</label>
+                  <input type="tel" className="profile-form-input" placeholder="+91" />
+                </div>
+                <div className="profile-form-group">
+                  <label className="profile-form-label">Date of Birth</label>
+                  <input type="text" className="profile-form-input" placeholder="DD / MM / YYYY" />
+                </div>
               </div>
               <button className="profile-update-btn">Update Profile</button>
             </div>

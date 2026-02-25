@@ -2,6 +2,7 @@
 import "@/components/FeaturedSection/FeaturedSection.css";
 import "./wardrobe.css";
 import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { products } from "./products";
 import { useCart } from "@/context/CartContext";
@@ -9,8 +10,13 @@ import { gsap } from "gsap";
 
 export default function Wardrobe() {
   const { addToCart } = useCart();
-  const [activeTag, setActiveTag] = useState("All");
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category");
+  const initialTag = categoryParam || "All";
+  const [activeTag, setActiveTag] = useState(initialTag);
+  const [filteredProducts, setFilteredProducts] = useState(
+    initialTag === "All" ? products : products.filter((p) => p.tag === initialTag)
+  );
   const [isAnimating, setIsAnimating] = useState(false);
   const [sortBy, setSortBy] = useState("default");
   const [priceRange, setPriceRange] = useState("all");

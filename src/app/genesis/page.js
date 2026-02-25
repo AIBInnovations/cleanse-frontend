@@ -76,98 +76,71 @@ export default function Genesis() {
         <div className="project-preview-wrapper">
           <div className="preview-col">
             <div className="preview-img">
-              <img src="/p1.png" alt="" />
+              <img src="/images/1.png" alt="" />
             </div>
             <div className="preview-img">
-              <img src="/p2.png" alt="" />
+              <img src="/images/2.png" alt="" />
             </div>
             <div className="preview-img">
-              <img src="/p3.png" alt="" />
+              <img src="/images/3.png" alt="" />
             </div>
           </div>
           <div className="preview-col">
             <div className="preview-img">
-              <img src="/p4.png" alt="" />
+              <img src="/images/4.png" alt="" />
             </div>
             <div className="preview-img">
-              <img src="/jar.png" alt="" />
+              <img src="/images/a.png" alt="" />
             </div>
             <div className="preview-img">
-              <img src="/product.png" alt="" />
+              <img src="/images/banner.png" alt="" />
             </div>
           </div>
           <div className="preview-col main-preview-col">
             <div className="preview-img">
-              <img src="/category-face.png" alt="" />
+              <img src="/images/why1.png" alt="" />
             </div>
             <div className="preview-img main-preview-img">
-              <img src="/jar.png" alt="" />
+              <img src="/images/top.png" alt="" />
             </div>
             <div className="preview-img">
-              <img src="/category-hair.png" alt="" />
-            </div>
-          </div>
-          <div className="preview-col">
-            <div className="preview-img">
-              <img src="/p1.png" alt="" />
-            </div>
-            <div className="preview-img">
-              <img src="/p2.png" alt="" />
-            </div>
-            <div className="preview-img">
-              <img src="/p3.png" alt="" />
+              <img src="/images/why2.png" alt="" />
             </div>
           </div>
           <div className="preview-col">
             <div className="preview-img">
-              <img src="/p4.png" alt="" />
+              <img src="/images/c1.png" alt="" />
             </div>
             <div className="preview-img">
-              <img src="/jar.png" alt="" />
+              <img src="/images/c2.png" alt="" />
             </div>
             <div className="preview-img">
-              <img src="/product.png" alt="" />
+              <img src="/images/c3.png" alt="" />
+            </div>
+          </div>
+          <div className="preview-col">
+            <div className="preview-img">
+              <img src="/images/b1.png" alt="" />
+            </div>
+            <div className="preview-img">
+              <img src="/images/b2.png" alt="" />
+            </div>
+            <div className="preview-img">
+              <img src="/images/b3.png" alt="" />
             </div>
           </div>
         </div>
       </section>
 
       <section className="genesis-hero">
-        <div className="gen-hero-img">
-          <img src="/sacred.png" alt="" />
-        </div>
         <div className="container">
-          <div className="gen-hero-copy">
+          <div className="gen-hero-header">
             <Copy animateOnScroll={false} delay={0.7} type="flicker">
-              <p>Ancient wisdom preserved,</p>
-              <p>Pure ingredients sourced,</p>
-              <p>Beauty made sacred.</p>
-            </Copy>
-          </div>
-          <div className="gen-hero-copy">
-            <Copy animateOnScroll={false} delay={0.8} type="flicker">
-              <p>We honor traditions,</p>
-              <p>Crafted for today.</p>
-            </Copy>
-          </div>
-          <div className="gen-hero-copy">
-            <Copy animateOnScroll={false} delay={0.7}>
               <h1>The Story Behind Your Ritual</h1>
             </Copy>
-            <div className="gen-hero-meta">
-              <div className="gen-hero-meta-block">
-                <Copy animateOnScroll={false} delay={0.9} type="flicker">
-                  <p>We preserve formulas,</p>
-                  <p>Passed through generations,</p>
-                  <p>A study in nature.</p>
-                </Copy>
-              </div>
-              <div className="gen-hero-meta-block">
-                <Copy animateOnScroll={false} delay={1} type="flicker">
-                  <p>[ EST. RISHIKESH 2024 ]</p>
-                </Copy>
-              </div>
-            </div>
+            <Copy animateOnScroll={false} delay={0.85}>
+              <p className="gen-hero-subtitle">Ancient Wisdom, Modern Purity</p>
+            </Copy>
           </div>
         </div>
       </section>
