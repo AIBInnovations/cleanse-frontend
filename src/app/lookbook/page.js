@@ -2,6 +2,7 @@
 import "./lookbook.css";
 import { useRef } from "react";
 import Link from "next/link";
+import { slugify } from "@/utils/slugify";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -81,7 +82,7 @@ export default function Lookbook() {
 
               {/* Product Card */}
               {pin.type === "product" && (
-                <Link href="/unit" className="lb-product">
+                <Link href={`/unit/${pin.name ? slugify(pin.name) : ""}`} className="lb-product">
                   <div className="lb-product-img" style={{ backgroundColor: pin.bg }}>
                     <img src={pin.img} alt={pin.name} loading="lazy" />
                   </div>

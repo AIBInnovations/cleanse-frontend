@@ -1,9 +1,10 @@
 "use client";
 import "./cart.css";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { products } from "@/app/wardrobe/products";
 import { useCart } from "@/context/CartContext";
+import { productApi } from "@/lib/endpoints";
+import { normalizeProduct } from "@/lib/normalizers";
 import Copy from "@/components/Copy/Copy";
 
 const discountTiers = [
@@ -18,17 +19,27 @@ const maxThreshold = discountTiers[discountTiers.length - 1].threshold;
 export default function CartPage() {
   const { cartItems, removeFromCart, updateQuantity, addToCart, cartCount, subtotal } = useCart();
 
+  const [giftWrap, setGiftWrap] = useState(false);
+  const [giftMessage, setGiftMessage] = useState("");
+
   const activeTier = [...discountTiers].reverse().find((t) => subtotal >= t.threshold && t.discount > 0);
   const nextTier = discountTiers.find((t) => subtotal < t.threshold);
   const discountAmount = activeTier ? (subtotal * activeTier.discount) / 100 : 0;
+  const giftWrapCost = giftWrap ? 99 : 0;
   const finalTotal = subtotal - discountAmount;
   const progress = Math.min((subtotal / maxThreshold) * 100, 100);
 
-  const recommended = useMemo(() => {
-    const cartNames = cartItems.map((item) => item.name);
-    const available = products.filter((p) => !cartNames.includes(p.name));
-    const shuffled = [...available].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 4);
+  const [recommended, setRecommended] = useState([]);
+
+  useEffect(() => {
+    productApi.getAll({ limit: 8 }).then((data) => {
+      const cartIds = cartItems.map((item) => item.productId || item.name);
+      const filtered = (data.products || [])
+        .filter((p) => !cartIds.includes(p._id) && !cartIds.includes(p.name))
+        .slice(0, 4)
+        .map(normalizeProduct);
+      setRecommended(filtered);
+    }).catch(() => {});
   }, [cartItems]);
 
   if (cartItems.length === 0) {
@@ -95,25 +106,24 @@ export default function CartPage() {
       <section className="cart-content">
         <div className="cart-items-list">
           {cartItems.map((item, index) => {
-            const productIndex = products.findIndex((p) => p.name === item.name) + 1;
-            const imgIndex = ((productIndex - 1) % 4) + 1;
+            const itemId = item.cartItemId || `${item.productId || item.name}_${item.selectedSize}`;
             const quantity = Number(item.quantity) || 1;
             return (
-              <div key={`${item.name}-${index}`} className="cart-page-item">
+              <div key={itemId || index} className="cart-page-item">
                 <div className="cart-page-item-image">
-                  <img src={`/images/${imgIndex}.png`} alt={item.name} />
+                  <img src={item.image || `/images/${(index % 4) + 1}.png`} alt={item.name} />
                 </div>
                 <div className="cart-page-item-details">
                   <div className="cart-page-item-top">
                     <h3 className="cart-page-item-name">{item.name}</h3>
-                    <span className="cart-page-item-price">&#8377;{(parseFloat(item.price) * quantity).toFixed(0)}</span>
+                    <span className="cart-page-item-price">&#8377;{(Number(item.price) * quantity).toFixed(0)}</span>
                   </div>
-                  <p className="cart-page-item-unit">&#8377;{item.price} each</p>
+                  <p className="cart-page-item-unit">&#8377;{item.price} each{item.selectedSize ? ` · ${item.selectedSize}` : ""}</p>
                   <div className="cart-page-item-controls">
                     <div className="cart-quantity-selector">
                       <button
                         className="cart-qty-btn"
-                        onClick={() => updateQuantity(item.name, quantity - 1)}
+                        onClick={() => updateQuantity(itemId, quantity - 1)}
                         disabled={quantity <= 1}
                       >
                         -
@@ -121,12 +131,12 @@ export default function CartPage() {
                       <span className="cart-qty-value">{quantity}</span>
                       <button
                         className="cart-qty-btn"
-                        onClick={() => updateQuantity(item.name, quantity + 1)}
+                        onClick={() => updateQuantity(itemId, quantity + 1)}
                       >
                         +
                       </button>
                     </div>
-                    <button className="cart-page-remove" onClick={() => removeFromCart(item.name)}>
+                    <button className="cart-page-remove" onClick={() => removeFromCart(itemId)}>
                       Remove
                     </button>
                   </div>
@@ -134,6 +144,34 @@ export default function CartPage() {
               </div>
             );
           })}
+        </div>
+
+        {/* Gift Options */}
+        <div className="gift-options">
+          <h3 className="gift-options-title">GIFT OPTIONS</h3>
+          <div className="gift-toggle">
+            <label className="gift-toggle-switch">
+              <input
+                type="checkbox"
+                checked={giftWrap}
+                onChange={(e) => setGiftWrap(e.target.checked)}
+              />
+              <span className="gift-toggle-slider"></span>
+            </label>
+            <span className="gift-toggle-label">Add Gift Wrapping <span className="gift-toggle-price">(+&#8377;99)</span></span>
+          </div>
+          {giftWrap && (
+            <div className="gift-message-wrapper">
+              <textarea
+                className="gift-message"
+                placeholder="Write a personal message..."
+                maxLength={200}
+                value={giftMessage}
+                onChange={(e) => setGiftMessage(e.target.value)}
+              />
+              <span className="gift-char-count">{giftMessage.length} / 200</span>
+            </div>
+          )}
         </div>
 
         {/* Order Summary */}
@@ -151,13 +189,19 @@ export default function CartPage() {
                   <span>-&#8377;{discountAmount.toFixed(2)}</span>
                 </div>
               )}
+              {giftWrap && (
+                <div className="cart-summary-line cart-summary-gift">
+                  <span>Gift Wrapping</span>
+                  <span>&#8377;99</span>
+                </div>
+              )}
               <div className="cart-summary-line cart-summary-shipping">
                 <span>Shipping</span>
                 <span>{subtotal >= 1200 ? "Free" : "&#8377;99"}</span>
               </div>
               <div className="cart-summary-line cart-summary-total">
                 <span>Total</span>
-                <span>&#8377;{(subtotal >= 1200 ? finalTotal : finalTotal + 99).toFixed(2)}</span>
+                <span>&#8377;{(subtotal >= 1200 ? finalTotal + giftWrapCost : finalTotal + 99 + giftWrapCost).toFixed(2)}</span>
               </div>
             </div>
             <button className="cart-checkout-btn">Proceed to Checkout</button>
@@ -176,13 +220,11 @@ export default function CartPage() {
             <h2 className="cart-recommended-heading">Recommended</h2>
           </Copy>
           <div className="cart-recommended-grid">
-            {recommended.map((product) => {
-              const productIndex = products.indexOf(product) + 1;
-              const imgIndex = ((productIndex - 1) % 4) + 1;
+            {recommended.map((product, i) => {
               return (
-                <div key={product.name} className="cart-rec-card">
-                  <Link href="/unit" className="cart-rec-card-image">
-                    <img src={`/images/${imgIndex}.png`} alt={product.name} />
+                <div key={product._id || i} className="cart-rec-card">
+                  <Link href={`/unit/${product.slug}`} className="cart-rec-card-image">
+                    <img src={product.primaryImage || `/images/${(i % 4) + 1}.png`} alt={product.name} />
                   </Link>
                   <div className="cart-rec-card-info">
                     <h4 className="cart-rec-card-name">{product.name}</h4>

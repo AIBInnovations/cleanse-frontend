@@ -1,27 +1,47 @@
 "use client";
 import "@/components/FeaturedSection/FeaturedSection.css";
 import "./wardrobe.css";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { products } from "./products";
 import { useCart } from "@/context/CartContext";
 import { gsap } from "gsap";
+import { productApi } from "@/lib/endpoints";
+import { normalizeProduct } from "@/lib/normalizers";
 
 export default function Wardrobe() {
+  return (
+    <Suspense>
+      <WardrobeContent />
+    </Suspense>
+  );
+}
+
+function WardrobeContent() {
   const { addToCart } = useCart();
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
   const initialTag = categoryParam || "All";
+  const [allProducts, setAllProducts] = useState([]);
   const [activeTag, setActiveTag] = useState(initialTag);
-  const [filteredProducts, setFilteredProducts] = useState(
-    initialTag === "All" ? products : products.filter((p) => p.tag === initialTag)
-  );
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [isAnimating, setIsAnimating] = useState(false);
   const [sortBy, setSortBy] = useState("default");
   const [priceRange, setPriceRange] = useState("all");
+  const [loading, setLoading] = useState(true);
   const productRefs = useRef([]);
   const isInitialMount = useRef(true);
+
+  // Fetch all products from API on mount
+  useEffect(() => {
+    productApi.getAll({ limit: 50 }).then((data) => {
+      const normalized = (data.products || []).map(normalizeProduct);
+      setAllProducts(normalized);
+      const initial = initialTag === "All" ? normalized : normalized.filter((p) => p.tag === initialTag);
+      setFilteredProducts(initial);
+      setLoading(false);
+    }).catch(() => setLoading(false));
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const sortProducts = (productsToSort, sortOption) => {
     const sorted = [...productsToSort];
@@ -54,8 +74,8 @@ export default function Wardrobe() {
 
   const applyFiltersAndSort = (tag, sort, price) => {
     let result = tag === "All"
-      ? products
-      : products.filter((product) => product.tag === tag);
+      ? allProducts
+      : allProducts.filter((product) => product.tag === tag);
     result = filterByPrice(result, price);
     result = sortProducts(result, sort);
     return result;
@@ -117,6 +137,18 @@ export default function Wardrobe() {
       }
     );
   }, [filteredProducts]);
+
+  if (loading) {
+    return (
+      <div className="wardrobe-page">
+        <section className="wardrobe-hero">
+          <div className="wardrobe-hero-content">
+            <h1 className="wardrobe-hero-title">LOADING...</h1>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="wardrobe-page">
@@ -185,11 +217,11 @@ export default function Wardrobe() {
       <section className="wardrobe-section section-row-1">
         <div className="products-pair">
           {filteredProducts.slice(0, 2).map((product, index) => {
-            const imgIndex = ((products.indexOf(product)) % 4) + 1;
+            const imgIndex = ((allProducts.indexOf(product)) % 4) + 1;
             return (
               <div key={product.name + index} className="product-card" ref={(el) => (productRefs.current[index] = el)} style={{ opacity: 0 }}>
                 <div className="product-card-image">
-                  <img src={`/images/${imgIndex}.png`} alt={product.name} loading="lazy" />
+                  <img src={product.primaryImage || `/images/${imgIndex}.png`} alt={product.name} loading="lazy" />
                 </div>
                 <button className="product-card-cart-btn" onClick={() => addToCart(product)}>
                   <span className="cart-btn-circle">
@@ -206,7 +238,7 @@ export default function Wardrobe() {
                   <p className="product-card-desc">{product.description}</p>
                   <div className="product-card-footer">
                     <span className="product-card-price">₹{product.price}</span>
-                    <Link href="/unit" className="product-card-buy-btn">Buy Now</Link>
+                    <Link href={`/unit/${product.slug}`} className="product-card-buy-btn">Buy Now</Link>
                   </div>
                 </div>
               </div>
@@ -221,11 +253,11 @@ export default function Wardrobe() {
       {/* Section 2: 4 Products in a Row */}
       <section className="wardrobe-section section-row-2">
         {filteredProducts.slice(2, 6).map((product, index) => {
-          const imgIndex = ((products.indexOf(product)) % 4) + 1;
+          const imgIndex = ((allProducts.indexOf(product)) % 4) + 1;
           return (
             <div key={product.name + index} className="product-card" ref={(el) => (productRefs.current[index + 2] = el)} style={{ opacity: 0 }}>
               <div className="product-card-image">
-                <img src={`/images/${imgIndex}.png`} alt={product.name} loading="lazy" />
+                <img src={product.primaryImage || `/images/${imgIndex}.png`} alt={product.name} loading="lazy" />
               </div>
               <button className="product-card-cart-btn" onClick={() => addToCart(product)}>
                 <span className="cart-btn-circle">
@@ -242,7 +274,7 @@ export default function Wardrobe() {
                 <p className="product-card-desc">{product.description}</p>
                 <div className="product-card-footer">
                   <span className="product-card-price">₹{product.price}</span>
-                  <Link href="/unit" className="product-card-buy-btn">Buy Now</Link>
+                  <Link href={`/unit/${product.slug}`} className="product-card-buy-btn">Buy Now</Link>
                 </div>
               </div>
             </div>
@@ -257,11 +289,11 @@ export default function Wardrobe() {
         </div>
         <div className="products-beside-banner">
           {filteredProducts.slice(6, 10).map((product, index) => {
-            const imgIndex = ((products.indexOf(product)) % 4) + 1;
+            const imgIndex = ((allProducts.indexOf(product)) % 4) + 1;
             return (
               <div key={product.name + index} className="product-card" ref={(el) => (productRefs.current[index + 6] = el)} style={{ opacity: 0 }}>
                 <div className="product-card-image">
-                  <img src={`/images/${imgIndex}.png`} alt={product.name} loading="lazy" />
+                  <img src={product.primaryImage || `/images/${imgIndex}.png`} alt={product.name} loading="lazy" />
                 </div>
                 <button className="product-card-cart-btn" onClick={() => addToCart(product)}>
                   <span className="cart-btn-circle">
@@ -278,7 +310,7 @@ export default function Wardrobe() {
                   <p className="product-card-desc">{product.description}</p>
                   <div className="product-card-footer">
                     <span className="product-card-price">₹{product.price}</span>
-                    <Link href="/unit" className="product-card-buy-btn">Buy Now</Link>
+                    <Link href={`/unit/${product.slug}`} className="product-card-buy-btn">Buy Now</Link>
                   </div>
                 </div>
               </div>

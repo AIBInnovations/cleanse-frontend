@@ -1,8 +1,10 @@
 "use client";
 import "./FeaturedSection.css";
 import Link from "next/link";
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { useCart } from "@/context/CartContext";
+import { productApi } from "@/lib/endpoints";
+import { normalizeProduct } from "@/lib/normalizers";
 
 const FeaturedSection = () => {
   const { addToCart } = useCart();
@@ -105,40 +107,13 @@ const FeaturedSection = () => {
     },
   ];
 
-  const featuredProducts = [
-    {
-      id: 1,
-      name: "Product 1",
-      description: "Description of the product",
-      price: "₹400",
-      image: "/images/1.png",
-      link: "/wardrobe",
-    },
-    {
-      id: 2,
-      name: "Product 1",
-      description: "Description of the product",
-      price: "₹400",
-      image: "/images/2.png",
-      link: "/wardrobe",
-    },
-    {
-      id: 3,
-      name: "Product 1",
-      description: "Description of the product",
-      price: "₹400",
-      image: "/images/3.png",
-      link: "/wardrobe",
-    },
-    {
-      id: 4,
-      name: "Product 1",
-      description: "Description of the product",
-      price: "₹400",
-      image: "/images/4.png",
-      link: "/wardrobe",
-    },
-  ];
+  const [featuredProducts, setFeaturedProducts] = useState([]);
+
+  useEffect(() => {
+    productApi.getAll({ limit: 4, sort: "featured" }).then((data) => {
+      setFeaturedProducts((data.products || []).map(normalizeProduct));
+    }).catch(() => {});
+  }, []);
 
   return (
     <>
@@ -146,12 +121,12 @@ const FeaturedSection = () => {
       <section className="products-section">
         <h2 className="products-section-title">OUR BEST SELLERS</h2>
         <div className="products-grid">
-          {featuredProducts.map((product) => (
-            <div key={product.id} className="product-card">
+          {featuredProducts.map((product, i) => (
+            <div key={product._id || i} className="product-card">
               <div className="product-card-image">
-                <img src={product.image} alt={product.name} loading="lazy" />
+                <img src={product.primaryImage || `/images/${(i % 4) + 1}.png`} alt={product.name} loading="lazy" />
               </div>
-              <button className="product-card-cart-btn" onClick={() => addToCart({ name: product.name, price: parseInt(product.price.replace(/[^\d]/g, '')) })}>
+              <button className="product-card-cart-btn" onClick={() => addToCart(product)}>
                 <span className="cart-btn-circle">
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
@@ -163,10 +138,10 @@ const FeaturedSection = () => {
               </button>
               <div className="product-card-info">
                 <h3 className="product-card-name">{product.name}</h3>
-                <p className="product-card-desc">{product.description}</p>
+                <p className="product-card-desc">{product.shortDescription || product.description}</p>
                 <div className="product-card-footer">
-                  <span className="product-card-price">{product.price}</span>
-                  <Link href={product.link} className="product-card-buy-btn">Buy Now</Link>
+                  <span className="product-card-price">₹{product.price}</span>
+                  <Link href={`/unit/${product.slug}`} className="product-card-buy-btn">Buy Now</Link>
                 </div>
               </div>
             </div>
@@ -372,52 +347,24 @@ export const BuildYourRitual = () => {
 
 export const LatestLaunches = () => {
   const { addToCart } = useCart();
+  const [products, setProducts] = useState([]);
 
-  const products = [
-    {
-      id: 1,
-      name: "Product 1",
-      description: "Description of the product",
-      price: "₹400",
-      image: "/images/1.png",
-      link: "/wardrobe",
-    },
-    {
-      id: 2,
-      name: "Product 1",
-      description: "Description of the product",
-      price: "₹400",
-      image: "/images/2.png",
-      link: "/wardrobe",
-    },
-    {
-      id: 3,
-      name: "Product 1",
-      description: "Description of the product",
-      price: "₹400",
-      image: "/images/3.png",
-      link: "/wardrobe",
-    },
-    {
-      id: 4,
-      name: "Product 1",
-      description: "Description of the product",
-      price: "₹400",
-      image: "/images/4.png",
-      link: "/wardrobe",
-    },
-  ];
+  useEffect(() => {
+    productApi.getAll({ limit: 4, sort: "newest" }).then((data) => {
+      setProducts((data.products || []).map(normalizeProduct));
+    }).catch(() => {});
+  }, []);
 
   return (
     <section className="products-section">
       <h2 className="products-section-title">OUR LATEST LAUNCHES</h2>
       <div className="products-grid">
-        {products.map((product) => (
-          <div key={product.id} className="product-card">
+        {products.map((product, i) => (
+          <div key={product._id || i} className="product-card">
             <div className="product-card-image">
-              <img src={product.image} alt={product.name} loading="lazy" />
+              <img src={product.primaryImage || `/images/${(i % 4) + 1}.png`} alt={product.name} loading="lazy" />
             </div>
-            <button className="product-card-cart-btn" onClick={() => addToCart({ name: product.name, price: parseInt(product.price.replace(/[^\d]/g, '')) })}>
+            <button className="product-card-cart-btn" onClick={() => addToCart(product)}>
               <span className="cart-btn-circle">
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
@@ -429,10 +376,10 @@ export const LatestLaunches = () => {
             </button>
             <div className="product-card-info">
               <h3 className="product-card-name">{product.name}</h3>
-              <p className="product-card-desc">{product.description}</p>
+              <p className="product-card-desc">{product.shortDescription || product.description}</p>
               <div className="product-card-footer">
-                <span className="product-card-price">{product.price}</span>
-                <Link href={product.link} className="product-card-buy-btn">Buy Now</Link>
+                <span className="product-card-price">₹{product.price}</span>
+                <Link href={`/unit/${product.slug}`} className="product-card-buy-btn">Buy Now</Link>
               </div>
             </div>
           </div>

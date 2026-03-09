@@ -1,16 +1,25 @@
 "use client";
 import "./BlogSection.css";
 import Link from "next/link";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { blogApi } from "@/lib/endpoints";
+import { normalizeBlog } from "@/lib/normalizers";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const BlogSection = () => {
   const sectionRef = useRef(null);
   const imagesRef = useRef([]);
+  const [allBlogs, setAllBlogs] = useState([]);
+
+  useEffect(() => {
+    blogApi.getAll({ limit: 3 }).then((data) => {
+      setAllBlogs((data.blogs || []).map(normalizeBlog));
+    }).catch(() => {});
+  }, []);
 
   useGSAP(() => {
     imagesRef.current.forEach((img) => {
@@ -33,35 +42,7 @@ const BlogSection = () => {
     });
   }, { scope: sectionRef });
 
-  const blogs = [
-    {
-      id: 1,
-      title: "The Ancient Wisdom of Ayurvedic Hair Rituals",
-      category: "Hair Care",
-      date: "Jan 28, 2025",
-      image: "/images/b1.png",
-      excerpt: "Discover centuries-old techniques for naturally lustrous hair.",
-      link: "/blog/ayurvedic-hair-rituals",
-    },
-    {
-      id: 2,
-      title: "Understanding Your Dosha for Better Skin",
-      category: "Skin Care",
-      date: "Jan 22, 2025",
-      image: "/images/b2.png",
-      excerpt: "Learn how your unique constitution affects your skincare needs.",
-      link: "/blog/dosha-skin-care",
-    },
-    {
-      id: 3,
-      title: "Morning Rituals for Radiant Complexion",
-      category: "Wellness",
-      date: "Jan 15, 2025",
-      image: "/images/b3.png",
-      excerpt: "Simple daily practices that transform your skin from within.",
-      link: "/blog/morning-rituals",
-    },
-  ];
+  const blogs = allBlogs;
 
   return (
     <section className="blog-section" ref={sectionRef}>
@@ -73,8 +54,8 @@ const BlogSection = () => {
         <div className="blog-grid">
           {blogs.map((blog, index) => (
             <Link
-              href={blog.link}
-              key={blog.id}
+              href={`/blog/${blog.slug}`}
+              key={blog._id || blog.slug}
               className={`blog-card ${index === 0 ? 'blog-card-featured' : 'blog-card-green'}`}
             >
               <div className="blog-card-image-wrapper">

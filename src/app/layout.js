@@ -5,8 +5,12 @@ import ClientLayout from "@/client-layout";
 import Menu from "@/components/Menu/Menu";
 import Footer from "@/components/Footer/Footer";
 import ShoppingCart from "@/components/ShoppingCart/ShoppingCart";
+
 import TransitionProvider from "@/providers/TransitionProvider";
+import { AuthProvider } from "@/context/AuthContext";
 import { CartProvider } from "@/context/CartContext";
+import { ToastProvider } from "@/context/ToastContext";
+import ErrorBoundary from "@/components/ErrorBoundary/ErrorBoundary";
 
 export const metadata = {
   title: "Cleanse Ayurveda | Premium Ayurvedic Beauty",
@@ -17,6 +21,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <ErrorBoundary>
+        <AuthProvider>
+        <ToastProvider>
         <CartProvider>
           <TransitionProvider>
             <ClientLayout footer={<Footer />}>
@@ -26,6 +33,9 @@ export default function RootLayout({ children }) {
             <ShoppingCart />
           </TransitionProvider>
         </CartProvider>
+        </ToastProvider>
+        </AuthProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );

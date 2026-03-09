@@ -2,7 +2,6 @@
 import "./ShoppingCart.css";
 import { useState, useEffect, useRef } from "react";
 
-import { products } from "@/app/wardrobe/products";
 import { useCart } from "@/context/CartContext";
 
 const discountTiers = [
@@ -106,52 +105,48 @@ const LoyaltyPoints = ({ subtotal }) => {
 // Cross-sell Products Component
 const CrossSellProducts = ({ cartItems }) => {
   const { addToCart } = useCart();
+  const [crossSellProducts, setCrossSellProducts] = useState([]);
 
-  // Get products not in cart for cross-selling (limit to 2 for compact display)
-  const cartProductNames = cartItems.map((item) => item.name);
-  const crossSellProducts = products
-    .filter((p) => !cartProductNames.includes(p.name))
-    .slice(0, 2);
+  useEffect(() => {
+    import("@/lib/endpoints").then(({ productApi }) => {
+      productApi.getAll({ limit: 6 }).then((data) => {
+        const cartIds = cartItems.map((item) => item.productId || item.name);
+        const filtered = (data.products || [])
+          .filter((p) => !cartIds.includes(p._id) && !cartIds.includes(p.name))
+          .slice(0, 2);
+        import("@/lib/normalizers").then(({ normalizeProduct }) => {
+          setCrossSellProducts(filtered.map(normalizeProduct));
+        });
+      }).catch(() => {});
+    });
+  }, [cartItems]);
 
   if (crossSellProducts.length === 0 || cartItems.length === 0) return null;
-
-  const handleAddProduct = (product) => {
-    const productIndex = products.findIndex((p) => p.name === product.name) + 1;
-    addToCart({
-      name: product.name,
-      price: product.price,
-      image: `/products/product_${productIndex}.png`,
-      quantity: 1,
-    });
-  };
 
   return (
     <div className="cross-sell">
       <h4 className="cross-sell-title">Complete Your Routine</h4>
       <div className="cross-sell-products">
-        {crossSellProducts.map((product) => {
-          const productIndex = products.findIndex((p) => p.name === product.name) + 1;
-          return (
-            <div key={product.name} className="cross-sell-item">
-              <div className="cross-sell-image">
-                <img
-                  src={`/products/product_${productIndex}.png`}
-                  alt={product.name}
-                />
-              </div>
-              <div className="cross-sell-details">
-                <p className="cross-sell-name">{product.name}</p>
-                <p className="cross-sell-price">&#8377;{product.price}</p>
-              </div>
-              <button
-                className="cross-sell-add"
-                onClick={() => handleAddProduct(product)}
-              >
-                +
-              </button>
+        {crossSellProducts.map((product, i) => (
+          <div key={product._id || i} className="cross-sell-item">
+            <div className="cross-sell-image">
+              <img
+                src={product.primaryImage || `/images/${(i % 4) + 1}.png`}
+                alt={product.name}
+              />
             </div>
-          );
-        })}
+            <div className="cross-sell-details">
+              <p className="cross-sell-name">{product.name}</p>
+              <p className="cross-sell-price">&#8377;{product.price}</p>
+            </div>
+            <button
+              className="cross-sell-add"
+              onClick={() => addToCart(product)}
+            >
+              +
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -293,14 +288,13 @@ const ShoppingCart = () => {
               </div>
             ) : (
               cartItems.map((item, index) => {
-                const productIndex =
-                  products.findIndex((p) => p.name === item.name) + 1;
+                const itemId = item.cartItemId || `${item.productId || item.name}_${item.selectedSize}`;
                 const quantity = Number(item.quantity) || 1;
                 return (
-                  <div key={`${item.name}-${index}`} className="cart-item">
+                  <div key={itemId || index} className="cart-item">
                     <div className="cart-item-image">
                       <img
-                        src={`/products/product_${productIndex}.png`}
+                        src={item.image || `/images/${(index % 4) + 1}.png`}
                         alt={item.name}
                       />
                     </div>
@@ -311,10 +305,11 @@ const ShoppingCart = () => {
                           <span className="cart-item-quantity">x{quantity}</span>
                         )}
                       </div>
+                      {item.selectedSize && <p className="cart-item-size" style={{ fontSize: "0.75rem", color: "#888", marginTop: "2px" }}>{item.selectedSize}</p>}
                       <p className="cart-item-price">&#8377;{item.price}</p>
                       <button
                         className="cart-item-remove"
-                        onClick={() => removeFromCart(item.name)}
+                        onClick={() => removeFromCart(itemId)}
                       >
                         Remove
                       </button>

@@ -1,90 +1,16 @@
 "use client";
 import "./blog.css";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { blogApi } from "@/lib/endpoints";
+import { normalizeBlog } from "@/lib/normalizers";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const categories = ["All", "Hair Care", "Skin Care", "Wellness", "Rituals", "Ingredients"];
-
-const blogs = [
-  {
-    id: 1,
-    title: "The Ancient Wisdom of Ayurvedic Hair Rituals",
-    category: "Hair Care",
-    date: "Jan 28, 2025",
-    image: "/images/b1.png",
-    excerpt: "Discover centuries-old techniques passed down through generations for naturally lustrous, healthy hair rooted in Ayurvedic tradition.",
-    readTime: "5 min read",
-    featured: true,
-  },
-  {
-    id: 2,
-    title: "Understanding Your Dosha for Better Skin",
-    category: "Skin Care",
-    date: "Jan 22, 2025",
-    image: "/images/b2.png",
-    excerpt: "Learn how your unique constitution affects your skincare needs and discover the perfect routine for your dosha type.",
-    readTime: "4 min read",
-  },
-  {
-    id: 3,
-    title: "Morning Rituals for Radiant Complexion",
-    category: "Wellness",
-    date: "Jan 15, 2025",
-    image: "/images/b3.png",
-    excerpt: "Simple daily practices that transform your skin from within, blending ancient wisdom with modern self-care.",
-    readTime: "3 min read",
-  },
-  {
-    id: 4,
-    title: "The Sacred Power of Turmeric in Skincare",
-    category: "Ingredients",
-    date: "Jan 10, 2025",
-    image: "/images/why1.png",
-    excerpt: "Explore why turmeric has been the golden secret of Ayurvedic beauty for over 5,000 years.",
-    readTime: "6 min read",
-  },
-  {
-    id: 5,
-    title: "Building a Nighttime Ayurvedic Routine",
-    category: "Rituals",
-    date: "Jan 5, 2025",
-    image: "/images/why2.png",
-    excerpt: "Wind down with intention — a complete guide to evening skincare rituals that restore and rejuvenate.",
-    readTime: "4 min read",
-  },
-  {
-    id: 6,
-    title: "Rose Water: Nature's Most Elegant Toner",
-    category: "Ingredients",
-    date: "Dec 28, 2024",
-    image: "/images/why3.png",
-    excerpt: "From Mughal gardens to modern vanities — the timeless journey of rose water in beauty rituals.",
-    readTime: "5 min read",
-  },
-  {
-    id: 7,
-    title: "Balancing Pitta Dosha in Summer",
-    category: "Wellness",
-    date: "Dec 20, 2024",
-    image: "/images/c1.png",
-    excerpt: "Keep your fire element in check with cooling Ayurvedic practices designed for the warmer months.",
-    readTime: "4 min read",
-  },
-  {
-    id: 8,
-    title: "Oil Pulling: Ancient Detox for Modern Life",
-    category: "Rituals",
-    date: "Dec 15, 2024",
-    image: "/images/c2.png",
-    excerpt: "A 3,000-year-old practice that cleanses, heals, and brings clarity — one swish at a time.",
-    readTime: "3 min read",
-  },
-];
 
 export default function BlogPage() {
   const heroRef = useRef(null);
@@ -92,6 +18,16 @@ export default function BlogPage() {
   const cardsRef = useRef([]);
   const featuredRef = useRef(null);
   const [activeCategory, setActiveCategory] = useState("All");
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    blogApi.getAll({ limit: 50 }).then((data) => {
+      const normalized = (data.blogs || []).map(normalizeBlog);
+      setBlogs(normalized);
+      setLoading(false);
+    }).catch(() => setLoading(false));
+  }, []);
 
   const filteredBlogs = activeCategory === "All"
     ? blogs
@@ -205,7 +141,7 @@ export default function BlogPage() {
       {/* Featured Article - Full width cinematic card */}
       {activeCategory === "All" && featuredBlog && (
         <section className="blog-featured" ref={featuredRef} style={{ opacity: 0 }}>
-          <Link href={`/blog/${featuredBlog.id}`} className="blog-featured-card">
+          <Link href={`/blog/${featuredBlog.slug}`} className="blog-featured-card">
             <div className="blog-featured-img">
               <img src={featuredBlog.image} alt={featuredBlog.title} />
             </div>
@@ -256,8 +192,8 @@ export default function BlogPage() {
         <div className="blog-grid-container">
           {gridBlogs.map((blog, index) => (
             <Link
-              href={`/blog/${blog.id}`}
-              key={blog.id}
+              href={`/blog/${blog.slug}`}
+              key={blog._id || blog.slug}
               className={`blog-grid-card ${index === 0 ? "blog-grid-card-wide" : ""} ${index === 3 ? "blog-grid-card-tall" : ""}`}
               ref={(el) => (cardsRef.current[index] = el)}
               style={{ opacity: 0 }}

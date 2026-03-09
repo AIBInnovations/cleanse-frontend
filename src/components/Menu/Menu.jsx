@@ -38,6 +38,11 @@ const Menu = () => {
   const [isNavGreen, setIsNavGreen] = useState(!isHomePage);
   const [isPageTransitioning, setIsPageTransitioning] = useState(false);
 
+  const [lang, setLang] = useState("EN");
+  const [currency, setCurrency] = useState("INR");
+  const [showLangMenu, setShowLangMenu] = useState(false);
+  const [showCurrMenu, setShowCurrMenu] = useState(false);
+
   const menuRef = useRef(null);
   const menuOverlayRef = useRef(null);
   const hamburgerRef = useRef(null);
@@ -45,6 +50,37 @@ const Menu = () => {
   const splitTextsRef = useRef([]);
   const mainLinkSplitsRef = useRef([]);
   const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const savedLang = localStorage.getItem("cleanse-lang");
+    const savedCurrency = localStorage.getItem("cleanse-currency");
+    if (savedLang) setLang(savedLang);
+    if (savedCurrency) setCurrency(savedCurrency);
+  }, []);
+
+  const handleLangChange = (l) => {
+    setLang(l);
+    localStorage.setItem("cleanse-lang", l);
+    setShowLangMenu(false);
+  };
+
+  const handleCurrencyChange = (c) => {
+    setCurrency(c);
+    localStorage.setItem("cleanse-currency", c);
+    setShowCurrMenu(false);
+  };
+
+  // Close selector dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!e.target.closest('.menu-selector') && !e.target.closest('.menu-selectors')) {
+        setShowLangMenu(false);
+        setShowCurrMenu(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
 
   const scrambleText = (elements, duration = 0.4) => {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
@@ -543,6 +579,32 @@ const Menu = () => {
             <Link href="/blog" className="menu-nav-link">Blog</Link>
           </div>
           <div className="menu-header-actions">
+            <div className="menu-selectors">
+              <div className="menu-selector" onClick={() => { setShowLangMenu(!showLangMenu); setShowCurrMenu(false); }}>
+                <span className="menu-selector-value">{lang}</span>
+                {showLangMenu && (
+                  <div className="menu-selector-dropdown">
+                    {[{code: "EN", label: "English"}, {code: "HI", label: "Hindi"}, {code: "TA", label: "Tamil"}].map(l => (
+                      <button key={l.code} className={`menu-selector-option ${lang === l.code ? "active" : ""}`} onClick={(e) => { e.stopPropagation(); handleLangChange(l.code); }}>
+                        {l.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div className="menu-selector" onClick={() => { setShowCurrMenu(!showCurrMenu); setShowLangMenu(false); }}>
+                <span className="menu-selector-value">{currency === "INR" ? "\u20B9" : currency === "USD" ? "$" : currency === "EUR" ? "\u20AC" : "\u00A3"}</span>
+                {showCurrMenu && (
+                  <div className="menu-selector-dropdown">
+                    {[{code: "INR", label: "\u20B9 INR"}, {code: "USD", label: "$ USD"}, {code: "EUR", label: "\u20AC EUR"}, {code: "GBP", label: "\u00A3 GBP"}].map(c => (
+                      <button key={c.code} className={`menu-selector-option ${currency === c.code ? "active" : ""}`} onClick={(e) => { e.stopPropagation(); handleCurrencyChange(c.code); }}>
+                        {c.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
             <Link href="/profile" className="menu-action-btn" aria-label="Profile">
               <ProfileIcon />
             </Link>
@@ -589,6 +651,32 @@ const Menu = () => {
 
         {/* Right-side actions - shown when scrolled */}
         <div className="menu-scrolled-actions">
+          <div className="menu-selectors">
+            <div className="menu-selector" onClick={() => { setShowLangMenu(!showLangMenu); setShowCurrMenu(false); }}>
+              <span className="menu-selector-value">{lang}</span>
+              {showLangMenu && (
+                <div className="menu-selector-dropdown">
+                  {[{code: "EN", label: "English"}, {code: "HI", label: "Hindi"}, {code: "TA", label: "Tamil"}].map(l => (
+                    <button key={l.code} className={`menu-selector-option ${lang === l.code ? "active" : ""}`} onClick={(e) => { e.stopPropagation(); handleLangChange(l.code); }}>
+                      {l.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div className="menu-selector" onClick={() => { setShowCurrMenu(!showCurrMenu); setShowLangMenu(false); }}>
+              <span className="menu-selector-value">{currency === "INR" ? "\u20B9" : currency === "USD" ? "$" : currency === "EUR" ? "\u20AC" : "\u00A3"}</span>
+              {showCurrMenu && (
+                <div className="menu-selector-dropdown">
+                  {[{code: "INR", label: "\u20B9 INR"}, {code: "USD", label: "$ USD"}, {code: "EUR", label: "\u20AC EUR"}, {code: "GBP", label: "\u00A3 GBP"}].map(c => (
+                    <button key={c.code} className={`menu-selector-option ${currency === c.code ? "active" : ""}`} onClick={(e) => { e.stopPropagation(); handleCurrencyChange(c.code); }}>
+                      {c.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
           <Link href="/profile" className="menu-action-btn" aria-label="Profile">
             <ProfileIcon />
           </Link>
@@ -664,6 +752,24 @@ const Menu = () => {
                   Testimonials
                 </a>
               </div>
+            </div>
+          </div>
+        </div>
+        <div className="menu-overlay-selectors">
+          <div className="menu-overlay-selector-group">
+            <span className="menu-overlay-selector-label">Language</span>
+            <div className="menu-overlay-selector-pills">
+              {["EN", "HI", "TA"].map(l => (
+                <button key={l} className={`menu-overlay-pill ${lang === l ? "active" : ""}`} onClick={() => handleLangChange(l)}>{l}</button>
+              ))}
+            </div>
+          </div>
+          <div className="menu-overlay-selector-group">
+            <span className="menu-overlay-selector-label">Currency</span>
+            <div className="menu-overlay-selector-pills">
+              {["INR", "USD", "EUR", "GBP"].map(c => (
+                <button key={c} className={`menu-overlay-pill ${currency === c ? "active" : ""}`} onClick={() => handleCurrencyChange(c)}>{c}</button>
+              ))}
             </div>
           </div>
         </div>

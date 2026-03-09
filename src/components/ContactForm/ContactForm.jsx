@@ -1,9 +1,28 @@
 "use client";
 import "./ContactForm.css";
-
+import { useState } from "react";
 import { MdOutlineArrowOutward } from "react-icons/md";
+import { newsletterApi } from "@/lib/endpoints";
 
 const ContactForm = () => {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async () => {
+    if (!email.trim() || submitting) return;
+    setSubmitting(true);
+    try {
+      await newsletterApi.subscribe(email.trim(), "footer");
+      setSubmitted(true);
+      setEmail("");
+    } catch {
+      setSubmitted(true);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <section className="contact-form">
       <div className="contact-parallax-image-wrapper">
@@ -19,12 +38,26 @@ const ContactForm = () => {
             and ancient beauty secrets.
           </p>
         </div>
-        <div className="cf-input">
-          <input type="text" placeholder="Enter Your Email" />
-        </div>
-        <div className="cf-submit">
-          <MdOutlineArrowOutward />
-        </div>
+        {!submitted ? (
+          <>
+            <div className="cf-input">
+              <input
+                type="text"
+                placeholder="Enter Your Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+              />
+            </div>
+            <div className="cf-submit" onClick={handleSubmit} style={{ cursor: "pointer" }}>
+              {submitting ? "..." : <MdOutlineArrowOutward />}
+            </div>
+          </>
+        ) : (
+          <div className="cf-input">
+            <p className="bodyCopy sm" style={{ color: "#4CAF50" }}>Thank you for subscribing!</p>
+          </div>
+        )}
         <div className="cf-footer">
           <div className="cf-divider"></div>
           <div className="cf-footer-copy">

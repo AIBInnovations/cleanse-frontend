@@ -39,7 +39,8 @@ const ChatSupport = () => {
     "Track my order",
     "Product recommendations",
     "Return policy",
-    "Talk to support"
+    "Talk to support",
+    "Chat on WhatsApp"
   ];
 
   const handleSend = () => {
@@ -58,6 +59,11 @@ const ChatSupport = () => {
   };
 
   const handleQuickReply = (reply) => {
+    if (reply === "Chat on WhatsApp") {
+      window.open("https://wa.me/919876543210", "_blank", "noopener,noreferrer");
+      return;
+    }
+
     setMessages([...messages, { type: "user", text: reply }]);
 
     setTimeout(() => {
@@ -143,7 +149,7 @@ const ChatSupport = () => {
           {quickReplies.map((reply) => (
             <button
               key={reply}
-              className="quick-reply-btn"
+              className={`quick-reply-btn${reply === "Chat on WhatsApp" ? " whatsapp" : ""}`}
               onClick={() => handleQuickReply(reply)}
             >
               {reply}

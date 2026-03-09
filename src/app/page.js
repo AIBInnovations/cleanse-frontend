@@ -16,6 +16,7 @@ import HoverWord from "@/components/HoverWord/HoverWord";
 import "@/components/HoverWord/HoverWord.css";
 import ShopByProduct from "@/components/ShopByProduct/ShopByProduct";
 import BlogSection from "@/components/BlogSection/BlogSection";
+import BeforeAfter from "@/components/BeforeAfter/BeforeAfter";
 
 import Copy from "@/components/Copy/Copy";
 
@@ -277,6 +278,8 @@ export default function Index() {
       <div id="testimonials">
         <Testimonials />
       </div>
+
+      <BeforeAfter />
 
       <LatestLaunches />
 

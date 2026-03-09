@@ -18,7 +18,7 @@ const Product = ({
   const pathname = usePathname();
 
   const handleImageClick = () => {
-    if (pathname === "/unit") {
+    if (pathname.startsWith("/unit/")) {
       window.dispatchEvent(new CustomEvent("scrollToTop"));
     }
   };
@@ -27,13 +27,13 @@ const Product = ({
 
   return (
     <div className={`product ${className}`} ref={innerRef} style={style}>
-      <Link href="/unit" className="product-img" onClick={handleImageClick}>
+      <Link href={"/unit/" + (product.slug || "")} className="product-img" onClick={handleImageClick}>
         <img src={imgPath} alt={product.name} />
       </Link>
       <div className="product-info">
         <div className="product-info-wrapper">
           <p>{product.name}</p>
-          <p>${product.price}</p>
+          <p>&#8377;{product.price}</p>
         </div>
         {showAddToCart && (
           <button

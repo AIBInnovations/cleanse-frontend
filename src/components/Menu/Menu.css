@@ -706,3 +706,108 @@
   }
 
 }
+
+/* Header Selectors */
+.menu-selectors {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.menu-selector {
+  position: relative;
+  cursor: pointer;
+  padding: 6px 10px;
+  font-size: 0.7rem;
+  font-family: var(--font-body);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.menu-selector:hover {
+  opacity: 1;
+}
+
+.menu-selector-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--base-700);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 4px;
+  min-width: 100px;
+  z-index: 1000;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.menu-selector-option {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  background: none;
+  border: none;
+  color: var(--base-100);
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.menu-selector-option:hover,
+.menu-selector-option.active {
+  background: rgba(255,255,255,0.1);
+}
+
+/* Mobile Overlay Selectors */
+.menu-overlay-selectors {
+  display: flex;
+  gap: 2rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin-top: 1rem;
+}
+
+.menu-overlay-selector-label {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 0.6rem;
+  font-family: var(--font-body);
+}
+
+.menu-overlay-selector-pills {
+  display: flex;
+  gap: 6px;
+}
+
+.menu-overlay-pill {
+  padding: 6px 14px;
+  background: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--base-100);
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.menu-overlay-pill:hover {
+  border-color: rgba(255,255,255,0.4);
+}
+
+.menu-overlay-pill.active {
+  background: var(--base-100);
+  color: var(--base-700);
+  border-color: var(--base-100);
+}

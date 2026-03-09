@@ -1,0 +1,184 @@
+/* Before & After Gallery Section */
+.before-after {
+  width: 100%;
+  padding: 6rem 2rem;
+  background-color: var(--base-100);
+  overflow: hidden;
+}
+
+.ba-container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+/* Header */
+.ba-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.ba-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 400;
+  color: #4F2C22;
+  text-transform: uppercase;
+  line-height: 100%;
+  letter-spacing: 0.04em;
+  margin-bottom: 1rem;
+}
+
+.ba-subtitle {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  color: #4F2C22;
+  opacity: 0.7;
+  line-height: 1.5;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* Grid */
+.ba-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+/* Card */
+.ba-card {
+  border: 1px solid rgba(79, 44, 34, 0.12);
+  border-radius: 1rem;
+  padding: 1rem;
+  background-color: #fff;
+  transition: box-shadow 0.3s ease;
+}
+
+.ba-card:hover {
+  box-shadow: 0 8px 30px rgba(79, 44, 34, 0.1);
+}
+
+/* Before/After Images */
+.ba-images {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.ba-image-wrapper {
+  position: relative;
+  flex: 1;
+  aspect-ratio: 1 / 1.15;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-color: #E7D0A6;
+}
+
+.ba-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Label Pills */
+.ba-label {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  padding: 0.2rem 0.6rem;
+  background-color: rgba(30, 30, 30, 0.75);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 9999px;
+  line-height: 1.4;
+  z-index: 2;
+}
+
+.ba-label-after {
+  background-color: rgba(79, 44, 34, 0.85);
+}
+
+/* Card Info */
+.ba-card-info {
+  padding: 0.25rem 0.25rem 0;
+}
+
+.ba-name {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #4F2C22;
+  margin-bottom: 0.35rem;
+}
+
+.ba-testimony {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 400;
+  font-style: italic;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.ba-product {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #999;
+  letter-spacing: 0.02em;
+}
+
+/* Responsive - Tablet */
+@media (max-width: 1024px) {
+  .ba-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 640px) {
+  .before-after {
+    padding: 4rem 1rem;
+  }
+
+  .ba-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .ba-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .before-after {
+    padding: 3rem 0.75rem;
+  }
+
+  .ba-title {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .ba-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .ba-header {
+    margin-bottom: 2rem;
+  }
+
+  .ba-grid {
+    max-width: 100%;
+  }
+}
