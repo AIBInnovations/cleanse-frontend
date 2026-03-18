@@ -70,7 +70,7 @@ export default function Index() {
 
   const settings = useSettings();
 
-  const heroImages = ["/images/hero.png", "/hero.png", "/home/hero.png"];
+  const heroImages = ["/images/hero.png", "/images/image.png", "/images/banner.png"];
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
 
   useEffect(() => {
