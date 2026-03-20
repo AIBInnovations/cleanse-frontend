@@ -10,12 +10,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const DEFAULT_REELS = [
-  { id: 1, title: "Morning Ritual", subtitle: "Golden Hour Glow", video: "/videos/reel1.mp4", poster: "/serum.jpg", position: "left-top" },
-  { id: 2, title: "Sacred Rituals", subtitle: "Embrace Your Natural Glow", video: "/videos/reel2.mp4", poster: "/cream.jpg", position: "center" },
-  { id: 3, title: "Evening Care", subtitle: "Restore & Rejuvenate", video: "/videos/reel3.mp4", poster: "/pink.jpg", position: "right-bottom" },
+  { id: 1, title: "Morning Ritual", subtitle: "Golden Hour Glow", video: "/videos/reel1.mp4", poster: "/images/REEL 1.png", position: "left-top" },
+  { id: 2, title: "Sacred Rituals", subtitle: "Embrace Your Natural Glow", video: "/videos/reel2.mp4", poster: "/images/REEL 2.png", position: "center" },
+  { id: 3, title: "Evening Care", subtitle: "Restore & Rejuvenate", video: "/videos/reel3.mp4", poster: "/images/REEL 3.png", position: "right-bottom" },
 ];
 
-const DEFAULT_POSTERS = { "left-top": "/serum.jpg", center: "/cream.jpg", "right-bottom": "/pink.jpg" };
+const DEFAULT_POSTERS = { "left-top": "/images/REEL 1.png", center: "/images/REEL 2.png", "right-bottom": "/images/REEL 3.png" };
 
 const MarqueeBanner = () => {
   const settings = useSettings();
@@ -26,7 +26,7 @@ const MarqueeBanner = () => {
     title: r.title,
     subtitle: r.subtitle,
     video: r.video?.url || DEFAULT_REELS[i]?.video,
-    poster: r.posterImage?.url || DEFAULT_POSTERS[r.position] || DEFAULT_REELS[i]?.poster,
+    poster: DEFAULT_REELS[i]?.poster || r.posterImage?.url || DEFAULT_POSTERS[r.position],
     position: r.position,
   })) : DEFAULT_REELS;
 

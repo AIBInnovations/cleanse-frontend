@@ -1,12 +1,14 @@
 "use client";
 import "./unit.css";
+import "@/components/FeaturedSection/FeaturedSection.css";
 import { Suspense, use, useState, useEffect, useCallback } from "react";
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { productApi, shippingApi, reviewApi, bundleApi } from "@/lib/endpoints";
-import { normalizeProduct, productUrl } from "@/lib/normalizers";
+import { normalizeProduct } from "@/lib/normalizers";
+import { productUrl } from "@/lib/normalizers";
 
 const productImages = [
   "/images/1.png",
@@ -538,19 +540,19 @@ function UnitContent({ params }) {
     <div className="unit-page">
       <section className="product-hero">
         <div className="product-hero-col product-hero-left">
-          <div className="product-hero-image">
-            <img src={galleryImages[activeImage]} alt={product.name} />
-          </div>
           <div className="product-thumbnails">
-            {galleryImages.slice(1).map((img, index) => (
+            {galleryImages.map((img, index) => (
               <button
                 key={index}
-                className={`product-thumbnail ${activeImage === index + 1 ? "active" : ""}`}
-                onClick={() => setActiveImage(index + 1)}
+                className={`product-thumbnail ${activeImage === index ? "active" : ""}`}
+                onClick={() => setActiveImage(index)}
               >
-                <img src={img} alt={`Product view ${index + 2}`} />
+                <img src={img} alt={`Product view ${index + 1}`} />
               </button>
             ))}
+          </div>
+          <div className="product-hero-image">
+            <img src={galleryImages[activeImage]} alt={product.name} />
           </div>
         </div>
         <div className="product-hero-col product-meta">
@@ -974,25 +976,32 @@ function UnitContent({ params }) {
       {/* Recommended For You */}
       <section className="recommended-section">
         <h2 className="recommended-title">RECOMMENDED FOR YOU</h2>
-        <div className="recommended-grid">
-          {relatedProducts.map((rp, i) => {
-            return (
-              <div key={rp._id || rp.name} className="rec-card">
-                <div className="rec-card-image">
-                  <Link href={productUrl(rp)}>
-                    <img src={rp.primaryImage || `/images/${(i % 4) + 1}.png`} alt={rp.name} />
-                  </Link>
-                </div>
-                <div className="rec-card-info">
-                  <h3 className="rec-card-name">{rp.name}</h3>
-                  <div className="rec-card-footer">
-                    <span className="rec-card-price">&#8377;{rp.price}</span>
-                    <button className="rec-card-btn" onClick={() => addToCart(rp)}>Add to Cart</button>
-                  </div>
+        <div className="products-grid">
+          {relatedProducts.map((rp, i) => (
+            <div key={rp._id || rp.name} className="product-card">
+              <Link href={productUrl(rp)} className="product-card-image">
+                <img src={rp.primaryImage || `/images/${(i % 4) + 1}.png`} alt={rp.name} />
+              </Link>
+              <button className="product-card-cart-btn" onClick={() => addToCart(rp)}>
+                <span className="cart-btn-circle">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <path d="M16 10a4 4 0 01-8 0" />
+                  </svg>
+                </span>
+                <span className="cart-btn-text">Add to Cart</span>
+              </button>
+              <div className="product-card-info">
+                <Link href={productUrl(rp)}><h3 className="product-card-name">{rp.name}</h3></Link>
+                <p className="product-card-desc">{rp.shortDescription || rp.description}</p>
+                <div className="product-card-footer">
+                  <span className="product-card-price">&#8377;{rp.price}</span>
+                  <button className="product-card-buy-btn" onClick={() => { addToCart(rp); router.push("/cart"); }}>Buy Now</button>
                 </div>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </section>
     </div>

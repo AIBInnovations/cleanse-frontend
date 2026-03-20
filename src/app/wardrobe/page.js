@@ -241,7 +241,7 @@ function WardrobeContent() {
         </section>
       )}
 
-      {!loading && (
+      {!loading && filteredProducts.length >= 10 && (
         <>
           {/* Section 1: 2 Products + Spotlight Banner */}
           <section className="wardrobe-section section-row-1">
@@ -265,7 +265,7 @@ function WardrobeContent() {
                     </button>
                     <div className="product-card-info">
                       <Link href={productUrl(product)}><h3 className="product-card-name">{product.name}</h3></Link>
-                      <p className="product-card-desc">{product.description}</p>
+                      <p className="product-card-desc">{product.shortDescription || product.description}</p>
                       <div className="product-card-footer">
                         <span className="product-card-price">₹{product.price}</span>
                         <button className="product-card-buy-btn" onClick={() => { addToCart(product); router.push("/cart"); }}>Buy Now</button>
@@ -301,7 +301,7 @@ function WardrobeContent() {
                   </button>
                   <div className="product-card-info">
                     <Link href={productUrl(product)}><h3 className="product-card-name">{product.name}</h3></Link>
-                    <p className="product-card-desc">{product.description}</p>
+                    <p className="product-card-desc">{product.shortDescription || product.description}</p>
                     <div className="product-card-footer">
                       <span className="product-card-price">₹{product.price}</span>
                       <button className="product-card-buy-btn" onClick={() => { addToCart(product); router.push("/cart"); }}>Buy Now</button>
@@ -337,7 +337,7 @@ function WardrobeContent() {
                     </button>
                     <div className="product-card-info">
                       <Link href={productUrl(product)}><h3 className="product-card-name">{product.name}</h3></Link>
-                      <p className="product-card-desc">{product.description}</p>
+                      <p className="product-card-desc">{product.shortDescription || product.description}</p>
                       <div className="product-card-footer">
                         <span className="product-card-price">₹{product.price}</span>
                         <button className="product-card-buy-btn" onClick={() => { addToCart(product); router.push("/cart"); }}>Buy Now</button>
@@ -349,6 +349,39 @@ function WardrobeContent() {
             </div>
           </section>
         </>
+      )}
+
+      {!loading && filteredProducts.length < 10 && (
+        <section className="wardrobe-section wardrobe-category-grid">
+          {filteredProducts.map((product, index) => {
+            const imgIndex = ((allProducts.indexOf(product)) % 4) + 1;
+            return (
+              <div key={product.name + index} className="product-card" ref={(el) => (productRefs.current[index] = el)} style={{ opacity: 0 }}>
+                <Link href={productUrl(product)} className="product-card-image">
+                  <img src={product.primaryImage || `/images/${imgIndex}.png`} alt={product.name} loading="lazy" />
+                </Link>
+                <button className="product-card-cart-btn" onClick={() => addToCart(product)}>
+                  <span className="cart-btn-circle">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                      <line x1="3" y1="6" x2="21" y2="6" />
+                      <path d="M16 10a4 4 0 01-8 0" />
+                    </svg>
+                  </span>
+                  <span className="cart-btn-text">Add to Cart</span>
+                </button>
+                <div className="product-card-info">
+                  <Link href={productUrl(product)}><h3 className="product-card-name">{product.name}</h3></Link>
+                  <p className="product-card-desc">{product.shortDescription || product.description}</p>
+                  <div className="product-card-footer">
+                    <span className="product-card-price">₹{product.price}</span>
+                    <button className="product-card-buy-btn" onClick={() => { addToCart(product); router.push("/cart"); }}>Buy Now</button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </section>
       )}
     </div>
   );
