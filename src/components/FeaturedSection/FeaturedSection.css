@@ -1069,6 +1069,10 @@
     border-radius: 0.75rem;
   }
 
+  .product-card-cart-btn {
+    top: 175px;
+  }
+
   .product-card:hover .product-card-image img {
     transform: scale(1.05);
   }
@@ -1084,6 +1088,16 @@
 
   .product-card-price {
     font-size: 0.8rem;
+  }
+
+  .product-card-buy-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+  }
+
+  .product-card-desc {
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem;
   }
 }
 
